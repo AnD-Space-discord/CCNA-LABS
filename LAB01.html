@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab 1: VLANs on Switches</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f6f8;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #1f4e79;
+      color: white;
+      padding: 20px 40px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      background: white;
+      padding: 30px 40px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      border-radius: 8px;
+    }
+
+    h2 {
+      border-left: 5px solid #1f4e79;
+      padding-left: 10px;
+      margin-top: 30px;
+      color: #1f4e79;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    .topology {
+      background: #eef3f7;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 15px 0;
+      font-style: italic;
+    }
+
+    pre {
+      background: #0d1117;
+      color: #e6edf3;
+      padding: 15px;
+      border-radius: 0 0 6px 6px;
+      overflow-x: auto;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .terminal {
+      margin: 15px 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .terminal-header {
+      background: #161b22;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .red { background: #ff5f56; }
+    .yellow { background: #ffbd2e; }
+    .green { background: #27c93f; }
+
+    .prompt { color: #7ee787; }
+    .command { color: #79c0ff; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #1f4e79;
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 13px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lab 1: VLANs on Switches</h1>
+    <p>Author: Architecture &. Developer Space</p>
+  </header>
+
+  <main>
+    <h2>Objective</h2>
+    <p>The objective of this lab is to learn and understand how to create VLANs on Cisco switches.</p>
+
+    <h2>Explanation</h2>
+    <ul>
+      <li>VLANs allow you to segment your network into multiple, smaller broadcast domains.</li>
+    </ul>
+
+    <h2>VLAN Ranges</h2>
+    <ul>
+      <li><strong>Normal Range VLANs (2–1001):</strong> Common VLANs used for general segmentation. Can be created, edited, and deleted.</li>
+      <li><strong>VLANs 1002–1005:</strong> Reserved for legacy protocols like FDDI and Token Ring.</li>
+      <li><strong>Valid VLAN ID Range:</strong> 1–4094</li>
+    </ul>
+
+    <h2>Lab Topology</h2>
+    <div class="topology">Use the provided network topology diagram for this lab exercise.</div>
+
+    <h2>Task 1 – Hostname & VLAN Creation</h2>
+    <p>Configure the hostname of the switch as <strong>SW1</strong> and create the VLANs shown in the topology.</p>
+
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      <pre>
+<span class="prompt">Switch#</span> <span class="command">config t</span>
+<span class="prompt">Switch(config)#</span> <span class="command">hostname SW1</span>
+
+<span class="prompt">SW1(config)#</span> <span class="command">vlan 10</span>
+<span class="prompt">SW1(config-vlan)#</span> <span class="command">name Sales</span>
+
+<span class="prompt">SW1(config)#</span> <span class="command">vlan 20</span>
+<span class="prompt">SW1(config-vlan)#</span> <span class="command">name Manager</span>
+
+<span class="prompt">SW1(config)#</span> <span class="command">vlan 30</span>
+<span class="prompt">SW1(config-vlan)#</span> <span class="command">name Engineer</span>
+
+<span class="prompt">SW1(config)#</span> <span class="command">vlan 40</span>
+<span class="prompt">SW1(config-vlan)#</span> <span class="command">name Support</span>
+      </pre>
+    </div>
+
+    <h2>Task 2 – Interface Configuration</h2>
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      <pre>
+<span class="prompt">SW1(config)#</span> <span class="command">interface fa0/0</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">switchport mode access</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">switchport access vlan 10</span>
+
+<span class="prompt">SW1(config)#</span> <span class="command">interface fa0/1</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">switchport mode access</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">switchport access vlan 20</span>
+
+<span class="prompt">SW1(config)#</span> <span class="command">interface fa0/2</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">switchport mode access</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">switchport access vlan 30</span>
+
+<span class="prompt">SW1(config)#</span> <span class="command">interface fa0/3</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">switchport mode access</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">switchport access vlan 40</span>
+      </pre>
+    </div>
+
+    <h2>Task 3 – Verification</h2>
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      <pre>
+<span class="prompt">SW1#</span> <span class="command">show vlan brief</span>
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/4, Fa0/5, Fa0/6
+10   SALES                            active    Fa0/0
+20   MANAGERS                         active    Fa0/1
+30   ENGINEERS                        active    Fa0/2
+40   SUPPORT                          active    Fa0/3
+      </pre>
+    </div>
+    
+  </main>
+
+  <footer>
+    VLAN Configuration Lab – Cisco Switching Fundamentals
+  </footer>
+</body>
+</html>
