@@ -100,6 +100,14 @@
       color: white;
       padding: 20px;
       border-radius: 8px;
+      text-decoration: none;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .lab-item:hover {
+      background: #163a5c;
+      transform: translateY(-5px);
     }
 
     footer {
@@ -161,7 +169,7 @@
   <section id="labs">
     <h2>Featured Labs</h2>
     <div class="labs">
-      <div class="lab-item" href="LAB01.html">VLAN Configuration Lab</div>
+      <a class="lab-item" href="LAB01.html">VLAN Configuration Lab</a>
       <div class="lab-item">Static Routing Lab</div>
       <div class="lab-item">Inter-VLAN Routing</div>
       <div class="lab-item">ACL Configuration</div>
