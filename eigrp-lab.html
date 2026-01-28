@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EIGRP Routing Lab</title>
+  <style>
+    body { margin:0; font-family: Arial, Helvetica, sans-serif; background:#f4f6f8; color:#333; }
+    header { background:#1f4e79; color:white; padding:20px 40px; }
+    header h1 { margin:0; }
+    main { max-width:1000px; margin:30px auto; background:white; padding:30px 40px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.08);}    
+    h2 { border-left:5px solid #1f4e79; padding-left:10px; color:#1f4e79; margin-top:30px; }
+
+    .terminal { margin:15px 0; border-radius:8px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.15);}    
+    .terminal-header { background:#161b22; padding:8px 12px; display:flex; gap:8px; }
+    .dot { height:12px; width:12px; border-radius:50%; }
+    .red{background:#ff5f56;} .yellow{background:#ffbd2e;} .green{background:#27c93f;}
+    pre { background:#0d1117; color:#e6edf3; padding:15px; margin:0; font-size:14px; overflow-x:auto; }
+    .prompt{color:#7ee787;} .command{color:#79c0ff;}
+    .home-btn { display:inline-block; margin-top:10px; padding:10px 20px; background:#ffbd2e; color:#000; text-decoration:none; border-radius:6px; font-weight:bold; transition:0.3s; }
+    .home-btn:hover { background:#ffaa00; }
+    footer { text-align:center; padding:15px; color:#777; font-size:13px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>EIGRP Routing Lab</h1>
+  <p>Dynamic Routing Configuration Using EIGRP</p>
+  <a href="index.html" class="home-btn">← Home</a>
+  <a href="labs.html" class="home-btn" style="margin-left: 10px; display:inline-block;">📚 All Labs</a>
+</header>
+
+<main>
+
+<h2>Objective</h2>
+<p>Learn to configure Enhanced Interior Gateway Routing Protocol (EIGRP) between multiple routers and verify routing tables.</p>
+
+<h2>Lab Topology</h2>
+<div style="text-align: center; margin: 30px 0; padding: 20px; background: #f9f9f9; border: 2px dashed #ccc; border-radius: 8px;">
+  <img src="/Images/EIGRP-lab/Picture1.png" alt="EIGRP Lab Topology" style="max-width: 100%; height: auto;">
+</div>
+
+<h2>Task 1 – Loopback Interface Configuration</h2>
+
+<h3>R1 Loopbacks</h3>
+<div class="terminal">
+<div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+<pre>
+<span class="prompt">R1(config)#</span> <span class="command">int loopback 1</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">ip address 10.10.10.1 255.255.255.0</span>
+<span class="prompt">R1(config)#</span> <span class="command">int loopback 2</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">ip address 10.10.11.1 255.255.255.0</span>
+</pre>
+</div>
+
+<h3>R2 Loopbacks</h3>
+<div class="terminal">
+<div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+<pre>
+<span class="prompt">R2(config)#</span> <span class="command">int loopback 1</span>
+<span class="prompt">R2(config-if)#</span> <span class="command">ip address 10.10.40.1 255.255.255.0</span>
+<span class="prompt">R2(config)#</span> <span class="command">int loopback 2</span>
+<span class="prompt">R2(config-if)#</span> <span class="command">ip address 10.10.50.1 255.255.255.0</span>
+</pre>
+</div>
+
+<h3>R3 Loopbacks</h3>
+<div class="terminal">
+<div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+<pre>
+<span class="prompt">R3(config)#</span> <span class="command">int loopback 1</span>
+<span class="prompt">R3(config-if)#</span> <span class="command">ip address 10.10.20.1 255.255.255.0</span>
+<span class="prompt">R3(config)#</span> <span class="command">int loopback 2</span>
+<span class="prompt">R3(config-if)#</span> <span class="command">ip address 10.10.30.1 255.255.255.0</span>
+</pre>
+</div>
+
+<h2>Task 2 – EIGRP Configuration (AS 1)</h2>
+
+<h3>R1</h3>
+<div class="terminal">
+<div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+<pre>
+<span class="prompt">R1(config)#</span> <span class="command">router eigrp 1</span>
+<span class="prompt">R1(config-router)#</span> <span class="command">network 10.10.10.0</span>
+<span class="prompt">R1(config-router)#</span> <span class="command">network 10.10.11.0</span>
+<span class="prompt">R1(config-router)#</span> <span class="command">network 172.16.10.0</span>
+<span class="prompt">R1(config-router)#</span> <span class="command">network 172.16.10.4</span>
+<span class="prompt">R1(config-router)#</span> <span class="command">no auto-summary</span>
+</pre>
+</div>
+
+<h3>R2</h3>
+<div class="terminal">
+<div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+<pre>
+<span class="prompt">R2(config)#</span> <span class="command">router eigrp 1</span>
+<span class="prompt">R2(config-router)#</span> <span class="command">network 172.16.10.4</span>
+<span class="prompt">R2(config-router)#</span> <span class="command">network 10.10.40.0</span>
+<span class="prompt">R2(config-router)#</span> <span class="command">network 10.10.50.0</span>
+<span class="prompt">R2(config-router)#</span> <span class="command">no auto-summary</span>
+</pre>
+</div>
+
+<h3>R3</h3>
+<div class="terminal">
+<div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+<pre>
+<span class="prompt">R3(config)#</span> <span class="command">router eigrp 1</span>
+<span class="prompt">R3(config-router)#</span> <span class="command">network 172.16.10.0</span>
+<span class="prompt">R3(config-router)#</span> <span class="command">network 10.10.20.0</span>
+<span class="prompt">R3(config-router)#</span> <span class="command">network 10.10.30.0</span>
+<span class="prompt">R3(config-router)#</span> <span class="command">no auto-summary</span>
+</pre>
+</div>
+
+<h2>Task 3 – Verification</h2>
+<div class="terminal">
+<div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+<pre>
+<span class="prompt">R1#</span> <span class="command">show ip route</span>
+<span class="prompt">R2#</span> <span class="command">show ip route</span>
+<span class="prompt">R3#</span> <span class="command">show ip route</span>
+</pre>
+</div>
+
+</main>
+
+<footer>EIGRP Dynamic Routing Lab – CCNA Practice</footer>
+
+</body>
+</html>

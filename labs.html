@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Labs | CCNA Hands-On Labs</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f6f8;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #1f4e79;
+      color: white;
+      padding: 20px 40px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .home-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #ffbd2e;
+      color: #000;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .home-btn:hover {
+      background: #ffaa00;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      background: white;
+      padding: 30px 40px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      border-radius: 8px;
+    }
+
+    h2 {
+      border-left: 5px solid #1f4e79;
+      padding-left: 10px;
+      margin-top: 30px;
+      color: #1f4e79;
+    }
+
+    .labs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .lab-card {
+      background: #1f4e79;
+      color: white;
+      padding: 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: block;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .lab-card:hover {
+      background: #163a5c;
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    .lab-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+    }
+
+    .lab-card p {
+      margin: 0;
+      font-size: 14px;
+      opacity: 0.95;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 13px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>All CCNA Labs</h1>
+    <p>Complete List of Available Networking Labs</p>
+    <a href="index.html" class="home-btn">← Home</a>
+  </header>
+
+  <main>
+    <h2>Featured Labs</h2>
+    <p>Explore all available hands-on CCNA labs designed to build your networking skills.</p>
+    
+    <div class="labs-grid">
+      <a href="LAB01.html" class="lab-card">
+        <h3>VLAN Configuration Lab</h3>
+        <p>Learn to create and manage VLANs on Cisco switches. Segment your network into multiple broadcast domains.</p>
+      </a>
+
+      <a href="eigrp-lab.html" class="lab-card">
+        <h3>EIGRP Routing Lab</h3>
+        <p>Configure and troubleshoot EIGRP routing protocol for dynamic network communication. Perfect for beginners—learn basic EIGRP configuration without requiring deep technical knowledge.</p>
+      </a>
+
+      <div class="lab-card" style="cursor: not-allowed; opacity: 0.7;">
+        <h3>Static Routing Lab</h3>
+        <p>Master manual route configuration and understand when static routing is most effective.</p>
+      </div>
+
+      <div class="lab-card" style="cursor: not-allowed; opacity: 0.7;">
+        <h3>Inter-VLAN Routing</h3>
+        <p>Enable communication between different VLANs using router interfaces and subinterfaces.</p>
+      </div>
+
+      <div class="lab-card" style="cursor: not-allowed; opacity: 0.7;">
+        <h3>ACL Configuration</h3>
+        <p>Configure Access Control Lists to filter network traffic and implement security policies.</p>
+      </div>
+
+      <div class="lab-card" style="cursor: not-allowed; opacity: 0.7;">
+        <h3>DHCP Setup</h3>
+        <p>Set up DHCP servers and configure automatic IP address assignment for network clients.</p>
+      </div>
+
+      <div class="lab-card" style="cursor: not-allowed; opacity: 0.7;">
+        <h3>STP Basics</h3>
+        <p>Understand Spanning Tree Protocol and prevent network loops in switched environments.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Architecture &. Developer Space | CCNA Lab Hub
+  </footer>
+</body>
+</html>
