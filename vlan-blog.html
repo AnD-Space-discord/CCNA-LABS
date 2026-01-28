@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is the Use of VLAN? | CCNA Lab Hub</title>
+  <style>
+    body { margin:0; font-family: Arial, Helvetica, sans-serif; background:#f4f6f8; color:#333; line-height:1.7; }
+    header { background:#1f4e79; color:white; padding:40px 20px; text-align:center; }
+    header h1 { margin:0; font-size:34px; }
+    main { max-width:900px; margin:40px auto; background:white; padding:35px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.08); }
+    h2 { color:#1f4e79; margin-top:30px; }
+    ul { margin-left:20px; }
+    .highlight { background:#eef3f7; padding:15px; border-left:5px solid #1f4e79; margin:20px 0; }
+    footer { text-align:center; padding:20px; font-size:14px; color:#777; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>What is the Use of VLAN?</h1>
+  <p>Understanding Virtual LANs in Modern Networks</p>
+  <div style="margin-top:12px; text-align:center;">
+    <a href="index.html" class="home-btn" style="margin-right:8px;">← Home</a>
+    <a href="labs.html" class="home-btn" style="margin-right:8px;">📚 All Labs</a>
+    <a href="blog.html" class="home-btn">📝 Blog</a>
+  </div>
+</header>
+
+<main>
+
+<p>
+A <strong>VLAN (Virtual Local Area Network)</strong> is a networking technology that allows administrators to divide a single physical network into multiple logical networks. VLANs are essential in modern networking because they improve performance, security, and management of Local Area Networks (LANs).
+</p>
+
+<h2>🔹 Restricting Broadcast Domains</h2>
+<p>
+In a traditional LAN, broadcast traffic is sent to all devices in the network, which can slow down performance. VLANs limit broadcast traffic by creating separate broadcast domains. Traffic inside one VLAN stays within that VLAN, preventing unnecessary load on the entire network.
+</p>
+
+<h2>🔹 Enhancing Network Security</h2>
+<p>
+Devices in different VLANs cannot directly communicate at Layer 2. This separation allows network administrators to isolate sensitive departments (like HR or Finance) from others. Even if someone gains access to one VLAN, they cannot easily reach devices in another VLAN without routing or firewall rules.
+</p>
+
+<h2>🔹 Easier Network Management</h2>
+<p>
+VLANs group devices logically rather than physically. Employees in the same department can be in the same VLAN even if they are on different floors or buildings. This makes network changes, moves, and expansions easier without rewiring the infrastructure.
+</p>
+
+<h2>🔹 Improved Network Performance</h2>
+<p>
+By reducing broadcast traffic and limiting unnecessary communication, VLANs help maintain faster and more efficient network performance, especially in large organizations.
+</p>
+
+<h2>🔹 Better Organization of Workgroups</h2>
+<p>
+Departments such as Sales, Engineering, and Support can each have their own VLAN. This logical separation keeps traffic organized and simplifies policy implementation.
+</p>
+
+<h2>🔹 Support for Quality of Service (QoS)</h2>
+<p>
+VLANs can help prioritize important traffic such as voice (VoIP) or video conferencing by separating it from general data traffic, ensuring smoother communication.
+</p>
+
+<h2>🔹 Scalability</h2>
+<p>
+As networks grow, VLANs make it easy to expand by simply adding new VLANs instead of redesigning the entire network structure.
+</p>
+
+<div class="highlight">
+<strong>In Summary:</strong> VLANs improve performance, security, and flexibility while making networks easier to manage and scale. They are a fundamental concept in CCNA and modern enterprise networking.
+</div>
+
+<p style="margin-top:18px;">
+Continue reading about related topics: <a href="trunk-blog.html">Trunk Ports & 802.1Q →</a>
+</p>
+
+</main>
+
+<footer>
+© 2026 CCNA Lab Hub | Networking Concepts Blog
+</footer>
+
+</body>
+</html>

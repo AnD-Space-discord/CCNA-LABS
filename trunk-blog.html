@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trunk Ports & 802.1Q — CCNA Lab Hub</title>
+  <style>
+    body { margin:0; font-family: Arial, Helvetica, sans-serif; background:#f4f6f8; color:#333; line-height:1.7; }
+    header { background:#1f4e79; color:white; padding:40px 20px; text-align:center; }
+    header h1 { margin:0; font-size:34px; }
+    main { max-width:900px; margin:40px auto; background:white; padding:35px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.08); }
+    h2 { color:#1f4e79; margin-top:30px; }
+    .note { background:#eef3f7; padding:15px; border-left:5px solid #1f4e79; margin:20px 0; }
+    .nav-btn { display:inline-block; padding:10px 16px; background:#ffbd2e; color:#000; text-decoration:none; border-radius:6px; margin-top:12px; }
+    .prompt{color:#7ee787;} .command{color:#79c0ff;}
+    footer { text-align:center; padding:20px; font-size:14px; color:#777; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Trunk Ports & 802.1Q</h1>
+  <p>How trunk ports carry multiple VLANs across a single link</p>
+  <div style="margin-top:12px;">
+    <a href="index.html" class="nav-btn" style="margin-right:8px;">← Home</a>
+    <a href="labs.html" class="nav-btn" style="margin-right:8px;">📚 All Labs</a>
+    <a href="blog.html" class="nav-btn">📝 Blog</a>
+  </div>
+</header>
+
+<main>
+
+<p>
+A <strong>trunk port</strong> is a switch port configured to carry traffic for multiple VLANs across a single physical link between network devices. Trunks use tagging (most commonly 802.1Q) so the receiving device can identify which VLAN each frame belongs to.
+</p>
+
+<h2>Why Use Trunk Ports?</h2>
+<ul>
+  <li><strong>VLAN Communication:</strong> Trunk ports enable devices (switches, routers, firewalls) to carry traffic for all VLANs without needing separate physical links for each VLAN.</li>
+  <li><strong>Efficient Bandwidth Use:</strong> Consolidate traffic from multiple VLANs over one link, reducing cabling and port usage.</li>
+</ul>
+
+<h2>Trunk Port Configuration</h2>
+<h3>Access Mode vs. Trunk Mode</h3>
+<ul>
+  <li>By default, switch ports are in <em>access</em> mode and belong to a single VLAN.</li>
+  <li>To enable trunking, change the port mode to <em>trunk</em> so it can carry multiple VLANs.</li>
+</ul>
+
+<h3>802.1Q Encapsulation</h3>
+<ul>
+  <li>Trunk ports commonly use the <strong>802.1Q</strong> standard to tag VLAN frames with an identifier.</li>
+  <li>802.1Q tags are added to Ethernet frames so the receiving device can separate traffic by VLAN.</li>
+  <li>Native VLAN: untagged frames on a trunk are associated with the configured native VLAN (default VLAN 1 on many switches).</li>
+</ul>
+
+<h2>Troubleshooting Trunk Ports</h2>
+<ul>
+  <li>Use show commands like <code>show interfaces trunk</code> and <code>show vlan brief</code> to inspect trunk status and VLAN membership.</li>
+  <li>Verify both ends of the trunk agree on encapsulation (802.1Q) and native VLAN settings.</li>
+  <li>Check for mismatched VLAN lists or allowed VLAN ranges that could block traffic.</li>
+</ul>
+
+<div class="note">
+<strong>Quick CLI example:</strong>
+<pre style="background:#0d1117;color:#e6edf3;padding:12px;margin-top:10px;">
+<span class="prompt">Switch(config)#</span> <span class="command">interface gigabitEthernet0/1</span>
+<span class="prompt">Switch(config-if)#</span> <span class="command">switchport mode trunk</span>
+<span class="prompt">Switch(config-if)#</span> <span class="command">switchport trunk encapsulation dot1q</span>
+<span class="prompt">Switch(config-if)#</span> <span class="command">switchport trunk native vlan 99</span>
+<span class="prompt">Switch(config-if)#</span> <span class="command">switchport trunk allowed vlan 10,20,30</span>
+</pre>
+</div>
+
+<p>Trunks are fundamental when designing multi-VLAN networks and are commonly used between switches, and between switches and routers or virtualization hosts.</p>
+
+</main>
+
+<footer>
+© 2026 CCNA Lab Hub | Trunk Ports
+</footer>
+
+</body>
+</html>
