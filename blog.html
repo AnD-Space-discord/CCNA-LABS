@@ -4,19 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blog | Architecture &. Developer Space</title>
-  <style>
-    body { font-family: Arial, Helvetica, sans-serif; margin:0; background:#f4f6f8; color:#333; }
-    header { background:#1f4e79; color:white; padding:20px 40px; }
-    header h1 { margin:0; }
-    .home-btn { display:inline-block; margin-top:10px; padding:10px 20px; background:#ffbd2e; color:#000; text-decoration:none; border-radius:6px; font-weight:bold; }
-    main { max-width:1000px; margin:30px auto; background:white; padding:30px 40px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.08);}    
-    h2 { border-left:5px solid #1f4e79; padding-left:10px; color:#1f4e79; }
-    .post { padding:18px; border-radius:8px; background:#eef3f7; margin:18px 0; }
-    .post h3 { margin:0 0 8px 0; }
-    .post p { margin:0 0 12px 0; }
-    .read-btn { display:inline-block; padding:8px 14px; background:#1f4e79; color:#fff; text-decoration:none; border-radius:6px; }
-    footer { text-align:center; padding:15px; color:#777; }
-  </style>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
@@ -36,15 +27,15 @@
     </div>
 
     <div class="post">
-      <h3>EIGRP Basics and Configuration</h3>
-      <p>Overview of EIGRP, how it differs from other protocols, and basic configuration examples. Practice in the <a href="eigrp-lab.html">EIGRP Lab</a>.</p>
-      <a class="read-btn" href="eigrp-blog.html">Read</a>
-    </div>
-
-    <div class="post">
       <h3>Trunk Ports & 802.1Q</h3>
       <p>Learn what trunk ports do, why they're used, how to configure 802.1Q tagging, and troubleshooting tips. Practical examples and CLI snippets included.</p>
       <a class="read-btn" href="trunk-blog.html">Read</a>
+    </div>
+
+    <div class="post">
+      <h3>EIGRP Basics and Configuration</h3>
+      <p>Overview of EIGRP, how it differs from other protocols, and basic configuration examples. Practice in the <a href="eigrp-lab.html">EIGRP Lab</a>.</p>
+      <a class="read-btn" href="eigrp-blog.html">Read</a>
     </div>
 
     <div class="post">
@@ -55,6 +46,20 @@
 
   </main>
 
-  <footer>© 2026 Architecture &. Developer Space</footer>
+  <footer>
+    <div style="margin-bottom:8px;color:#f1f5f8;font-size:14px;background:rgba(0,0,0,0.3);padding:10px 12px;border-radius:6px;display:inline-block;">
+      Contact: <a href="mailto:asdfwhite0901@gmail.com" style="color:#ffbd2e;text-decoration:none;margin-left:8px;">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/gmail.svg" alt="Gmail" style="width:14px;height:14px;vertical-align:middle;margin-right:5px;filter:invert(100%);">asdfwhite0901@gmail.com
+      </a>
+      <a href="https://discord.gg/ZezHyjKP4S" target="_blank" style="color:#5865F2;text-decoration:none;margin-left:10px;">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/discord.svg" alt="Discord" style="width:14px;height:14px;vertical-align:middle;margin-right:5px;filter:invert(100%);">Discord
+      </a>
+      <a href="https://t.me/CCIECCNP" target="_blank" style="color:#0088cc;text-decoration:none;margin-left:10px;">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/telegram.svg" alt="Telegram" style="width:14px;height:14px;vertical-align:middle;margin-right:5px;filter:invert(100%);">Telegram
+      </a>
+    </div>
+    © 2026 Architecture &. Developer Space
+  </footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

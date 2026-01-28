@@ -4,27 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trunk Ports & 802.1Q — CCNA Lab Hub</title>
-  <style>
-    body { margin:0; font-family: Arial, Helvetica, sans-serif; background:#f4f6f8; color:#333; line-height:1.7; }
-    header { background:#1f4e79; color:white; padding:40px 20px; text-align:center; }
-    header h1 { margin:0; font-size:34px; }
-    main { max-width:900px; margin:40px auto; background:white; padding:35px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.08); }
-    h2 { color:#1f4e79; margin-top:30px; }
-    .note { background:#eef3f7; padding:15px; border-left:5px solid #1f4e79; margin:20px 0; }
-    .nav-btn { display:inline-block; padding:10px 16px; background:#ffbd2e; color:#000; text-decoration:none; border-radius:6px; margin-top:12px; }
-    .prompt{color:#7ee787;} .command{color:#79c0ff;}
-    footer { text-align:center; padding:20px; font-size:14px; color:#777; }
-  </style>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header>
   <h1>Trunk Ports & 802.1Q</h1>
   <p>How trunk ports carry multiple VLANs across a single link</p>
-  <div style="margin-top:12px;">
-    <a href="index.html" class="nav-btn" style="margin-right:8px;">← Home</a>
-    <a href="labs.html" class="nav-btn" style="margin-right:8px;">📚 All Labs</a>
-    <a href="blog.html" class="nav-btn">📝 Blog</a>
+  <div style="margin-top:12px; text-align:center;">
+    <a href="index.html" class="home-btn" style="margin-right:8px;">← Home</a>
+    <a href="labs.html" class="home-btn" style="margin-right:8px;">📚 All Labs</a>
+    <a href="blog.html" class="home-btn">📝 Blog</a>
   </div>
 </header>
 
@@ -77,8 +70,18 @@ A <strong>trunk port</strong> is a switch port configured to carry traffic for m
 </main>
 
 <footer>
-© 2026 CCNA Lab Hub | Trunk Ports
-</footer>
-
+  <div style="margin-bottom:8px;color:#f1f5f8;font-size:14px;background:rgba(0,0,0,0.3);padding:10px 12px;border-radius:6px;display:inline-block;">
+    Contact: <a href="mailto:asdfwhite0901@gmail.com" style="color:#ffbd2e;text-decoration:none;margin-left:8px;">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/gmail.svg" alt="Gmail" style="width:14px;height:14px;vertical-align:middle;margin-right:5px;filter:invert(100%);">asdfwhite0901@gmail.com
+    </a>
+    <a href="https://discord.gg/ZezHyjKP4S" target="_blank" style="color:#5865F2;text-decoration:none;margin-left:10px;">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/discord.svg" alt="Discord" style="width:14px;height:14px;vertical-align:middle;margin-right:5px;filter:invert(100%);">Discord
+    </a>
+    <a href="https://t.me/CCIECCNP" target="_blank" style="color:#0088cc;text-decoration:none;margin-left:10px;">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/telegram.svg" alt="Telegram" style="width:14px;height:14px;vertical-align:middle;margin-right:5px;filter:invert(100%);">Telegram
+    </a>
+  </div>
+  © 2026 Architecture &. Developer Space
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
