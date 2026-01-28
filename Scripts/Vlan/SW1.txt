@@ -1,0 +1,40 @@
+conf t
+hostname SW1
+!
+vlan 10
+ name Sales
+exit
+!
+vlan 20
+ name Manager
+exit
+!
+vlan 30
+ name Engineer
+exit
+!
+vlan 40
+ name Support
+exit
+!
+interface fa0/0
+ switchport mode access
+ switchport access vlan 10
+exit
+!
+interface fa0/1
+ switchport mode access
+ switchport access vlan 20
+exit
+!
+interface fa0/2
+ switchport mode access
+ switchport access vlan 30
+exit
+!
+interface fa0/3
+ switchport mode access
+ switchport access vlan 40
+exit
+!
+show vlan brief

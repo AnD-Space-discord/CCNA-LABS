@@ -98,6 +98,65 @@
     .prompt { color: #7ee787; }
     .command { color: #79c0ff; }
 
+    .scripts-section {
+      background: #eef3f7;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+      border-left: 5px solid #1f4e79;
+    }
+
+    .scripts-section h3 {
+      margin-top: 0;
+      color: #1f4e79;
+    }
+
+    .script-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+
+    .script-item span {
+      font-weight: 500;
+      color: #333;
+    }
+
+    .script-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .script-btn {
+      padding: 8px 15px;
+      background: #1f4e79;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      transition: 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .script-btn:hover {
+      background: #163a5c;
+    }
+
+    .script-btn.download {
+      background: #27c93f;
+    }
+
+    .script-btn.download:hover {
+      background: #1fa031;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -347,6 +406,19 @@ VLAN Name                             Status    Ports
 30   ENGINEERS                        active    Fa0/2
 40   SUPPORT                          active    Fa0/3
       </pre>
+    </div>
+
+    <div class="scripts-section">
+      <h3>📝 Lab Configuration Scripts</h3>
+      <p>Download or view the complete configuration scripts for this lab:</p>
+      
+      <div class="script-item">
+        <span>SW1 Configuration Script</span>
+        <div class="script-buttons">
+          <a href="Scripts/Vlan/SW1.txt" target="_blank" class="script-btn">View</a>
+          <a href="Scripts/Vlan/SW1.txt" download="SW1-config.txt" class="script-btn download">Download</a>
+        </div>
+      </div>
     </div>
     
   </main>
