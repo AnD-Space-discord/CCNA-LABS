@@ -172,6 +172,7 @@ h2 {
   padding-right: 10px;
   margin-top: 30px;
   color: var(--primary-color);
+  font-size: 24px;
 }
 
 section h2 {
@@ -195,7 +196,8 @@ section p {
 
 main p {
   color: var(--dark-text);
-  padding: 0 10px;
+  padding: 5px 20px;
+  font-size: 18px;
 }
 
 ul, li {
