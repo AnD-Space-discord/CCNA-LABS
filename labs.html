@@ -105,6 +105,107 @@
       font-size: 13px;
       color: #777;
     }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        padding: 20px 15px;
+      }
+
+      header h1 {
+        font-size: 22px;
+      }
+
+      header p {
+        font-size: 14px;
+      }
+
+      main {
+        padding: 20px 15px;
+        margin: 20px auto;
+      }
+
+      .home-btn {
+        display: block;
+        margin: 8px 0;
+        text-align: center;
+      }
+
+      .labs-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .lab-card {
+        padding: 20px;
+      }
+
+      .lab-card h3 {
+        font-size: 16px;
+      }
+
+      .lab-card p {
+        font-size: 13px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 15px 10px;
+      }
+
+      header h1 {
+        font-size: 18px;
+      }
+
+      header p {
+        font-size: 12px;
+      }
+
+      main {
+        padding: 15px 10px;
+        border-radius: 4px;
+        box-shadow: none;
+      }
+
+      .home-btn {
+        padding: 8px 15px;
+        font-size: 13px;
+        margin: 5px 0;
+      }
+
+      .labs-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .lab-card {
+        padding: 15px;
+      }
+
+      .lab-card h3 {
+        font-size: 14px;
+        margin: 0 0 8px 0;
+      }
+
+      .lab-card p {
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      h2 {
+        font-size: 16px;
+        padding-left: 8px;
+      }
+
+      p {
+        font-size: 13px;
+      }
+    }
   </style>
 </head>
 <body>
