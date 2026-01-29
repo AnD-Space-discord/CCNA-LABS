@@ -432,6 +432,17 @@ pre {
   color: #333;
 }
 
+.step {
+  background: var(--dark-bg);
+  color: var(--light-text);
+  padding: 15px;
+  border-radius: 6px;
+  font-family: monospace;
+  margin: 15px 0;
+  text-align: center;
+  font-weight: bold;
+}
+
 /* Tables */
 table {
   width: 100%;
