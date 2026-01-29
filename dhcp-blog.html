@@ -56,8 +56,10 @@ Discover → Offer → Request → Acknowledgment
 <ul>
   <li><strong>Discover:</strong> Client searches for a DHCP server.</li>
   <li><strong>Offer:</strong> Server offers an available IP address.</li>
-  <li><strong>Request:</strong> Client requests the offered IP.</li>
-  <li><strong>Acknowledgment:</strong> Server confirms and assigns the IP configuration.</li>
+  <li><strong>Request:</strong> Client requests server to reserve the offered IP and not to assign it anyone else.</li>
+  <li><strong>Acknowledgment:</strong> Server confirms and reserves the IP Address.</li>
+  <h5 class="Extra">Extra:</h5>
+  <li><strong>How it Binds the IP address to the device:</strong> The Server binds the IP address to devices network interface MAC Address.</li>
 </ul>
 
 <h2>Special IP Addresses Used</h2>
