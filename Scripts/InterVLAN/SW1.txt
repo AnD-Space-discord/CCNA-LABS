@@ -1,0 +1,5 @@
+vlan 10
+vlan 20
+interface gigabitEthernet 0/1
+switchport mode trunk
+no shutdown
