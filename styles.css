@@ -156,6 +156,7 @@ h2 {
   font-family: 'Fira Code', monospace;
   font-size: 0.9rem;
   color: #d1d5db;
+  overflow-x: auto;
 }
 
 .prompt { color: #27c93f; font-weight: bold; }
@@ -193,6 +194,13 @@ h2 {
   box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
 }
 
+/* --- Action Bar --- */
+.actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+}
+
 /* --- Buttons --- */
 .btn, .home-btn, .script-btn {
   background: var(--accent-color);
@@ -204,6 +212,7 @@ h2 {
   display: inline-block;
   border: none;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .btn:hover { background: #2563eb; transform: scale(1.05); }
