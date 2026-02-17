@@ -1,40 +1,31 @@
-conf t
+enable
+configure terminal
 hostname SW1
 !
 vlan 10
  name Sales
-exit
-!
 vlan 20
  name Manager
-exit
-!
 vlan 30
  name Engineer
-exit
-!
 vlan 40
  name Support
-exit
 !
-interface fa0/0
+interface fastEthernet 0/0
  switchport mode access
  switchport access vlan 10
-exit
 !
-interface fa0/1
+interface fastEthernet 0/1
  switchport mode access
  switchport access vlan 20
-exit
 !
-interface fa0/2
+interface fastEthernet 0/2
  switchport mode access
  switchport access vlan 30
-exit
 !
-interface fa0/3
+interface fastEthernet 0/3
  switchport mode access
  switchport access vlan 40
-exit
 !
+end
 show vlan brief

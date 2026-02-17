@@ -1,0 +1,14 @@
+enable
+configure terminal
+hostname SW1
+!
+interface fastEthernet 0/1
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security mac-address sticky
+ switchport port-security violation restrict
+exit
+!
+end
+show port-security interface fa0/1
