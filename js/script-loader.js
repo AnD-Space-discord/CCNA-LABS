@@ -17,7 +17,8 @@ const labScriptsData = {
     'rip.lab.html': { folder: 'RIP', files: ['R1.txt', 'R2.txt'], pkt: 'rip.pkt' },
     'static-routing.lab.html': { folder: 'StaticRouting', files: ['R1.txt', 'R2.txt'], pkt: 'static-routing.pkt' },
     'trunk.lab.html': { folder: 'Trunk', files: ['SW1.txt', 'SW2.txt'], pkt: 'trunk.pkt' },
-    'LAB01.lab.html': { folder: 'Vlan', files: ['SW1.txt'], pkt: 'LAB01.pkt' }
+    'LAB01.lab.html': { folder: 'Vlan', files: ['SW1.txt'], pkt: 'LAB01.pkt' },
+    'basic.cli.lab.html': { folder: 'BasicCLI', files: ['R1.txt'], pkt: 'basic-cli.pkt' }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
