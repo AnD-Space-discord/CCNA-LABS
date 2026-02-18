@@ -36,34 +36,61 @@ function updateFile(filePath, isSubdir) {
     content = content.replace(navRegex, newNav);
 
     // 3. Update Header
-    const headerRegex = /<header class="hero" style="[^"]*">([\s\S]*?)<\/header>|<header>([\s\S]*?)<\/header>/;
-    content = content.replace(headerRegex, (match, p1, p2) => {
-        const inner = p1 || p2 || '';
+    const headerRegex = /<header class="hero" style="[^"]*">([\s\S]*?)<\/header>|<header class="hero">([\s\S]*?)<\/header>|<header class="lab-header">([\s\S]*?)<\/header>|<header class="blog-header">([\s\S]*?)<\/header>|<header>([\s\S]*?)<\/header>/;
+    content = content.replace(headerRegex, (match, p1, p2, p3, p4, p5) => {
+        const inner = p1 || p2 || p3 || p4 || p5 || '';
         if (filePath.includes('.lab.html')) {
             return `  <header class="lab-header">
     ${inner.trim()}
   </header>`;
         }
-        return `  <header class="hero" style="height: 40vh; min-height: 300px;">
+        if (filePath.includes('BLOGS/')) {
+            return `  <header class="blog-header">
+    ${inner.trim()}
+  </header>`;
+        }
+        return `  <header class="hero">
     ${inner.trim()}
   </header>`;
     });
 
-    // 4. Wrap main content with lab-main for labs
+    // 4. Wrap main content
     if (filePath.includes('.lab.html')) {
-        content = content.replace(/<main>/, '<main class="lab-main">');
+        content = content.replace(/<main[^>]*>/, '<main class="lab-main">');
+    } else if (filePath.includes('BLOGS/')) {
+        // Wrap content in article if not already wrapped
+        if (!content.includes('blog-article')) {
+            content = content.replace(/<main[^>]*>/, '<main class="blog-main">\n      <div class="blog-article">');
+            content = content.replace(/<\/main>/, '      </div>\n    </main>');
+        } else {
+            content = content.replace(/<main[^>]*>/, '<main class="blog-main">');
+        }
+
+        // Add separators before h2 tags (except the first one if it's right at the start)
+        content = content.replace(/<h2/g, '<div class="section-divider"></div>\n        <h2');
+        // Fix: remove double divider at the top
+        content = content.replace(/<div class="blog-article">\n        <div class="section-divider"><\/div>/, '<div class="blog-article">');
     }
 
     // 5. Standard footer
     const footerRegex = /<footer>[\s\S]*?<\/footer>/;
     const newFooter = `  <footer>
-    <p>© 2026 Architecture & Developer Space | CCNA Mastery</p>
-  </footer>`;
+    <p>© 2026 Architecture & Developer Space</p>
+  </footer>
+  <script src="${prefix}js/theme-manager.js"></script>`;
     content = content.replace(footerRegex, newFooter);
 
     fs.writeFileSync(filePath, content, 'utf8');
     console.log(`Updated ${path.relative(__dirname, filePath)}`);
 }
+
+// Run for root level files
+const rootFiles = fs.readdirSync(__dirname);
+rootFiles.forEach(file => {
+    if (file.endsWith('.html')) {
+        updateFile(path.join(__dirname, file), false);
+    }
+});
 
 // Run for labs and BLOGS
 processDirectory(path.join(__dirname, 'labs'), true);
