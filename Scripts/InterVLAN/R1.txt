@@ -1,10 +1,7 @@
 ! --- Basic Configuration ---
+enable
+configure terminal
 hostname R1
-enable secret cisco
-line vty 0 4
- password cisco
- login
-exit
 
 ! --- Physical Interface ---
 interface GigabitEthernet0/0
