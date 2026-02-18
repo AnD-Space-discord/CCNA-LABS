@@ -17,7 +17,11 @@ line console 0
 ! Task 3: Secure Privileged Mode
 enable secret class123
 
-! Task 4: Encrypt Plain-Text Passwords
+! Task 4: Configure Local Usernames
+username admin privilege 15 secret admin123
+username guest secret guestpass
+
+! Task 5: Encrypt Plain-Text Passwords
 service password-encryption
 
 end
