@@ -2,83 +2,107 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Security Labs | CCNA Hands-On</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security Labs | CCNA Hands-On</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <nav>
-        <a href="../index.html">Home</a>
-        <div class="nav-item">
-            <a href="../labs.html">Labs <i class="fas fa-chevron-down"></i></a>
-            <div class="dropdown-content">
-                <a href="switching.html">Switching</a>
-                <a href="routing.html">Routing</a>
-                <a href="security.html">Security</a>
-                <a href="ip-services.html">IP Services</a>
-                <a href="../labs.html">All Labs</a>
-            </div>
+  <nav>
+    <a href="../index.html">Home</a>
+    <div class="nav-item">
+      <a href="../labs.html">Labs <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown-content">
+        <a href="switching.html">Switching</a>
+        <a href="routing.html">Routing</a>
+        <a href="security.html">Security</a>
+        <a href="ip-services.html">IP Services</a>
+        <a href="../labs.html">All Labs</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="../blog.html">Blog <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown-content">
+        <a href="../blog/switching.html">Switching</a>
+        <a href="../blog/routing.html">Routing</a>
+        <a href="../blog/security.html">Security</a>
+        <a href="../blog/ip-services.html">IP Services</a>
+        <a href="../blog.html">All Topics</a>
+      </div>
+    </div>
+    <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+      <i class="fas fa-gear"></i>
+    </button>
+  </nav>
+
+  <header class="hero">
+    <h1>Security Labs</h1>
+    <p>Secure your network with ACLs, NAT, and Device Hardening.</p>
+  </header>
+
+  <main>
+    <div class="unit-list">
+      <a href="rsa.ssh.lab.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Lab: RSA & SSH Configuration</span>
+          <p>Secure management access with public-key encryption.</p>
         </div>
-        <div class="nav-item">
-            <a href="../blog.html">Blog <i class="fas fa-chevron-down"></i></a>
-            <div class="dropdown-content">
-                <a href="../blog/switching.html">Switching</a>
-                <a href="../blog/routing.html">Routing</a>
-                <a href="../blog/security.html">Security</a>
-                <a href="../blog/ip-services.html">IP Services</a>
-                <a href="../blog.html">All Topics</a>
-            </div>
+      </a>
+      <a href="acl.lab.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Lab: ACL Configuration</span>
+          <p>Traffic filtering using Standard and Extended Access Lists.</p>
         </div>
-        <a href="../contact.html">Contact</a>
-    </nav>
-
-    <header class="hero">
-        <h1>Security Labs</h1>
-        <p>Secure your network with ACLs, NAT, and Device Hardening.</p>
-    </header>
-
-    <main>
-        <div class="unit-list">
-            <a href="rsa.ssh.lab.html" class="unit-item">
-                <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
-                <div class="unit-content">
-                    <span class="unit-title">Lab: RSA & SSH Configuration</span>
-                    <p>Secure management access with public-key encryption.</p>
-                </div>
-            </a>
-            <a href="acl.lab.html" class="unit-item">
-                <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
-                <div class="unit-content">
-                    <span class="unit-title">Lab: ACL Configuration</span>
-                    <p>Traffic filtering using Standard and Extended Access Lists.</p>
-                </div>
-            </a>
-            <a href="nat.lab.html" class="unit-item">
-                <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
-                <div class="unit-content">
-                    <span class="unit-title">Lab: NAT Configuration</span>
-                    <p>Set up PAT to connect local users to the internet securely.</p>
-                </div>
-            </a>
-            <a href="port-security.lab.html" class="unit-item">
-                <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
-                <div class="unit-content">
-                    <span class="unit-title">Lab: Port Security</span>
-                    <p>Prevent unauthorized physical access on switch ports.</p>
-                </div>
-            </a>
+      </a>
+      <a href="nat.lab.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Lab: NAT Configuration</span>
+          <p>Set up PAT to connect local users to the internet securely.</p>
         </div>
-    </main>
+      </a>
+      <a href="port-security.lab.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Lab: Port Security</span>
+          <p>Prevent unauthorized physical access on switch ports.</p>
+        </div>
+      </a>
+    </div>
+  </main>
 
-    <footer>
-        <p>© 2026 Architecture & Developer Space</p>
-    </footer>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>Premium CCNA & CCNP hands-on labs for networking professionals and students.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../labs.html">Labs</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Community</h3>
+        <div class="contact-icons">
+          <a href="https://discord.gg/ZezHyjKP4S" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Architecture & Developer Space. All rights reserved.</p>
+    </div>
+  </footer>
 
-    <script src="../js/theme-manager.js"></script>
+  <script src="../js/theme-manager.js"></script>
 </body>
 
 </html>

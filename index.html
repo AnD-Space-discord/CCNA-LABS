@@ -37,115 +37,121 @@
         <a href="blog.html">All Topics</a>
       </div>
     </div>
-    <a href="contact.html">Contact</a>
+    <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+      <i class="fas fa-gear"></i>
+    </button>
   </nav>
 
   <header class="hero hero-home">
-    <h1>Architecture & Developer Space</h1>
+    <h1>Architecture & <span style="color: var(--accent-color);">Developer Space</span></h1>
     <p>Hands-On CCNA & CCNP Labs — Learn by Doing</p>
 
-    <div class="terminal" style="max-width: 650px; width: 90%; margin: 40px auto; text-align: left;">
+    <!-- Terminal Element in Hero -->
+    <div class="terminal" style="margin: 40px auto; max-width: 600px; text-align: left;">
       <div class="terminal-header">
         <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-        <span style="margin-left: 10px; font-size: 12px; color: #94a3b8;">guest@emcglobal: ~</span>
+        <span style="font-size: 0.7rem; color: #666; margin-left: 10px;">guest@emclgobal:~</span>
       </div>
-      <div class="terminal-body">
-        <div><span class="prompt">guest@emcglobal:~$</span> <span class="command">ls /labs</span></div>
-        <div style="color: #3b82f6; margin-bottom: 8px;">VLANs, EIGRP, OSPF, Automation...</div>
-        <div><span class="prompt">guest@emcglobal:~$</span> <span class="command">status --network</span></div>
-        <div style="color: #10b981;">System Online. Ready for Lab deployment.</div>
-        <div><span class="prompt">guest@emcglobal:~$</span> <span class="cursor"></span></div>
-      </div>
+      <pre style="margin: 0; padding: 20px; font-size: 0.85rem;">
+<span style="color: #4ade80;">guest@emclgobal:~$</span> ls /labs
+VLANs, EIGRP, OSPF, Automation...
+
+<span style="color: #4ade80;">guest@emclgobal:~$</span> status --network
+System Online. Ready for Lab deployment.
+<span style="color: #4ade80;">guest@emclgobal:~$</span> <span class="cursor">_</span></pre>
     </div>
 
-    <a href="labs.html" class="btn">Start Practicing</a>
+    <a href="#labs" class="btn btn-primary"
+      style="padding: 14px 40px; border-radius: 50px; font-weight: 700; transition: all 0.3s; background: var(--accent-color); border: none; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);">
+      Start Practicing
+    </a>
   </header>
 
   <main>
-    <section class="grid-2">
-      <div class="intro-content">
-        <span
-          style="color: var(--accent-color); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">The
-          Platform</span>
-        <h2 style="text-align: left; margin: 10px 0 25px;">Engineering Mastery</h2>
-        <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 20px;">We provide step-by-step Cisco
-          networking labs designed to help you master real-world skills. From basic routing to advanced switching, our
-          content is built specifically for engineers aiming for certification excellence.</p>
-        <p style="font-weight: 600;">Join 1,000+ students globally 🌏</p>
+    <section class="feature-section">
+      <div class="feature-text">
+        <span>The Platform</span>
+        <h2>Engineering Mastery</h2>
+        <p>We provide step-by-step Cisco networking labs designed to help you master real-world skills. From basic
+          routing to advanced switching, our content is built specifically for engineers aiming for certification
+          excellence.</p>
+        <p style="margin-top: 20px; font-weight: 600; font-size: 0.9rem; color: var(--accent-color);">
+          Join 1,000+ students globally <i class="fas fa-globe-americas"></i>
+        </p>
       </div>
-
-      <div class="feature-list">
+      <div class="feature-cards">
         <div class="feature-item">
-          <div class="feature-icon"><i class="fas fa-microchip"></i></div>
+          <i class="fas fa-terminal"></i>
           <div>
-            <h4 style="margin-bottom: 5px;">Real CLI Focus</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Practice actual Cisco IOS commands used in industry.
-            </p>
+            <h4 style="margin: 0; font-size: 1.1rem; font-weight: 700;">Real CLI Focus</h4>
+            <p style="margin: 4px 0 0; font-size: 0.85rem; color: var(--text-muted);">Practice actual Cisco IOS commands
+              used in industry.</p>
           </div>
         </div>
         <div class="feature-item">
-          <div class="feature-icon"><i class="fas fa-layer-group"></i></div>
+          <i class="fas fa-layer-group"></i>
           <div>
-            <h4 style="margin-bottom: 5px;">Step-by-Step</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Structured guides that ensure clear progression.</p>
+            <h4 style="margin: 0; font-size: 1.1rem; font-weight: 700;">Step-by-Step</h4>
+            <p style="margin: 4px 0 0; font-size: 0.85rem; color: var(--text-muted);">Structured guides that ensure
+              clear progression.</p>
           </div>
         </div>
         <div class="feature-item">
-          <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+          <i class="fas fa-rocket"></i>
           <div>
-            <h4 style="margin-bottom: 5px;">Career Ready</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Build production-level network infrastructure
-              skills.</p>
+            <h4 style="margin: 0; font-size: 1.1rem; font-weight: 700;">Career Ready</h4>
+            <p style="margin: 4px 0 0; font-size: 0.85rem; color: var(--text-muted);">Build production-level network
+              infrastructure skills.</p>
           </div>
         </div>
       </div>
     </section>
 
     <section id="labs">
-      <h2>Featured Labs</h2>
+      <h2 style="margin-bottom: 60px;">Featured Labs</h2>
       <div class="labs-scroll-container">
         <div class="labs-track">
           <!-- Set 1 -->
           <a class="lab-item" href="labs/LAB01.lab.html">
-            <span style="color: var(--accent-color); font-size: 0.8rem; font-weight: 800;">VLAN Configuration</span>
+            <span>VLAN Configuration</span>
             <p>Master broadcast domains and security.</p>
           </a>
           <a class="lab-item" href="labs/trunk.lab.html">
-            <span style="color: var(--accent-color); font-size: 0.8rem; font-weight: 800;">Trunking Config</span>
+            <span>Trunking Config</span>
             <p>Configure 802.1Q trunks between switches.</p>
           </a>
           <a class="lab-item" href="labs/eigrp.lab.html">
-            <span style="color: var(--accent-color); font-size: 0.8rem; font-weight: 800;">EIGRP Routing</span>
+            <span>EIGRP Routing</span>
             <p>Dynamic routing for professionals.</p>
           </a>
           <a class="lab-item" href="labs/ospf.lab.html">
-            <span style="color: var(--accent-color); font-size: 0.8rem; font-weight: 800;">OSPF Single Area</span>
+            <span>OSPF Single Area</span>
             <p>Configure OSPFv2 for dynamic routing.</p>
           </a>
           <a class="lab-item" href="labs/ipv6.lab.html">
-            <span style="color: var(--accent-color); font-size: 0.8rem; font-weight: 800;">IPv6 Config</span>
+            <span>IPv6 Config</span>
             <p>Enable IPv6 routing and Unicast.</p>
           </a>
 
-          <!-- Set 2 -->
+          <!-- Set 2 (Duplicate for Seamless Loop) -->
           <a class="lab-item" href="labs/LAB01.lab.html">
-            <span style="color: var(--accent-color); font-size: 0.8rem; font-weight: 800;">VLAN Configuration</span>
+            <span>VLAN Configuration</span>
             <p>Master broadcast domains and security.</p>
           </a>
           <a class="lab-item" href="labs/trunk.lab.html">
-            <span style="color: var(--accent-color); font-size: 0.8rem; font-weight: 800;">Trunking Config</span>
+            <span>Trunking Config</span>
             <p>Configure 802.1Q trunks between switches.</p>
           </a>
           <a class="lab-item" href="labs/eigrp.lab.html">
-            <span style="color: var(--accent-color); font-size: 0.8rem; font-weight: 800;">EIGRP Routing</span>
+            <span>EIGRP Routing</span>
             <p>Dynamic routing for professionals.</p>
           </a>
           <a class="lab-item" href="labs/ospf.lab.html">
-            <span style="color: var(--accent-color); font-size: 0.8rem; font-weight: 800;">OSPF Single Area</span>
+            <span>OSPF Single Area</span>
             <p>Configure OSPFv2 for dynamic routing.</p>
           </a>
           <a class="lab-item" href="labs/ipv6.lab.html">
-            <span style="color: var(--accent-color); font-size: 0.8rem; font-weight: 800;">IPv6 Config</span>
+            <span>IPv6 Config</span>
             <p>Enable IPv6 routing and Unicast.</p>
           </a>
         </div>
@@ -154,11 +160,32 @@
   </main>
 
   <footer>
-    <p>© 2026 Architecture & Developer Space</p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>Premium CCNA & CCNP hands-on labs for networking professionals and students.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="labs.html">Labs</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Community</h3>
+        <div class="contact-icons">
+          <a href="https://discord.gg/ZezHyjKP4S" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Architecture & Developer Space. All rights reserved.</p>
+    </div>
   </footer>
 
   <script src="js/theme-manager.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

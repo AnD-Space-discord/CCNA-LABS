@@ -33,7 +33,9 @@
                 <a href="../blog.html">All Topics</a>
             </div>
         </div>
-        <a href="../contact.html">Contact</a>
+        <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+            <i class="fas fa-gear"></i>
+        </button>
     </nav>
 
     <header class="hero">
@@ -43,33 +45,48 @@
 
     <main>
         <div class="unit-list">
-            <a href="../BLOGS/ip-addressing-blog.html" class="unit-item">
-                <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
-                <div class="unit-content">
-                    <span class="unit-title">IP Addressing & Subnetting</span>
-                    <p>IPv4 classes, subnet masks, and network/host portion logic.</p>
-                </div>
-            </a>
-            <a href="../BLOGS/ipv6-basics-blog.html" class="unit-item">
-                <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
-                <div class="unit-content">
-                    <span class="unit-title">IPv6 Fundamentals</span>
-                    <p>Understanding 128-bit addressing and hexadecimal notation.</p>
-                </div>
-            </a>
-            <a href="../BLOGS/dhcp-blog.html" class="unit-item">
-                <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
-                <div class="unit-content">
-                    <span class="unit-title">Understanding DHCP</span>
-                    <p>Learn the DORA process and automatic IP allocation.</p>
-                </div>
-            </a>
+      <a href="../BLOGS/dhcp-blog.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Understanding DHCP</span>
+          <p>Automating IP addressing with pools and relay agents.</p>
         </div>
-    </main>
+      </a>
+      <a href="../BLOGS/ip-addressing-blog.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">IP Addressing & Subnetting</span>
+          <p>Binary logic, subnet masks, and VLSM calculation guide.</p>
+        </div>
+      </a>
+    </div>
+  </main>
 
     <footer>
-        <p>© 2026 Architecture & Developer Space</p>
-    </footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>Premium CCNA & CCNP hands-on labs for networking professionals and students.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../labs.html">Labs</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Community</h3>
+        <div class="contact-icons">
+          <a href="https://discord.gg/ZezHyjKP4S" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Architecture & Developer Space. All rights reserved.</p>
+    </div>
+  </footer>
 
     <script src="../js/theme-manager.js"></script>
 </body>

@@ -11,86 +11,110 @@
 </head>
 
 <body>
-    <nav>
-        <a href="../index.html">Home</a>
-        <div class="nav-item">
-            <a href="../labs.html">Labs <i class="fas fa-chevron-down"></i></a>
-            <div class="dropdown-content">
-                <a href="switching.html">Switching</a>
-                <a href="routing.html">Routing</a>
-                <a href="security.html">Security</a>
-                <a href="ip-services.html">IP Services</a>
-                <a href="../labs.html">All Labs</a>
-            </div>
-        </div>
-        <div class="nav-item">
-            <a href="../blog.html">Blog <i class="fas fa-chevron-down"></i></a>
-            <div class="dropdown-content">
-                <a href="../blog/switching.html">Switching</a>
-                <a href="../blog/routing.html">Routing</a>
-                <a href="../blog/security.html">Security</a>
-                <a href="../blog/ip-services.html">IP Services</a>
-                <a href="../blog.html">All Topics</a>
-            </div>
-        </div>
-        <a href="../contact.html">Contact</a>
-    </nav>
+      <nav>
+    <a href="../index.html">Home</a>
+    <div class="nav-item">
+      <a href="../labs.html">Labs <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown-content">
+        <a href="switching.html">Switching</a>
+        <a href="routing.html">Routing</a>
+        <a href="security.html">Security</a>
+        <a href="ip-services.html">IP Services</a>
+        <a href="../labs.html">All Labs</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="../blog.html">Blog <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown-content">
+        <a href="../blog/switching.html">Switching</a>
+        <a href="../blog/routing.html">Routing</a>
+        <a href="../blog/security.html">Security</a>
+        <a href="../blog/ip-services.html">IP Services</a>
+        <a href="../blog.html">All Topics</a>
+      </div>
+    </div>
+    <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+      <i class="fas fa-gear"></i>
+    </button>
+  </nav>
 
     <header class="hero">
-        <h1>Routing Labs</h1>
-        <p>Master Static Routing, OSPF, EIGRP, and more.</p>
+    <h1>Routing Labs</h1>
+    <p>Master Static Routing, OSPF, EIGRP, and more.</p>
     </header>
 
     <main>
         <div class="unit-list">
-            <a href="static-routing.lab.html" class="unit-item">
-                <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
-                <div class="unit-content">
-                    <span class="unit-title">Lab: Static Routing</span>
-                    <p>Configure manual and default routes between routers.</p>
-                </div>
-            </a>
-            <a href="eigrp.lab.html" class="unit-item">
-                <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
-                <div class="unit-content">
-                    <span class="unit-title">Lab: EIGRP Routing</span>
-                    <p>Set up EIGRP for dynamic network communication.</p>
-                </div>
-            </a>
-            <a href="ospf.lab.html" class="unit-item">
-                <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
-                <div class="unit-content">
-                    <span class="unit-title">Lab: OSPF Single Area</span>
-                    <p>Master OSPF dynamic routing in Area 0.</p>
-                </div>
-            </a>
-            <a href="ospf-multi-area.lab.html" class="unit-item">
-                <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
-                <div class="unit-content">
-                    <span class="unit-title">Lab: OSPF Multi-Area</span>
-                    <p>Advanced OSPF configuration with Area 0, 1, and 2.</p>
-                </div>
-            </a>
-            <a href="rip.lab.html" class="unit-item">
-                <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
-                <div class="unit-content">
-                    <span class="unit-title">Lab: RIPv2 Routing</span>
-                    <p>Configure legacy distance-vector routing.</p>
-                </div>
-            </a>
-            <a href="ipv6.lab.html" class="unit-item">
-                <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
-                <div class="unit-content">
-                    <span class="unit-title">Lab: IPv6 Configuration</span>
-                    <p>Enable IPv6 global unicast and routing.</p>
-                </div>
-            </a>
+      <a href="static-routing.lab.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Lab: Static Routing</span>
+          <p>Configure manual and default routes between routers.</p>
         </div>
-    </main>
+      </a>
+      <a href="eigrp.lab.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Lab: EIGRP Routing</span>
+          <p>Set up EIGRP for dynamic network communication.</p>
+        </div>
+      </a>
+      <a href="ospf.lab.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Lab: OSPF Single Area</span>
+          <p>Master OSPF dynamic routing in Area 0.</p>
+        </div>
+      </a>
+      <a href="ospf-multi-area.lab.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Lab: OSPF Multi-Area</span>
+          <p>Advanced OSPF configuration with Area 0, 1, and 2.</p>
+        </div>
+      </a>
+      <a href="rip.lab.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Lab: RIPv2 Routing</span>
+          <p>Configure legacy distance-vector routing.</p>
+        </div>
+      </a>
+      <a href="ipv6.lab.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-plus"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Lab: IPv6 Configuration</span>
+          <p>Enable IPv6 global unicast and routing.</p>
+        </div>
+      </a>
+    </div>
+  </main>
 
-    <footer>
-        <p>© 2026 Architecture & Developer Space</p>
-    </footer>
+      <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>Premium CCNA & CCNP hands-on labs for networking professionals and students.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../labs.html">Labs</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Community</h3>
+        <div class="contact-icons">
+          <a href="https://discord.gg/ZezHyjKP4S" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Architecture & Developer Space. All rights reserved.</p>
+    </div>
+  </footer>
 
     <script src="../js/theme-manager.js"></script>
 </body>

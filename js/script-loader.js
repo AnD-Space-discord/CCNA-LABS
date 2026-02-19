@@ -33,13 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!container) return;
 
     let html = `
-        <section class="resources mt-5">
-            <h2>Lab Resources</h2>
-            <p>Access the full configuration scripts for each networking device in this lab.</p>
+        <div class="lab-resources">
+            <h2 style="border:none; padding:0; margin-bottom:15px; text-align:left;">Lab Resources</h2>
+            <p style="margin-bottom:40px; color:var(--text-muted);">Access the full configuration scripts for each networking device in this lab.</p>
             
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <h5 class="mb-3">🔍 Quick View</h5>
+            <div class="resource-grid">
+                <div class="resource-col">
+                    <h3><i class="fas fa-search" style="color:var(--accent-color);"></i> Quick View</h3>
                     <div class="d-flex flex-wrap gap-2">
     `;
 
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const scriptPath = `../Scripts/${labData.folder}/${file}`;
 
         html += `
-            <a href="${scriptPath}" target="_blank" class="btn btn-primary btn-sm px-4">
+            <a href="${scriptPath}" target="_blank" class="view-btn">
                 View ${deviceName}.txt
             </a>
         `;
@@ -58,9 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
                 
-                <div class="col-md-6">
-                    <h5 class="mb-3"><i class="fas fa-file-download me-2"></i> Script Downloads</h5>
-                    <div class="d-grid gap-2">
+                <div class="resource-col">
+                    <h3><i class="fas fa-file-download" style="color:#10b981;"></i> Script Downloads</h3>
     `;
 
     labData.files.forEach(file => {
@@ -68,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const scriptPath = `../Scripts/${labData.folder}/${file}`;
 
         html += `
-            <a href="${scriptPath}" download="${deviceName}-config.txt" class="btn btn-success d-flex align-items-center justify-content-center gap-2 py-2">
+            <a href="${scriptPath}" download="${deviceName}-config.txt" class="download-btn">
                 <i class="fas fa-file-code"></i>
                 Download ${deviceName} Configuration
             </a>
@@ -76,10 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     html += `
-                    </div>
                 </div>
             </div>
-        </section>
+        </div>
     `;
 
     container.innerHTML = html;
