@@ -7,145 +7,81 @@
   <meta name="google-adsense-account" content="ca-pub-4349583490319558">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4349583490319558"
     crossorigin="anonymous"></script>
-  <title>Networking Blog | Architecture & Developer Space</title>
+  <title>Engineering Blog | Architecture & Developer Space</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-          <nav>
+  <nav>
     <a href="index.html">Home</a>
-    <a href="labs.html">Labs</a>
-    <a href="blog.html">Blog</a>
+    <div class="nav-item">
+      <a href="labs.html">Labs <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown-content">
+        <a href="labs/switching.html">Switching</a>
+        <a href="labs/routing.html">Routing</a>
+        <a href="labs/security.html">Security</a>
+        <a href="labs/ip-services.html">IP Services</a>
+        <a href="labs.html">All Labs</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="blog.html">Blog <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown-content">
+        <a href="blog/switching.html">Switching</a>
+        <a href="blog/routing.html">Routing</a>
+        <a href="blog/security.html">Security</a>
+        <a href="blog/ip-services.html">IP Services</a>
+        <a href="blog.html">All Topics</a>
+      </div>
+    </div>
     <a href="contact.html">Contact</a>
   </nav>
 
-          <header class="hero">
+  <header class="hero">
     <h1>Engineering Blog</h1>
     <p>Deep dives into networking protocols, architecture, and lab walkthroughs.</p>
   </header>
 
   <main>
-    <div class="labs-grid">
-      <div class="lab-card">
-        <h3>Routing Protocols & IGPs</h3>
-        <p>A comprehensive guide to Interior Gateway Protocols (RIP, EIGRP, OSPF), their types, versions, and
-          Administrative Distance values.</p>
-        <div class="mt-auto pt-3">
-          <a href="BLOGS/routing-protocols-blog.html" class="btn btn-sm">View Blog</a>
+    <div class="unit-list">
+      <a href="blog/switching.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-network-wired"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Switching Topics</span>
+          <p>MAC learning, VLAN logic, STP processes, and frame forwarding.</p>
         </div>
-      </div>
-
-      <div class="lab-card">
-        <h3>Switching Basics</h3>
-        <p>Understand Layer 2 switching: MAC Address Tables, Aging Timers, and the packet forwarding process.</p>
-        <div class="mt-auto pt-3">
-          <a href="BLOGS/switching-basics-blog.html" class="btn btn-sm">View Blog</a>
+      </a>
+      <a href="blog/routing.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-route"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Routing Topics</span>
+          <p>RIP, EIGRP, OSPF, and packet forwarding architecture.</p>
         </div>
-      </div>
-
-      <div class="lab-card">
-        <h3>Router Basics</h3>
-        <p>Learn how routers function, read routing tables, and forward packets between different networks.</p>
-        <div class="mt-auto pt-3">
-          <a href="BLOGS/router-basics-blog.html" class="btn btn-sm">View Blog</a>
+      </a>
+      <a href="blog/security.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-shield-halved"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Security Topics</span>
+          <p>ACLs, NAT, VPNs, and device hardening strategies.</p>
         </div>
-      </div>
-
-      <div class="lab-card">
-        <h3>IP Addressing & Subnetting</h3>
-        <p>Understand the core of networking: IPv4 classes, the difference between Network and Host portions, and why
-          Subnet Masks are critical.</p>
-        <div class="mt-auto pt-3">
-          <a href="BLOGS/ip-addressing-blog.html" class="btn btn-sm">View Blog</a>
+      </a>
+      <a href="blog/ip-services.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-server"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">IP Services Topics</span>
+          <p>Addressing, DHCP, Management, and Infrastructure protocols.</p>
         </div>
-      </div>
-
-      <div class="lab-card">
-        <h3>IPv6 Fundamentals</h3>
-        <p>An introduction to IPv6, understanding 128-bit addressing, hexadecimal notation, and address types.</p>
-        <div class="mt-auto pt-3">
-          <a href="BLOGS/ipv6-basics-blog.html" class="btn btn-sm">View Blog</a>
-        </div>
-      </div>
-
-      <div class="lab-card">
-        <h3>VLANs on Switches</h3>
-        <p>This post covers VLAN basics, ranges, and configuration. Pairs with the VLAN Lab for hands-on practice.</p>
-        <div class="mt-auto pt-3">
-          <a href="BLOGS/vlan-blog.html" class="btn btn-sm">View Blog</a>
-        </div>
-      </div>
-
-      <div class="lab-card">
-        <h3>Trunk Ports & 802.1Q</h3>
-        <p>Learn what trunk ports do, why they're used, how to configure 802.1Q tagging, and troubleshooting tips.</p>
-        <div class="mt-auto pt-3">
-          <a href="BLOGS/trunk-blog.html" class="btn btn-sm">View Blog</a>
-        </div>
-      </div>
-
-      <div class="lab-card">
-        <h3>Inter-VLAN Routing</h3>
-        <p>How to connect isolated VLANs using Router-on-a-Stick (ROAS) and Layer 3 Switches (SVI).</p>
-        <div class="mt-auto pt-3">
-          <a href="BLOGS/intervlan-routing-blog.html" class="btn btn-sm">View Blog</a>
-        </div>
-      </div>
-
-      <div class="lab-card">
-        <h3>EIGRP Basics</h3>
-        <p>Overview of EIGRP, how it differs from other protocols, and basic configuration examples.</p>
-        <div class="mt-auto pt-3">
-          <a href="BLOGS/eigrp-blog.html" class="btn btn-sm">View Blog</a>
-        </div>
-      </div>
-
-      <div class="lab-card">
-        <h3>OSPF Basics</h3>
-        <p>Introduction to Open Shortest Path First (OSPF), understanding Areas, LSDB, and DR/BDR elections.</p>
-        <div class="mt-auto pt-3">
-          <a href="BLOGS/ospf-blog.html" class="btn btn-sm">View Blog</a>
-        </div>
-      </div>
-
-      <div class="lab-card">
-        <h3>Understanding DHCP</h3>
-        <p>Learn how DHCP automatically assigns IP addresses via the DORA process and special IP addresses.</p>
-        <div class="mt-auto pt-3">
-          <a href="BLOGS/dhcp-blog.html" class="btn btn-sm">View Blog</a>
-        </div>
-      </div>
-
-      <div class="lab-card">
-        <h3>Network Address Translation</h3>
-        <p>Understand how NAT works, the differences between Static, Dynamic, and PAT, and why it's crucial for IPv4.
-        </p>
-        <div class="mt-auto pt-3">
-          <a href="BLOGS/nat-blog.html" class="btn btn-sm">View Blog</a>
-        </div>
-      </div>
-
-      <div class="lab-card">
-        <h3>Access Control Lists (ACLs)</h3>
-        <p>Learn how to secure your network by filtering traffic with Standard and Extended ACLs.</p>
-        <div class="mt-auto pt-3">
-          <a href="BLOGS/acl.blog.html" class="btn btn-sm">View Blog</a>
-        </div>
-      </div>
-
+      </a>
     </div>
   </main>
 
-          <footer>
+  <footer>
     <p>© 2026 Architecture & Developer Space</p>
   </footer>
+
   <script src="js/theme-manager.js"></script>
-  <script src="js/theme-manager.js"></script>
-  <script src="js/theme-manager.js"></script>
-  <script src="js/theme-manager.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

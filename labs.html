@@ -16,8 +16,26 @@
 <body>
   <nav>
     <a href="index.html">Home</a>
-    <a href="labs.html">Labs</a>
-    <a href="blog.html">Blog</a>
+    <div class="nav-item">
+      <a href="labs.html">Labs <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown-content">
+        <a href="labs/switching.html">Switching</a>
+        <a href="labs/routing.html">Routing</a>
+        <a href="labs/security.html">Security</a>
+        <a href="labs/ip-services.html">IP Services</a>
+        <a href="labs.html">All Labs</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="blog.html">Blog <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown-content">
+        <a href="blog/switching.html">Switching</a>
+        <a href="blog/routing.html">Routing</a>
+        <a href="blog/security.html">Security</a>
+        <a href="blog/ip-services.html">IP Services</a>
+        <a href="blog.html">All Topics</a>
+      </div>
+    </div>
     <a href="contact.html">Contact</a>
   </nav>
 
@@ -25,147 +43,61 @@
     <h1>Lab Repository</h1>
     <p>Step-by-step hands-on training for the modern network engineer.</p>
   </header>
+
   <main>
     <div class="search-container">
-      <input type="text" id="labSearch" class="search-input" placeholder="Find a specific lab (e.g. OSPF, VLAN)...">
+      <input type="text" id="labSearch" class="search-input" placeholder="Search lab categories...">
     </div>
 
-    <div class="labs-grid">
-      <div class="lab-card">
-        <h3>Lab 1: Accessing Switch and Router</h3>
-        <p>Learn the fundamental icons and CLI access modes (User, Privileged, and Global Config).</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/accessing-switch-router.lab.html" class="btn btn-sm">View Lab</a>
+    <div class="unit-list">
+      <a href="labs/switching.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-network-wired"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Switching Labs</span>
+          <p>VLANs, Trunking, Port Security, and EtherChannel configurations.</p>
         </div>
-      </div>
-      <div class="lab-card">
-        <h3>Basic CLI Navigation & Security</h3>
-        <p>Master the basics: hostname, console security, and privileged mode encryption.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/basic.cli.lab.html" class="btn btn-sm">View Lab</a>
+      </a>
+      <a href="labs/routing.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-route"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Routing Labs</span>
+          <p>Static routing, OSPF, EIGRP, and Inter-VLAN routing mastery.</p>
         </div>
-      </div>
-      <div class="lab-card">
-        <h3>RSA & SSH Configuration</h3>
-        <p>Secure management access to network devices using RSA keys and SSHv2.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/rsa.ssh.lab.html" class="btn btn-sm">View Lab</a>
+      </a>
+      <a href="labs/security.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-shield-halved"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">Security Labs</span>
+          <p>Standard & Extended ACLs, NAT, and device hardening techniques.</p>
         </div>
-      </div>
-      <div class="lab-card">
-        <h3>VLAN Configuration Lab</h3>
-        <p>Learn to create and manage VLANs. Segment your network and configure interface assignments.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/LAB01.lab.html" class="btn btn-sm">View Lab</a>
+      </a>
+      <a href="labs/ip-services.html" class="unit-item">
+        <div class="unit-icon-box"><i class="fas fa-server"></i></div>
+        <div class="unit-content">
+          <span class="unit-title">IP Services Labs</span>
+          <p>DHCP, NTP, SNMP, and Network Management protocols.</p>
         </div>
-      </div>
-      <div class="lab-card">
-        <h3>Trunking Configuration Lab</h3>
-        <p>Configure 802.1Q trunks between switches to carry multiple VLANs across a single link.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/trunk.lab.html" class="btn btn-sm">View Lab</a>
-        </div>
-      </div>
-      <div class="lab-card">
-        <h3>Static Routing Lab</h3>
-        <p>Learn to configure manual static routes and default routes.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/static-routing.lab.html" class="btn btn-sm">View Lab</a>
-        </div>
-      </div>
-      <div class="lab-card">
-        <h3>Inter-VLAN Routing Lab</h3>
-        <p>Configure Router-on-a-Stick to enable communication between different VLANs.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/intervlan.lab.html" class="btn btn-sm">View Lab</a>
-        </div>
-      </div>
-      <div class="lab-card">
-        <h3>DHCP Configuration Lab</h3>
-        <p>Set up a Cisco Router to act as a DHCP server for a LAN.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/dhcp.lab.html" class="btn btn-sm">View Lab</a>
-        </div>
-      </div>
-      <div class="lab-card">
-        <h3>EIGRP Routing Lab</h3>
-        <p>Configure dynamic network communication using the EIGRP protocol.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/eigrp.lab.html" class="btn btn-sm">View Lab</a>
-        </div>
-      </div>
-      <div class="lab-card">
-        <h3>OSPF Single Area Lab</h3>
-        <p>Configure OSPFv2 in a single area to enable dynamic routing between routers.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/ospf.lab.html" class="btn btn-sm">View Lab</a>
-        </div>
-      </div>
-      <div class="lab-card">
-        <h3>RIPv2 Routing Lab</h3>
-        <p>Configure the Routing Information Protocol (RIPv2) for dynamic routing.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/rip.lab.html" class="btn btn-sm">View Lab</a>
-        </div>
-      </div>
-      <div class="lab-card">
-        <h3>OSPF Multi-Area Lab</h3>
-        <p>Advanced OSPF: Configure Areas 1, 0, and 2 and verify Inter-Area routing.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/ospf-multi-area.lab.html" class="btn btn-sm">View Lab</a>
-        </div>
-      </div>
-      <div class="lab-card">
-        <h3>ACL Configuration Lab</h3>
-        <p>Filter network traffic using Standard and Extended Access Control Lists.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/acl.lab.html" class="btn btn-sm">View Lab</a>
-        </div>
-      </div>
-      <div class="lab-card">
-        <h3>NAT Configuration Lab</h3>
-        <p>Configure Port Address Translation (PAT) to connect to the Internet.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/nat.lab.html" class="btn btn-sm">View Lab</a>
-        </div>
-      </div>
-      <div class="lab-card">
-        <h3>IPv6 Configuration Lab</h3>
-        <p>Enable IPv6 routing and configure Global Unicast addresses on Cisco routers.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/ipv6.lab.html" class="btn btn-sm">View Lab</a>
-        </div>
-      </div>
-      <div class="lab-card">
-        <h3>Port Security Lab</h3>
-        <p>Secure switch ports by limiting allowed MAC addresses.</p>
-        <div class="mt-auto pt-3">
-          <a href="labs/port-security.lab.html" class="btn btn-sm">View Lab</a>
-        </div>
-      </div>
+      </a>
     </div>
   </main>
 
   <footer>
     <p>© 2026 Architecture & Developer Space</p>
   </footer>
-  <script src="js/theme-manager.js"></script>
-  <script src="js/theme-manager.js"></script>
-  <script src="js/theme-manager.js"></script>
-  <script src="js/theme-manager.js"></script>
 
   <script>
     document.getElementById('labSearch').addEventListener('keyup', function () {
       const filter = this.value.toLowerCase();
-      const cards = document.querySelectorAll('.lab-card');
+      const items = document.querySelectorAll('.unit-item');
 
-      cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        card.style.display = text.includes(filter) ? '' : 'none';
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(filter) ? '' : 'none';
       });
     });
   </script>
 
+  <script src="js/theme-manager.js"></script>
 </body>
 
 </html>
