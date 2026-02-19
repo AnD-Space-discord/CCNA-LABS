@@ -7,7 +7,7 @@ function processDirectory(dir, isSubdir = true) {
         const filePath = path.join(dir, file);
         if (fs.statSync(filePath).isDirectory()) {
             // Don't recurse into non-content folders
-            if (['labs', 'BLOGS', 'blog'].includes(file)) {
+            if (['labs', 'BLOGS'].includes(file)) {
                 processDirectory(filePath, true);
             }
         } else if (file.endsWith('.html')) {
@@ -29,26 +29,8 @@ function updateFile(filePath, isSubdir) {
     const navRegex = /<nav>[\s\S]*?<\/nav>/;
     const newNav = `  <nav>
     <a href="${prefix}index.html">Home</a>
-    <div class="nav-item">
-      <a href="${prefix}labs.html">Labs <i class="fas fa-chevron-down"></i></a>
-      <div class="dropdown-content">
-        <a href="${prefix}labs/switching.html">Switching</a>
-        <a href="${prefix}labs/routing.html">Routing</a>
-        <a href="${prefix}labs/security.html">Security</a>
-        <a href="${prefix}labs/ip-services.html">IP Services</a>
-        <a href="${prefix}labs.html">All Labs</a>
-      </div>
-    </div>
-    <div class="nav-item">
-      <a href="${prefix}blog.html">Blog <i class="fas fa-chevron-down"></i></a>
-      <div class="dropdown-content">
-        <a href="${prefix}blog/switching.html">Switching</a>
-        <a href="${prefix}blog/routing.html">Routing</a>
-        <a href="${prefix}blog/security.html">Security</a>
-        <a href="${prefix}blog/ip-services.html">IP Services</a>
-        <a href="${prefix}blog.html">All Topics</a>
-      </div>
-    </div>
+    <a href="${prefix}labs.html">Labs</a>
+    <a href="${prefix}blog.html">Blog</a>
     <a href="${prefix}contact.html">Contact</a>
   </nav>`;
     content = content.replace(navRegex, newNav);
@@ -94,23 +76,9 @@ function updateFile(filePath, isSubdir) {
     const footerRegex = /<footer>[\s\S]*?<\/footer>/;
     const newFooter = `  <footer>
     <p>© 2026 Architecture & Developer Space</p>
-  </footer>`;
+  </footer>
+  <script src="${prefix}js/theme-manager.js"></script>`;
     content = content.replace(footerRegex, newFooter);
-
-    // 6. Clean up scripts and add theme manager
-    // Remove all existing theme-manager script tags
-    content = content.replace(/<script src="[^"]*theme-manager\.js"><\/script>/g, '');
-    // Remove trailing scripts after <footer> if they are redundant (optional, but let's at least ensure one theme-manager exists)
-    if (!content.includes('</body>')) {
-        content += `\n<script src="${prefix}js/theme-manager.js"></script>\n</body>`;
-    } else {
-        content = content.replace('</body>', `<script src="${prefix}js/theme-manager.js"></script>\n</body>`);
-    }
-
-    // Remove double body/html closings if any
-    content = content.replace(/<\/body>[\s\S]*<\/body>/g, '</body>');
-    content = content.replace(/<\/html>[\s\S]*<\/html>/g, '</html>');
-
 
     fs.writeFileSync(filePath, content, 'utf8');
     console.log(`Updated ${path.relative(__dirname, filePath)}`);
@@ -124,7 +92,6 @@ rootFiles.forEach(file => {
     }
 });
 
-// Run for labs, BLOGS, and blog
+// Run for labs and BLOGS
 processDirectory(path.join(__dirname, 'labs'), true);
 processDirectory(path.join(__dirname, 'BLOGS'), true);
-processDirectory(path.join(__dirname, 'blog'), true);
