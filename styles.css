@@ -17,7 +17,7 @@ body.light-mode {
   --accent-color: #1d4ed8;
   --text-main: #0f172a;
   --text-muted: #334155;
-  --glass-bg: rgba(191, 201, 209, 0.95);
+  --glass-bg: rgba(127, 139, 148, 0.95);
   --glass-border: rgba(15, 23, 42, 0.1);
   --terminal-black: #0f172a;
 }
