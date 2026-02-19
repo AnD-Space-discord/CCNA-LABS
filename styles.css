@@ -12,13 +12,13 @@
 }
 
 body.light-mode {
-  --primary-bg: #fdfdfd;
-  --secondary-bg: #f8fafc;
+  --primary-bg: #BFC9D1;
+  --secondary-bg: #AFBDC9;
   --accent-color: #1d4ed8;
-  --text-main: #1e293b;
-  --text-muted: #475569;
-  --glass-bg: rgba(255, 255, 255, 0.9);
-  --glass-border: rgba(30, 41, 59, 0.1);
+  --text-main: #0f172a;
+  --text-muted: #334155;
+  --glass-bg: rgba(191, 201, 209, 0.95);
+  --glass-border: rgba(15, 23, 42, 0.1);
   --terminal-black: #0f172a;
 }
 
@@ -63,27 +63,27 @@ body.light-mode .hero h1 {
 }
 
 body.light-mode nav {
-  background: rgba(255, 255, 255, 0.9);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(191, 201, 209, 0.95);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
 }
 
 body.light-mode .lab-card,
 body.light-mode .glass-panel,
 body.light-mode .feature-item {
-  background: white;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
 }
 
 body.light-mode .search-input {
-  background: white;
-  color: #1e293b;
-  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #94a3b8;
 }
 
 body.light-mode footer {
-  background: #f8fafc;
-  color: #64748b;
+  background: #AFBDC9;
+  color: #334155;
 }
 
 body.light-mode .terminal {
