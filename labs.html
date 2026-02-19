@@ -14,24 +14,30 @@
 </head>
 
 <body>
-          <nav>
+  <nav>
     <a href="index.html">Home</a>
     <a href="labs.html">Labs</a>
     <a href="blog.html">Blog</a>
     <a href="contact.html">Contact</a>
   </nav>
 
-          <header class="hero">
+  <header class="hero">
     <h1>Lab Repository</h1>
     <p>Step-by-step hands-on training for the modern network engineer.</p>
   </header>
-
   <main>
     <div class="search-container">
       <input type="text" id="labSearch" class="search-input" placeholder="Find a specific lab (e.g. OSPF, VLAN)...">
     </div>
 
     <div class="labs-grid">
+      <div class="lab-card">
+        <h3>Lab 1: Accessing Switch and Router</h3>
+        <p>Learn the fundamental icons and CLI access modes (User, Privileged, and Global Config).</p>
+        <div class="mt-auto pt-3">
+          <a href="labs/accessing-switch-router.lab.html" class="btn btn-sm">View Lab</a>
+        </div>
+      </div>
       <div class="lab-card">
         <h3>Basic CLI Navigation & Security</h3>
         <p>Master the basics: hostname, console security, and privileged mode encryption.</p>
@@ -140,7 +146,7 @@
     </div>
   </main>
 
-          <footer>
+  <footer>
     <p>© 2026 Architecture & Developer Space</p>
   </footer>
   <script src="js/theme-manager.js"></script>
