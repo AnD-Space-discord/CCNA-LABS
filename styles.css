@@ -1070,3 +1070,141 @@ body.light-mode .lab-resources {
     grid-template-columns: 1fr;
   }
 }
+
+/* --- Blog Specific Premium Styles --- */
+.blog-main {
+  max-width: 900px;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--secondary-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 40px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.comparison-table th {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--accent-color);
+  padding: 20px;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.comparison-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--glass-border);
+  color: var(--text-main);
+}
+
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.comparison-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.mode-table {
+  width: 100%;
+  margin: 20px 0;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.mode-table th,
+.mode-table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.mode-table th {
+  color: var(--highlight-gold);
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tip-box {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.05));
+  border-left: 4px solid var(--accent-color);
+  padding: 25px;
+  border-radius: 0 16px 16px 0;
+  margin: 40px 0;
+}
+
+.tip-box h4 {
+  color: var(--accent-color);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.trap-box {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.05));
+  border-left: 4px solid #ef4444;
+  padding: 25px;
+  border-radius: 0 16px 16px 0;
+  margin: 40px 0;
+}
+
+.trap-box h4 {
+  color: #ef4444;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.verdict-box {
+  background: var(--glass-bg);
+  border: 1px solid var(--accent-color);
+  padding: 30px;
+  border-radius: 20px;
+  margin: 50px 0;
+  text-align: center;
+}
+
+.verdict-header {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.highlight {
+  background: rgba(255, 189, 46, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  margin: 30px 0;
+  border: 1px dashed var(--highlight-gold);
+}
+
+body.light-mode .comparison-table {
+  background: #ffffff;
+}
+
+body.light-mode .comparison-table tr:hover td {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+body.light-mode .verdict-box {
+  background: #f8fafc;
+}
+
+body.light-mode .mode-table {
+  background: rgba(0, 0, 0, 0.05);
+}

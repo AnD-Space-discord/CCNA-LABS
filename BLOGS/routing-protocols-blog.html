@@ -1,119 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-adsense-account" content="ca-pub-4349583490319558">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4349583490319558"
-     crossorigin="anonymous"></script>
-  <title>Routing Protocols & IGPs | CCNA Blog</title>
+
+
+  <title>Routing Protocols & IGPs — CCNA Lab Hub</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-                  <nav>
+  <nav>
     <a href="../index.html">Home</a>
     <a href="../labs.html">Labs</a>
     <a href="../blog.html">Blog</a>
-    
   </nav>
 
-              <header class="hero">
+  <header class="hero"
+    style="background: linear-gradient(to bottom, rgba(2, 6, 23, 0.7), var(--primary-bg)), url('https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2000');">
     <h1>Routing Protocols & IGPs</h1>
-  <p>Understanding Interior Gateway Protocols, Types, and AD Values</p>
+    <p>Dynamic Path Selection and Protocol Classifications</p>
   </header>
 
-<main>
+  <main class="blog-main">
 
-<p>
-Routing protocols are the set of rules used by routers to communicate with each other and exchange information that enables them to select the best path to a destination. They are broadly classified into <strong>IGP (Interior Gateway Protocol)</strong> and <strong>EGP (Exterior Gateway Protocol)</strong>.
-</p>
+    <p class="lead">
+      Routing protocols are the set of rules used by routers to communicate and exchange information, enabling them to
+      select the best path to any destination network.
+    </p>
 
-<h2>IGP vs. EGP</h2>
-<ul>
-  <li><strong>IGP:</strong> Used for routing <em>within</em> a single Autonomous System (AS). Examples: OSPF, EIGRP, RIP, IS-IS.</li>
-  <li><strong>EGP:</strong> Used for routing <em>between</em> different Autonomous Systems. Example: BGP (Border Gateway Protocol).</li>
-</ul>
+    <div class="tip-box">
+      <h4><i class="fas fa-project-diagram"></i> IGP vs. EGP</h4>
+      <ul>
+        <li><strong>IGP (Interior):</strong> Used <em>within</em> an Autonomous System (e.g., OSPF, EIGRP).</li>
+        <li><strong>EGP (Exterior):</strong> Used <em>between</em> Autonomous Systems (e.g., BGP).</li>
+      </ul>
+    </div>
 
-<h2>Types of IGPs</h2>
-<p>IGPs are categorized based on how they calculate routes:</p>
+    <section id="classifications">
+      <h2>Protocol Classifications</h2>
 
-<h3>1. Distance Vector</h3>
-<p>Routers send their entire routing table to neighbors periodically. They know "distance" (metric) and "vector" (direction/next-hop).</p>
-<ul>
-  <li><strong>RIP (Routing Information Protocol):</strong> Uses hop count. Slow convergence.</li>
-  <li><strong>EIGRP (Enhanced Interior Gateway Routing Protocol):</strong> Advanced distance vector (hybrid). Uses bandwidth and delay. Fast convergence.</li>
-</ul>
+      <h3>1. Distance Vector</h3>
+      <p>Routers tell their neighbors what they know (entire table) periodically. They know "distance" (metric) and
+        "vector" (direction).</p>
+      <ul>
+        <li><strong>RIP:</strong> Uses Hop Count. Maximum 15 hops.</li>
+        <li><strong>EIGRP:</strong> Advanced distance vector. Uses Bandwidth and Delay.</li>
+      </ul>
 
-<h3>2. Link State</h3>
-<p>Routers build a complete map of the network (topology) and calculate the best path using the SPF algorithm.</p>
-<ul>
-  <li><strong>OSPF (Open Shortest Path First):</strong> Industry standard. Uses Cost (Bandwidth) as metric.</li>
-  <li><strong>IS-IS (Intermediate System to Intermediate System):</strong> Used mostly in ISP networks.</li>
-</ul>
+      <h3>2. Link State</h3>
+      <p>Routers build a complete map of the topology and run the SPF algorithm to find the shortest path.</p>
+      <ul>
+        <li><strong>OSPF:</strong> Industry standard, uses Cost based on bandwidth.</li>
+        <li><strong>IS-IS:</strong> Scalable protocol used primarily by Service Providers.</li>
+      </ul>
+    </section>
 
-<h2>Protocol Versions</h2>
-<table class="table table-dark table-striped">
-  <thead>
-    <tr>
-      <th>Protocol</th>
-      <th>IPv4 Version</th>
-      <th>IPv6 Version</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>RIP</td>
-      <td>RIPv1, RIPv2</td>
-      <td>RIPng</td>
-    </tr>
-    <tr>
-      <td>EIGRP</td>
-      <td>EIGRP</td>
-      <td>EIGRP for IPv6</td>
-    </tr>
-    <tr>
-      <td>OSPF</td>
-      <td>OSPFv2</td>
-      <td>OSPFv3</td>
-    </tr>
-  </tbody>
-</table>
+    <h2>Administrative Distance (AD)</h2>
+    <p>AD represents the <strong>trustworthiness</strong> of a routing source. If a router learns about a network from
+      two different protocols, it chooses the one with the <strong>lower AD</strong>.</p>
 
-<h2>Administrative Distance (AD) Comparison</h2>
-<p>Administrative Distance represents the <strong>trustworthiness</strong> of a route source. Lower values are preferred.</p>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Default AD</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Connected</strong></td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td><strong>Static Route</strong></td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td><strong>EIGRP (Internal)</strong></td>
+          <td>90</td>
+        </tr>
+        <tr>
+          <td><strong>OSPF</strong></td>
+          <td>110</td>
+        </tr>
+        <tr>
+          <td><strong>RIP</strong></td>
+          <td>120</td>
+        </tr>
+      </tbody>
+    </table>
 
-<table class="table table-dark table-striped">
-  <thead>
-    <tr>
-      <th>Route Source</th>
-      <th>Default AD Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>Connected Interface</td><td>0</td></tr>
-    <tr><td>Static Route</td><td>1</td></tr>
-    <tr><td>EIGRP Summary Route</td><td>5</td></tr>
-    <tr><td>eBGP</td><td>20</td></tr>
-    <tr><td>EIGRP (Internal)</td><td>90</td></tr>
-    <tr><td>OSPF</td><td>110</td></tr>
-    <tr><td>IS-IS</td><td>115</td></tr>
-    <tr><td>RIP</td><td>120</td></tr>
-    <tr><td>EIGRP (External)</td><td>170</td></tr>
-    <tr><td>iBGP</td><td>200</td></tr>
-  </tbody>
-</table>
+    <div class="verdict-box">
+      <div class="verdict-header">Expert Rule</div>
+      <p>Metric is used to choose the best path <em>within</em> a protocol; Administrative Distance is used to choose
+        between <em>different</em> protocols.</p>
+    </div>
 
-</main>
-<div style="text-align: center; margin-bottom: 40px;">
+  </main>
+
+  <div style="text-align: center; margin-bottom: 40px;">
     <a href="../labs/rip.lab.html" class="btn">Go to RIPv2 Routing Lab →</a>
-</div>
+  </div>
 
-
-              <footer>
+  <footer>
     <div class="footer-content">
       <div class="footer-section">
         <h3>About Us</h3>
@@ -138,11 +133,9 @@ Routing protocols are the set of rules used by routers to communicate with each 
       <p>&copy; 2026 Architecture & Developer Space. All rights reserved.</p>
     </div>
   </footer>
-  
-  
-  
-  
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../js/theme-manager.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/theme-manager.js"></script>
 </body>
+
 </html>

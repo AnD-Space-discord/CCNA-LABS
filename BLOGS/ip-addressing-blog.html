@@ -1,150 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-adsense-account" content="ca-pub-4349583490319558">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4349583490319558"
-     crossorigin="anonymous"></script>
-  <title>IP Addressing & Subnetting Basics | CCNA Blog</title>
+
+
+  <title>IP Addressing & Subnetting Basics — CCNA Lab Hub</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-                  <nav>
+  <nav>
     <a href="../index.html">Home</a>
     <a href="../labs.html">Labs</a>
     <a href="../blog.html">Blog</a>
-    
   </nav>
 
-              <header class="hero">
-    <h1>IP Addressing & Subnetting Basics</h1>
-  <p>Understanding IPv4, Classes, and the role of Subnet Masks</p>
+  <header class="hero"
+    style="background: linear-gradient(to bottom, rgba(2, 6, 23, 0.7), var(--primary-bg)), url('https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80&w=2000');">
+    <h1>IP Addressing & Subnetting</h1>
+    <p>The Foundation of Network Communication</p>
   </header>
 
-<main>
+  <main class="blog-main">
 
-<p>
-An <strong>IP Address (Internet Protocol Address)</strong> is a unique numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication. It serves two main functions: host or network interface identification and location addressing.
-</p>
+    <p class="lead">
+      An <strong>IP Address</strong> is a unique numerical label assigned to each device connected to a computer
+      network. It serves as both a host identifier and a location address.
+    </p>
 
-<h2>Types of IP Addresses</h2>
-<ul>
-  <li><strong>IPv4 (Internet Protocol version 4):</strong> The most widely used version. It is a 32-bit address written in dot-decimal notation (e.g., <code>192.168.1.1</code>).</li>
-  <li><strong>IPv6 (Internet Protocol version 6):</strong> The newer standard designed to replace IPv4 due to address exhaustion. It is a 128-bit address written in hexadecimal (e.g., <code>2001:0db8:85a3::8a2e:0370:7334</code>).</li>
-</ul>
+    <div class="tip-box">
+      <h4><i class="fas fa-network-wired"></i> Quick Comparison</h4>
+      <ul>
+        <li><strong>IPv4:</strong> 32-bit address, dot-decimal (e.g., 192.168.1.1).</li>
+        <li><strong>IPv6:</strong> 128-bit address, hexadecimal (e.g., 2001:db8::1).</li>
+      </ul>
+    </div>
 
-<h3>Public vs. Private IP Addresses</h3>
-<p>
-<strong>Public IPs</strong> are unique across the entire internet and are assigned by ISPs. <strong>Private IPs</strong> are used within local networks (LANs) and are not routable on the public internet.
-</p>
+    <section id="private-ips">
+      <h2>Private IP Ranges (RFC 1918)</h2>
+      <p>To preserve public IPv4 addresses, specific ranges are reserved for internal use within LANs.</p>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Range</th>
+            <th>CIDR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Class A</strong></td>
+            <td>10.0.0.0 – 10.255.255.255</td>
+            <td>10.0.0.0/8</td>
+          </tr>
+          <tr>
+            <td><strong>Class B</strong></td>
+            <td>172.16.0.0 – 172.31.255.255</td>
+            <td>172.16.0.0/12</td>
+          </tr>
+          <tr>
+            <td><strong>Class C</strong></td>
+            <td>192.168.0.0 – 192.168.255.255</td>
+            <td>192.168.0.0/16</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-<h4>Private IP Ranges (RFC 1918)</h4>
-<p>To preserve public IPv4 addresses, specific ranges were reserved for private use within LANs. These addresses cannot be routed over the internet.</p>
-<table class="table table-dark table-striped">
-  <thead>
-    <tr>
-      <th>Class</th>
-      <th>Range</th>
-      <th>CIDR</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Class A</td>
-      <td>10.0.0.0 – 10.255.255.255</td>
-      <td>10.0.0.0/8</td>
-    </tr>
-    <tr>
-      <td>Class B</td>
-      <td>172.16.0.0 – 172.31.255.255</td>
-      <td>172.16.0.0/12</td>
-    </tr>
-    <tr>
-      <td>Class C</td>
-      <td>192.168.0.0 – 192.168.255.255</td>
-      <td>192.168.0.0/16</td>
-    </tr>
-  </tbody>
-</table>
+    <section id="subnetting">
+      <h2>The Role of Subnet Masks</h2>
+      <p>A subnet mask distinguishes the <strong>Network Part</strong> (street) from the <strong>Host Part</strong>
+        (house number) of an IP address.</p>
+      <div class="highlight">
+        <p>Example: <strong>192.168.1.10</strong> with mask <strong>255.255.255.0</strong></p>
+        <ul>
+          <li>Network: 192.168.1.0</li>
+          <li>Host: <strong>.10</strong></li>
+        </ul>
+      </div>
+    </section>
 
-<h2>Network Part vs. Host Part</h2>
-<p>
-Every IP address is divided into two parts:
-</p>
-<ul>
-  <li><strong>Network Part:</strong> Identifies the specific network or subnet the device belongs to. (Like a street name).</li>
-  <li><strong>Host Part:</strong> Identifies the specific device on that network. (Like a house number).</li>
-</ul>
+    <h2>IPv4 Address Classes</h2>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Class</th>
+          <th>Range (1st Octet)</th>
+          <th>Default Mask</th>
+          <th>Typical Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Class A</strong></td>
+          <td>1 – 126</td>
+          <td>255.0.0.0</td>
+          <td>Large Enterprises / ISPs</td>
+        </tr>
+        <tr>
+          <td><strong>Class B</strong></td>
+          <td>128 – 191</td>
+          <td>255.255.0.0</td>
+          <td>Medium Companies / Universities</td>
+        </tr>
+        <tr>
+          <td><strong>Class C</strong></td>
+          <td>192 – 223</td>
+          <td>255.255.255.0</td>
+          <td>Small Businesses / Homes</td>
+        </tr>
+      </tbody>
+    </table>
 
-<h2>The Importance of Subnet Mask</h2>
-<p>
-The <strong>Subnet Mask</strong> is a 32-bit number that distinguishes the Network part from the Host part. It works by "masking" the network portion of the IP address.
-</p>
-<div class="highlight">
-For example, in the address <code>192.168.1.10</code> with a subnet mask of <code>255.255.255.0</code>:
-<br>• <strong>192.168.1</strong> is the Network.
-<br>• <strong>.10</strong> is the Host.
-</div>
+    <div class="trap-box">
+      <h4><i class="fas fa-vial"></i> Reserved Addresses</h4>
+      <p><strong>127.0.0.1</strong> is the loopback address used for self-testing. <strong>0.0.0.0</strong> is the "any"
+        or default route address.</p>
+    </div>
 
-<h2>IP Addressing Classes</h2>
-<p>IPv4 addresses were originally divided into classes to define network sizes:</p>
+  </main>
 
-<table class="table table-dark table-striped" style="margin-top: 20px;">
-  <thead>
-    <tr>
-      <th>Class</th>
-      <th>Range (1st Octet)</th>
-      <th>Default Subnet Mask</th>
-      <th>Usage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Class A</strong></td>
-      <td>1 – 126</td>
-      <td>255.0.0.0 (/8)</td>
-      <td>Very large networks (ISPs, huge corps)</td>
-    </tr>
-    <tr>
-      <td><strong>Class B</strong></td>
-      <td>128 – 191</td>
-      <td>255.255.0.0 (/16)</td>
-      <td>Medium-sized networks (Universities)</td>
-    </tr>
-    <tr>
-      <td><strong>Class C</strong></td>
-      <td>192 – 223</td>
-      <td>255.255.255.0 (/24)</td>
-      <td>Small networks (Home, Small Business)</td>
-    </tr>
-    <tr>
-      <td><strong>Class D</strong></td>
-      <td>224 – 239</td>
-      <td>N/A</td>
-      <td>Multicast groups</td>
-    </tr>
-    <tr>
-      <td><strong>Class E</strong></td>
-      <td>240 – 255</td>
-      <td>N/A</td>
-      <td>Reserved for Research</td>
-    </tr>
-  </tbody>
-</table>
-<p><em>Note: 127.0.0.0/8 is reserved for loopback testing (localhost).</em></p>
+  <div style="text-align: center; margin-bottom: 40px;">
+    <a href="../labs/basic.cli.lab.html" class="btn">Go to Basic CLI Lab →</a>
+  </div>
 
-</main>
-<div style="text-align: center; margin-bottom: 40px;">
-    <a href="../labs/basic.cli.lab.html" class="btn">Go to Basic CLI Navigation Lab →</a>
-</div>
-
-
-              <footer>
+  <footer>
     <div class="footer-content">
       <div class="footer-section">
         <h3>About Us</h3>
@@ -169,11 +155,9 @@ For example, in the address <code>192.168.1.10</code> with a subnet mask of <cod
       <p>&copy; 2026 Architecture & Developer Space. All rights reserved.</p>
     </div>
   </footer>
-  
-  
-  
-  
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../js/theme-manager.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/theme-manager.js"></script>
 </body>
+
 </html>

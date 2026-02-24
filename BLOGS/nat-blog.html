@@ -1,64 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-adsense-account" content="ca-pub-4349583490319558">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4349583490319558"
-     crossorigin="anonymous"></script>
-  <title>NAT Basics | CCNA Blog</title>
+
+
+  <title>NAT Basics — CCNA Lab Hub</title>
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-                  <nav>
+  <nav>
     <a href="../index.html">Home</a>
     <a href="../labs.html">Labs</a>
     <a href="../blog.html">Blog</a>
-    
   </nav>
 
-              <header class="hero">
+  <header class="hero"
+    style="background: linear-gradient(to bottom, rgba(2, 6, 23, 0.7), var(--primary-bg)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000');">
     <h1>Network Address Translation (NAT)</h1>
-  <p>Connecting Private Networks to the Public Internet</p>
+    <p>Connecting Private Networks to the Public Internet</p>
   </header>
 
-<main>
+  <main class="blog-main">
 
-<p><strong>NAT (Network Address Translation)</strong> is a method of remapping one IP address space into another. It is primarily used to allow devices on a private network (using RFC 1918 addresses) to communicate with the public Internet using a single or few public IP addresses.</p>
+    <p class="lead">
+      <strong>NAT (Network Address Translation)</strong> is a method of remapping one IP address space into another. It
+      is primarily used to allow devices on a private network to communicate with the public Internet.
+    </p>
 
-<h2>Types of NAT</h2>
-<ul>
-  <li><strong>Static NAT:</strong> One-to-One mapping. Used for servers that need to be accessible from the outside.</li>
-  <li><strong>Dynamic NAT:</strong> Many-to-Many mapping. Maps a private IP to a public IP from a pool of available addresses.</li>
-  <li><strong>PAT (Port Address Translation) / NAT Overload:</strong> Many-to-One mapping. Maps multiple private IPs to a single public IP using different port numbers. This is the most common type used in homes and offices.</li>
-</ul>
+    <div class="tip-box">
+      <h4><i class="fas fa-key"></i> Key Benefit</h4>
+      <p>NAT conserves the limited supply of public IPv4 addresses by allowing thousands of internal devices to share a
+        few public IPs.</p>
+    </div>
 
-<h2>NAT Terminology</h2>
-<table class="table table-dark table-striped">
-  <thead>
-    <tr>
-      <th>Term</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>Inside Local</td><td>The private IP address of the device on the internal network.</td></tr>
-    <tr><td>Inside Global</td><td>The public IP address the internal device uses to communicate with the outside world.</td></tr>
-    <tr><td>Outside Global</td><td>The IP address of the destination device on the internet.</td></tr>
-  </tbody>
-</table>
+    <section id="types">
+      <h2>Types of NAT</h2>
 
+      <h3>1. Static NAT</h3>
+      <p>One-to-One mapping. Used for servers (Web, Mail, DNS) that need to be consistently accessible from the outside
+        world using the same public IP.</p>
 
+      <h3>2. Dynamic NAT</h3>
+      <p>Many-to-Many mapping. Maps a private IP to a public IP from a pre-defined pool of available addresses. If the
+        pool is empty, new connections are blocked.</p>
 
-</main>
-<div style="text-align: center; margin-bottom: 40px;">
+      <h3>3. PAT (Port Address Translation)</h3>
+      <p><strong>NAT Overload:</strong> Many-to-One mapping. Maps multiple private IPs to a single public IP by
+        assigning different source port numbers to each connection. This is the industry default for home and enterprise
+        networks.</p>
+    </section>
+
+    <h2>NAT Terminology</h2>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Inside Local</strong></td>
+          <td>The private IP address of the device on the internal network.</td>
+        </tr>
+        <tr>
+          <td><strong>Inside Global</strong></td>
+          <td>The public IP address the internal device uses to reach the internet.</td>
+        </tr>
+        <tr>
+          <td><strong>Outside Global</strong></td>
+          <td>The public IP address of the destination device on the internet.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="verdict-box">
+      <div class="verdict-header">Expert Tip</div>
+      <p>When configuring NAT on Cisco routers, always remember to define `ip nat inside` and `ip nat outside` on the
+        correct interfaces, or translation will never trigger!</p>
+    </div>
+
+  </main>
+
+  <div style="text-align: center; margin-bottom: 40px;">
     <a href="../labs/nat.lab.html" class="btn">Go to NAT Configuration Lab →</a>
-</div>
+  </div>
 
-
-              <footer>
+  <footer>
     <div class="footer-content">
       <div class="footer-section">
         <h3>About Us</h3>
@@ -83,11 +118,9 @@
       <p>&copy; 2026 Architecture & Developer Space. All rights reserved.</p>
     </div>
   </footer>
-  
-  
-  
-  
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../js/theme-manager.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/theme-manager.js"></script>
 </body>
+
 </html>
