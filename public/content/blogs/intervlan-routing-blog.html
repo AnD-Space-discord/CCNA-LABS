@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <title>Inter-VLAN Routing — CCNA Lab Hub</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../labs.html">Labs</a>
+    <a href="../blog.html">Blog</a>
+  </nav>
+
+  <header class="hero"
+    style="background: linear-gradient(to bottom, rgba(2, 6, 23, 0.7), var(--primary-bg)), url('https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80&w=2000');">
+    <h1>Inter-VLAN Routing</h1>
+    <p>Connecting Isolated VLANs Across the Network</p>
+  </header>
+
+  <main class="blog-main">
+
+    <p class="lead">
+      By default, devices in different VLANs cannot communicate because they exist in separate broadcast domains. To
+      enable traffic flow between them, we need <strong>Inter-VLAN Routing</strong>.
+    </p>
+
+    <div class="tip-box">
+      <h4><i class="fas fa-route"></i> Layer 3 Requirement</h4>
+      <p>Inter-VLAN routing requires a Layer 3 device, such as a router or a Multilayer Switch, to move packets between
+        subnets.</p>
+    </div>
+
+    <section id="methods">
+      <h2>Implementation Methods</h2>
+
+      <h3>1. Router-on-a-Stick (ROAS)</h3>
+      <p>A single physical link connects a router to a switch. The router interface is divided into logical
+        <strong>sub-interfaces</strong>, each tagged with a VLAN ID (802.1Q).
+      </p>
+
+      <h3>2. Layer 3 Switch (SVI)</h3>
+      <p>A <strong>Switch Virtual Interface (SVI)</strong> is created for each VLAN. This is the fastest method as
+        routing happens at hardware speeds directly on the switch.</p>
+    </section>
+
+    <h2>Comparison Table</h2>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Router-on-a-Stick</th>
+          <th>Layer 3 Switch (SVI)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Hardware</strong></td>
+          <td>Router + L2 Switch</td>
+          <td>Multilayer Switch</td>
+        </tr>
+        <tr>
+          <td><strong>Performance</strong></td>
+          <td>Shared Link (Limited)</td>
+          <td>Wire-speed (Very Fast)</td>
+        </tr>
+        <tr>
+          <td><strong>Configuration</strong></td>
+          <td>Sub-interfaces</td>
+          <td>VLAN Interfaces</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="trap-box">
+      <h4><i class="fas fa-exclamation-triangle"></i> Common Error</h4>
+      <p>On a Layer 3 switch, Inter-VLAN routing will NOT work unless you enable it globally with the `ip routing`
+        command!</p>
+    </div>
+
+    <h2>CLI Quick Look (ROAS)</h2>
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+      </div>
+      <pre>
+<span class="prompt">Router(config)#</span> <span class="command">interface g0/0.10</span>
+<span class="prompt">Router(config-subif)#</span> <span class="command">encapsulation dot1Q 10</span>
+<span class="prompt">Router(config-subif)#</span> <span class="command">ip address 192.168.10.1 255.255.255.0</span>
+</pre>
+    </div>
+
+  </main>
+
+  <div style="text-align: center; margin-bottom: 40px;">
+    <a href="../labs/intervlan.lab.html" class="btn">Go to Inter-VLAN Routing Lab →</a>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>Premium CCNA & CCNP hands-on labs for networking professionals and students.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../labs.html">Labs</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Community</h3>
+        <div class="contact-icons">
+          <a href="https://discord.gg/ZezHyjKP4S" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Architecture & Developer Space. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/theme-manager.js"></script>
+</body>
+
+</html>

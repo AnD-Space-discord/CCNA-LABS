@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <title>Switching Basics — CCNA Lab Hub</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../labs.html">Labs</a>
+    <a href="../blog.html">Blog</a>
+  </nav>
+
+  <header class="hero"
+    style="background: linear-gradient(to bottom, rgba(2, 6, 23, 0.7), var(--primary-bg)), url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=2000');">
+    <h1>Switching Basics</h1>
+    <p>Understanding MAC Learning and Frame Forwarding</p>
+  </header>
+
+  <main class="blog-main">
+
+    <p class="lead">
+      A <strong>Network Switch</strong> is a Layer 2 device that connects devices within a Local Area Network (LAN) and
+      uses MAC addresses to forward data efficiently.
+    </p>
+
+    <div class="tip-box">
+      <h4><i class="fas fa-brain"></i> Intelligence vs. Hubs</h4>
+      <p>Unlike a hub, which broadcasts data to everyone, a switch intelligently directs traffic based on the
+        destination device's hardware address.</p>
+    </div>
+
+    <section id="mac-table">
+      <h2>The MAC Address Table (CAM)</h2>
+      <p>The core of switching logic is the <strong>MAC Address Table</strong>. This table maps MAC addresses to
+        specific switch ports.</p>
+
+      <h3>How it Works:</h3>
+      <ol>
+        <li><strong>Learning (Source MAC):</strong> When a frame enters, the switch records the source MAC address and
+          port.</li>
+        <li><strong>Forwarding (Dest MAC):</strong> The switch looks up the destination MAC. If found, it sends the
+          frame to that specific port (Unicast).</li>
+        <li><strong>Flooding:</strong> If the destination is unknown or broadcast, the switch "floods" it out all ports
+          in the same VLAN.</li>
+      </ol>
+      <h5>Aging Timer</h5>
+      <p>Entries stay in the table for a default of <strong>300 seconds</strong> (5 minutes) before being removed if no
+        new traffic is seen.</p>
+
+    </section>
+
+
+    <section id="switching-methods">
+      <h2>Frame Processing Methods</h2>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Description</th>
+            <th>Pros/Cons</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Store-and-Forward</strong></td>
+            <td>Receives THE WHOLE frame and checks CRC for errors first.</td>
+            <td>Highly reliable, higher latency.</td>
+          </tr>
+          <tr>
+            <td><strong>Cut-Through</strong></td>
+            <td>Forwards as soon as the destination MAC is read.</td>
+            <td>Fastest, but forwards corrupted frames.</td>
+          </tr>
+          <tr>
+            <td><strong>Fragment-Free</strong></td>
+            <td>Reads the first 64 bytes (collision window) before forwarding.</td>
+            <td>Balance of speed and reliability.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+      </div>
+      <pre>
+<span class="prompt">Switch#</span> <span class="command">show mac address-table</span>
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+   1    0001.42a1.3e01    DYNAMIC     Fa0/1
+  10    0002.1b2c.4d02    DYNAMIC     Fa0/2
+</pre>
+    </div>
+
+    <div class="verdict-box">
+      <div class="verdict-header">Key Rule</div>
+      <p>Switches learn from Source MACs and forward based on Destination MACs.</p>
+    </div>
+
+  </main>
+
+  <div style="text-align: center; margin-bottom: 40px;">
+    <a href="../labs/LAB01.lab.html" class="btn">Go to VLAN Configuration Lab →</a>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>Premium CCNA & CCNP hands-on labs for networking professionals and students.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../labs.html">Labs</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Community</h3>
+        <div class="contact-icons">
+          <a href="https://discord.gg/ZezHyjKP4S" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Architecture & Developer Space. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/theme-manager.js"></script>
+</body>
+
+</html>

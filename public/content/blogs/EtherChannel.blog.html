@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <meta name="description"
+        content="Master EtherChannel (Link Aggregation) in Cisco networking. Learn the differences between PAgP and LACP protocols, their negotiation modes, and best practices.">
+    <title>EtherChannel Mastery: PAgP vs. LACP Explained — CCNA Lab Hub</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../labs.html">Labs</a>
+        <a href="../blog.html">Blog</a>
+    </nav>
+
+    <header class="hero"
+        style="background: linear-gradient(to bottom, rgba(2, 6, 23, 0.7), var(--primary-bg)), url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=2000');">
+        <h1>EtherChannel Mastery</h1>
+        <p>PAgP vs. LACP: Choosing the Right Link Aggregation Protocol</p>
+    </header>
+
+    <main class="blog-main">
+        <div class="intro-section">
+            <p class="lead">
+                In the world of network engineering, redundancy and bandwidth are the two pillars of a stable
+                infrastructure.
+                <strong>EtherChannel</strong> (or Link Aggregation) is the technology that allows us to bundle multiple
+                physical
+                links into a single logical "pipe."
+            </p>
+            <p>
+                To manage these bundles, we use two primary negotiation protocols: <strong>PAgP</strong> and
+                <strong>LACP</strong>.
+                While they achieve similar results, choosing the wrong one can lead to failed links or vendor lock-in.
+            </p>
+        </div>
+
+        <section id="pagp">
+            <h2>1. PAgP: The Cisco Original</h2>
+            <p>
+                Port Aggregation Protocol (PAgP) is a Cisco-proprietary protocol developed in the early 1990s. It was
+                the
+                standard for years before an open alternative existed.
+            </p>
+            <ul>
+                <li><strong>Vendor Support:</strong> Only works on Cisco switches (or a few licensed third-party
+                    vendors).</li>
+                <li><strong>Key Feature:</strong> It integrates deeply with Cisco's Spanning Tree Protocol (STP) to
+                    handle
+                    topology changes more efficiently.</li>
+                <li><strong>Maximum Links:</strong> Supports up to 8 active links in a bundle.</li>
+            </ul>
+
+            <h3>PAgP Negotiation Modes</h3>
+            <table class="mode-table">
+                <thead>
+                    <tr>
+                        <th>Mode</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Desirable</strong></td>
+                        <td>Actively asks the neighbor to form a bundle.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Auto</strong></td>
+                        <td>Passively waits for the neighbor to initiate the request.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="lacp">
+            <h2>2. LACP: The Industry Standard</h2>
+            <p>
+                Link Aggregation Control Protocol (LACP) is defined by IEEE 802.3ad (now 802.1AX). It is the universal
+                language
+                of link aggregation used in modern data centers.
+            </p>
+            <ul>
+                <li><strong>Vendor Support:</strong> Open standard supported by almost every manufacturer, including
+                    Cisco,
+                    Juniper, and HP.</li>
+                <li><strong>Key Feature:</strong> Supports Cross-Stack EtherChannel, allowing you to terminate links on
+                    different
+                    physical switches within a stack for extreme redundancy.</li>
+                <li><strong>Maximum Links:</strong> Supports 16 links—8 active and 8 in "hot-standby" mode.</li>
+            </ul>
+
+            <h3>LACP Negotiation Modes</h3>
+            <table class="mode-table">
+                <thead>
+                    <tr>
+                        <th>Mode</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Active</strong></td>
+                        <td>Actively sends LACPDUs to negotiate a bundle.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Passive</strong></td>
+                        <td>Only responds to LACP requests; never initiates.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="comparison">
+            <h2>3. Which Should You Choose?</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>PAgP</th>
+                        <th>LACP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Standard</strong></td>
+                        <td>Cisco Proprietary</td>
+                        <td>IEEE 802.3ad (Open)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Compatibility</strong></td>
+                        <td>Cisco Only</td>
+                        <td>Multi-vendor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stacking</strong></td>
+                        <td>No Cross-Stack</td>
+                        <td>Supports Cross-Stack</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Modern Usage</strong></td>
+                        <td>Legacy/Specialized</td>
+                        <td>Industry Default</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="verdict-box">
+                <div class="verdict-header">The Verdict</div>
+                <p>
+                    <strong>Use LACP for 99% of modern deployments.</strong> Its cross-vendor support and ability to
+                    form bundles
+                    across a switch stack make it more flexible and future-proof.
+                </p>
+                <p>
+                    Use PAgP only if you are working in an older, purely Cisco-based environment where specific legacy
+                    features
+                    or stability with older Catalyst switches are required.
+                </p>
+            </div>
+        </section>
+
+        <div class="trap-box">
+            <h4><i class="fas fa-exclamation-triangle"></i> Troubleshooting Tip: The "Passive-Passive" Trap</h4>
+            <p>
+                A common mistake in both protocols is setting both ends to passive (Auto/Auto or Passive/Passive). In
+                this state,
+                both switches are waiting for a "hello" that never comes, and the EtherChannel will never form.
+            </p>
+            <p><strong>Rule of thumb:</strong> At least one side must be set to <strong>Active</strong> (LACP) or
+                <strong>Desirable</strong> (PAgP).
+            </p>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Premium CCNA & CCNP hands-on labs for networking professionals and students.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../labs.html">Labs</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Community</h3>
+                <div class="contact-icons">
+                    <a href="https://discord.gg/ZezHyjKP4S" target="_blank" title="Discord"><i
+                            class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Architecture & Developer Space. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/theme-manager.js"></script>
+</body>
+
+</html>
