@@ -37,7 +37,7 @@ body.light-mode {
   justify-content: center;
   transition: all 0.3s ease;
   position: absolute;
-  right: 40px;
+  left: 20px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1001;
@@ -813,7 +813,7 @@ body.light-mode .dropdown-content a:hover {
 .terminal {
   background: #000000;
   border-radius: 12px;
-  overflow: hidden;
+  overflow: clip;
   margin: 30px 0 50px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
@@ -855,9 +855,25 @@ body.light-mode .dropdown-content a:hover {
   font-family: 'Fira Code', 'Courier New', monospace;
   font-size: 0.95rem;
   line-height: 1.6;
-  white-space: pre-wrap;
-  word-wrap: break-word;
+  white-space: pre;
+  word-wrap: normal;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
+
+.terminal pre::-webkit-scrollbar {
+  height: 5px;
+}
+
+.terminal pre::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.terminal pre::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+
 
 .prompt {
   color: #4ade80;
@@ -1043,9 +1059,10 @@ body.light-mode .lab-resources {
     justify-content: flex-start !important;
   }
 
-  /* Push theme toggle left to make room for hamburger */
+  /* Keep theme toggle on the left on mobile */
   .theme-toggle-btn {
-    right: 64px !important;
+    left: 16px !important;
+    right: auto !important;
   }
 
   /* Lab resources: single column */
