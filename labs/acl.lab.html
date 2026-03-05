@@ -8,6 +8,179 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ── Topology Images ── */
+    .topology-container {
+      background: var(--secondary-bg, #1e293b);
+      border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+      border-radius: 16px;
+      padding: 30px;
+      margin: 20px 0 50px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    .topology-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      transition: transform 0.4s ease;
+    }
+
+    .topology-container:hover .topology-img {
+      transform: scale(1.01);
+    }
+
+    /* ── Topology Table ── */
+    .topology-table-wrapper {
+      overflow-x: auto;
+      margin: 20px 0 50px;
+      border-radius: 16px;
+    }
+
+    .topology-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--secondary-bg, #1e293b);
+      border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      min-width: 600px;
+    }
+
+    .topology-table th {
+      background: rgba(59, 130, 246, 0.12);
+      color: var(--accent-color, #3b82f6);
+      padding: 14px 18px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+      white-space: nowrap;
+    }
+
+    .topology-table td {
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+      color: var(--text-main, #f1f5f9);
+      font-size: 0.9rem;
+      vertical-align: middle;
+    }
+
+    .topology-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .topology-table tr:hover td {
+      background: rgba(59, 130, 246, 0.04);
+    }
+
+    /* ── Network Badges ── */
+    .badge-students {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge-teachers {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge-server {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge-link {
+      display: inline-block;
+      background: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* ── Info / Warning Boxes ── */
+    .info-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.05));
+      border-left: 4px solid var(--accent-color, #3b82f6);
+      padding: 22px 26px;
+      border-radius: 0 14px 14px 0;
+      margin: 10px 0 50px;
+      color: var(--text-main, #f1f5f9);
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+
+    .info-box>i {
+      color: var(--accent-color, #3b82f6);
+      font-size: 1.2rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--accent-color, #3b82f6);
+      font-size: 0.95rem;
+    }
+
+    .warning-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05));
+      border-left-color: #f59e0b;
+    }
+
+    .warning-box>i {
+      color: #f59e0b;
+    }
+
+    .warning-box strong {
+      color: #f59e0b;
+    }
+
+    /* Light mode overrides */
+    body.light-mode .topology-container {
+      background: #ffffff;
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+
+    body.light-mode .topology-table {
+      background: #ffffff;
+    }
+  </style>
 </head>
 
 <body>
@@ -155,7 +328,8 @@
 
     <h2>Task 1 – Creating a Standard Named ACL</h2>
     <p>Access the command prompt of <strong>Router0</strong> and run the following commands to create and apply the
-      <code>BlockStudents</code> ACL.</p>
+      <code>BlockStudents</code> ACL.
+    </p>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
