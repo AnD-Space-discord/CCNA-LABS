@@ -1,0 +1,37 @@
+!
+! =====================================================
+! Router2 — Teacher-Side Router Configuration
+! ACL Lab: Block Students from reaching the Server
+! =====================================================
+!
+! --- HOSTNAME AND BASIC SETUP ---
+!
+hostname Router2
+!
+no ip domain-lookup
+! Disables DNS lookups to prevent the CLI from hanging on typos
+!
+! --- INTERFACE CONFIGURATION ---
+!
+interface GigabitEthernet0/0
+ description Link_To_Teachers_20.0.0.0-8
+ ip address 20.0.0.1 255.0.0.0
+ no shutdown
+!
+interface GigabitEthernet0/1
+ description Link_To_Router0_192.168.1.4-30
+ ip address 192.168.1.6 255.255.255.252
+ no shutdown
+!
+! --- ROUTING (Default route toward Router0) ---
+!
+ip route 0.0.0.0 0.0.0.0 192.168.1.5
+! Default route — all unknown traffic sent to Router0
+!
+! --- LINE AND MANAGEMENT SETUP ---
+!
+line con 0
+ logging synchronous
+ exec-timeout 0 0
+!
+end

@@ -1,11 +1,12 @@
 /**
  * Lab Scripts Loader
  * Automatically generates download links for lab configuration scripts.
+ * View buttons open a premium in-page modal showing file content.
  */
 
 const labScriptsData = {
-    'acl.lab.html': { folder: 'ACL', files: ['R1.txt', 'SW1.txt'], pkt: 'acl.pkt' },
-    'acl-lab.html': { folder: 'ACL', files: ['R1.txt', 'SW1.txt'], pkt: 'acl.pkt' },
+    'acl.lab.html': { folder: 'ACL', files: ['Router0.txt', 'Router1.txt', 'Router2.txt'], pkt: 'acl.pkt' },
+    'acl-lab.html': { folder: 'ACL', files: ['Router0.txt', 'Router1.txt', 'Router2.txt'], pkt: 'acl.pkt' },
     'dhcp.lab.html': { folder: 'DHCP', files: ['R1.txt'], pkt: 'dhcp.pkt' },
     'eigrp.lab.html': { folder: 'EIGRP', files: ['R1.txt', 'R2.txt', 'R3.txt'], pkt: 'eigrp.pkt' },
     'intervlan.lab.html': { folder: 'InterVLAN', files: ['R1.txt', 'SW1.txt'], pkt: 'intervlan.pkt' },
@@ -22,6 +23,95 @@ const labScriptsData = {
     'rsa.ssh.lab.html': { folder: 'RSA', files: ['R1.txt'], pkt: 'rsa-ssh.pkt' }
 };
 
+// ─── Inject Modal HTML (once) ─────────────────────────────────────
+function injectScriptModal() {
+    if (document.getElementById('script-modal')) return;
+    const modal = document.createElement('div');
+    modal.id = 'script-modal';
+    modal.className = 'script-modal-overlay';
+    modal.innerHTML = `
+        <div class="script-modal-box">
+            <div class="script-modal-header">
+                <div class="script-modal-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <span class="script-modal-title" id="script-modal-title">Script Viewer</span>
+                <div class="script-modal-actions">
+                    <button class="script-modal-copy" id="script-modal-copy" title="Copy to clipboard">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <button class="script-modal-close" id="script-modal-close" title="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="script-modal-body">
+                <pre id="script-modal-content">Loading...</pre>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    // Close on backdrop click
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeScriptModal();
+    });
+
+    // Close button
+    document.getElementById('script-modal-close').addEventListener('click', closeScriptModal);
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeScriptModal();
+    });
+
+    // Copy button
+    document.getElementById('script-modal-copy').addEventListener('click', () => {
+        const content = document.getElementById('script-modal-content').textContent;
+        navigator.clipboard.writeText(content).then(() => {
+            const btn = document.getElementById('script-modal-copy');
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                btn.classList.remove('copied');
+            }, 2000);
+        });
+    });
+}
+
+function openScriptModal(title, path) {
+    const modal = document.getElementById('script-modal');
+    const contentEl = document.getElementById('script-modal-content');
+    const titleEl = document.getElementById('script-modal-title');
+
+    titleEl.textContent = title;
+    contentEl.textContent = 'Loading...';
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    fetch(path)
+        .then(res => {
+            if (!res.ok) throw new Error('File not found');
+            return res.text();
+        })
+        .then(text => {
+            contentEl.textContent = text;
+        })
+        .catch(() => {
+            contentEl.textContent = '! Error: Could not load script file.\n! Make sure the file exists at:\n! ' + path;
+        });
+}
+
+function closeScriptModal() {
+    const modal = document.getElementById('script-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// ─── Build Lab Resources Section ──────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname;
     const fileName = path.split('/').pop();
@@ -31,6 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const container = document.getElementById('script-downloads-container');
     if (!container) return;
+
+    injectScriptModal();
 
     let html = `
         <div class="lab-resources">
@@ -48,9 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const scriptPath = `../Scripts/${labData.folder}/${file}`;
 
         html += `
-            <a href="${scriptPath}" target="_blank" class="view-btn">
-                View ${deviceName}.txt
-            </a>
+            <button class="view-btn" onclick="openScriptModal('${file}', '${scriptPath}')">
+                <i class="fas fa-eye" style="margin-right:6px;"></i> View ${deviceName}
+            </button>
         `;
     });
 
@@ -60,6 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 <div class="resource-col">
                     <h3><i class="fas fa-file-download" style="color:#10b981;"></i> Script Downloads</h3>
+                    <div class="d-flex flex-wrap gap-2">
     `;
 
     labData.files.forEach(file => {
@@ -69,12 +162,13 @@ document.addEventListener('DOMContentLoaded', () => {
         html += `
             <a href="${scriptPath}" download="${deviceName}-config.txt" class="download-btn">
                 <i class="fas fa-file-code"></i>
-                Download ${deviceName} Configuration
+                Download ${deviceName}
             </a>
         `;
     });
 
     html += `
+                    </div>
                 </div>
             </div>
         </div>
