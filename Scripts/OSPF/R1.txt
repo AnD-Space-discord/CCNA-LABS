@@ -1,4 +1,51 @@
+! ============================================================
+! OSPF Single Area Lab – R1 Full Configuration
+! ============================================================
+
+enable
+configure terminal
+
+! ── Task 1: Basic Configuration ─────────────────────────────
+hostname R1
+enable secret cisco123
+no ip domain-lookup
+service password-encryption
+
+banner motd #
+*** Authorized Access Only – R1 ***
+#
+
+line console 0
+ password cisco
+ login
+ logging synchronous
+ exit
+
+line vty 0 4
+ password cisco
+ login
+ exit
+
+! ── Task 2: Interface Configuration ─────────────────────────
+interface GigabitEthernet0/0
+ description LAN - R1 Users
+ ip address 10.1.1.1 255.255.255.0
+ no shutdown
+ exit
+
+interface Serial0/0/0
+ description Link to R2
+ ip address 192.168.12.1 255.255.255.252
+ clock rate 128000
+ no shutdown
+ exit
+
+! ── Task 3: OSPF Configuration ──────────────────────────────
 router ospf 1
-router-id 1.1.1.1
-network 10.1.1.0 0.0.0.255 area 0
-network 192.168.12.0 0.0.0.3 area 0
+ router-id 1.1.1.1
+ network 10.1.1.0 0.0.0.255 area 0
+ network 192.168.12.0 0.0.0.3 area 0
+ exit
+
+end
+write memory

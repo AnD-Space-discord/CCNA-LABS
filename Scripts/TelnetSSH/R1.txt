@@ -1,0 +1,56 @@
+! ============================================================
+! Telnet & SSH Remote Access Lab – Router R1
+! ============================================================
+
+enable
+configure terminal
+
+! ── Basic Configuration ──────────────────────────────────────
+hostname R1
+enable secret cisco123
+no ip domain-lookup
+service password-encryption
+
+banner motd #
+*****************************************************
+*   WARNING: Authorized Access Only – R1            *
+*   Unauthorized access is strictly prohibited.     *
+*****************************************************
+#
+
+! ── Console Line (physical access) ──────────────────────────
+line console 0
+ password cisco
+ login
+ logging synchronous
+ exit
+
+! ── Telnet Access (VTY lines) ───────────────────────────────
+line vty 0 4
+ password cisco
+ login
+ logging synchronous
+ exit
+
+! ── Interface: Management IP ────────────────────────────────
+interface GigabitEthernet0/0
+ description Link to SW1
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+ exit
+
+! ── SSH Configuration ────────────────────────────────────────
+ip domain-name ccna-lab.local
+username admin privilege 15 secret Admin@123
+crypto key generate rsa modulus 1024
+
+line vty 0 4
+ login local
+ transport input ssh telnet
+ logging synchronous
+ exit
+
+ip ssh version 2
+
+end
+write memory

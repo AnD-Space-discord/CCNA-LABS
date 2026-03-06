@@ -20,7 +20,8 @@ const labScriptsData = {
     'trunk.lab.html': { folder: 'Trunk', files: ['SW1.txt', 'SW2.txt'], pkt: 'trunk.pkt' },
     'LAB01.lab.html': { folder: 'Vlan', files: ['SW1.txt'], pkt: 'LAB01.pkt' },
     'basic.cli.lab.html': { folder: 'BasicCLI', files: ['R1.txt'], pkt: 'basic-cli.pkt' },
-    'rsa.ssh.lab.html': { folder: 'RSA', files: ['R1.txt'], pkt: 'rsa-ssh.pkt' }
+    'rsa.ssh.lab.html': { folder: 'RSA', files: ['R1.txt'], pkt: 'rsa-ssh.pkt' },
+    'telnet-ssh.lab.html': { folder: 'TelnetSSH', files: ['R1.txt', 'SW1.txt'], pkt: 'telnet-ssh.pkt' }
 };
 
 // ─── Inject Modal HTML (once) ─────────────────────────────────────

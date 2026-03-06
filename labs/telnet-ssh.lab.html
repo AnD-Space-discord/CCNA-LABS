@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telnet & SSH Remote Access Lab | CCNA Labs</title>
+    <meta name="description"
+        content="Learn how to configure Telnet and SSH remote access on Cisco routers and switches. Covers VTY lines, management SVI, banners, passwords, logging synchronous, and no ip domain-lookup.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <a href="../index.html">Home</a>
+        <div class="nav-item">
+            <a href="../labs.html">Labs <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-content">
+                <a href="foundation.html">Foundation</a>
+                <a href="switching.html">Switching</a>
+                <a href="routing.html">Routing</a>
+                <a href="security.html">Security</a>
+                <a href="ip-services.html">IP Services</a>
+                <a href="../labs.html">All Labs</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a href="../blog.html">Blog <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-content">
+                <a href="../blog/switching.html">Switching</a>
+                <a href="../blog/routing.html">Routing</a>
+                <a href="../blog/security.html">Security</a>
+                <a href="../blog/ip-services.html">IP Services</a>
+                <a href="../blog.html">All Topics</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="lab-header-simple">
+        <p style="color: var(--accent-color); font-weight: 600; margin-bottom: 5px;">Level 0: The Absolute Fundamentals
+        </p>
+        <h1>Telnet &amp; SSH Remote Access Lab</h1>
+        <p>Configure remote management access to Cisco routers and switches</p>
+    </header>
+
+    <main class="lab-main">
+
+        <h2>Objective</h2>
+        <p>In this beginner lab you will configure <strong>Telnet</strong> and <strong>SSH</strong> remote access on
+            both a
+            router and a switch. You will also learn the purpose of essential hardening commands used on every Cisco
+            device —
+            <code>banner motd</code>, <code>logging synchronous</code>, <code>no ip domain-lookup</code>, and
+            <code>service password-encryption</code>.
+        </p>
+
+        <!-- WHY these commands exist -->
+        <h2>Key Commands Explained</h2>
+
+        <div class="topology-table-wrapper">
+            <table class="topology-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Mode</th>
+                        <th>What it does</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>hostname &lt;name&gt;</code></td>
+                        <td>Global config</td>
+                        <td>Sets a unique device name. Makes the CLI prompt meaningful and is required for SSH.</td>
+                    </tr>
+                    <tr>
+                        <td><code>no ip domain-lookup</code></td>
+                        <td>Global config</td>
+                        <td>Stops the router from trying to DNS-resolve mistyped commands (eliminates the 30-second
+                            hang).</td>
+                    </tr>
+                    <tr>
+                        <td><code>banner motd # … #</code></td>
+                        <td>Global config</td>
+                        <td>Displays a warning message to anyone who connects. Required for legal notice before login.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>logging synchronous</code></td>
+                        <td>Line config</td>
+                        <td>Prevents Syslog messages from interrupting your typing mid-command. Essential for usability.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>service password-encryption</code></td>
+                        <td>Global config</td>
+                        <td>Applies Type-7 encryption to all plain-text passwords in the running config.</td>
+                    </tr>
+                    <tr>
+                        <td><code>enable secret &lt;pass&gt;</code></td>
+                        <td>Global config</td>
+                        <td>Sets the privileged-mode password using MD5 (Type-5). Always preferred over
+                            <code>enable password</code>.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>login local</code></td>
+                        <td>Line config</td>
+                        <td>Authenticates VTY/console logins against the local username database instead of a line
+                            password.</td>
+                    </tr>
+                    <tr>
+                        <td><code>transport input ssh telnet</code></td>
+                        <td>Line config</td>
+                        <td>Restricts VTY lines to accept only SSH and Telnet. Use <code>ssh</code> only for production.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Topology -->
+        <h2>Lab Topology</h2>
+        <p>A simple two-device topology: Router R1 connected to Switch SW1. A PC is connected to SW1 on an access port
+            and
+            will be used to Telnet/SSH into both devices.</p>
+
+        <div class="topology-table-wrapper">
+            <table class="topology-table">
+                <thead>
+                    <tr>
+                        <th>Device</th>
+                        <th>Interface / SVI</th>
+                        <th>IP Address</th>
+                        <th>Subnet Mask</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>R1</strong></td>
+                        <td><code>GigabitEthernet0/0</code></td>
+                        <td><code>192.168.1.1</code></td>
+                        <td><code>255.255.255.0</code></td>
+                        <td>Default gateway for the LAN</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SW1</strong></td>
+                        <td><code>VLAN 1 (SVI)</code></td>
+                        <td><code>192.168.1.2</code></td>
+                        <td><code>255.255.255.0</code></td>
+                        <td>Management IP (switches use SVI)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PC0</strong></td>
+                        <td>NIC</td>
+                        <td><code>192.168.1.10</code></td>
+                        <td><code>255.255.255.0</code></td>
+                        <td>Test PC – used to Telnet/SSH</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="info-box">
+            <i class="fas fa-lightbulb"></i>
+            <div>
+                <strong>Why does a switch need a management IP?</strong>
+                Switches operate at Layer 2 and don't route traffic. To manage a switch remotely (Telnet/SSH), you
+                assign an IP
+                address to a <strong>Switch Virtual Interface (SVI)</strong> — typically <code>interface vlan 1</code>.
+                You also
+                need a <code>ip default-gateway</code> so the switch can reply to hosts on other subnets.
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!--  Task 1 – Basic Config + Banner           -->
+        <!-- ══════════════════════════════════════════ -->
+        <h2>Task 1 – Basic Configuration &amp; Banner</h2>
+        <p>Apply this to <strong>both R1 and SW1</strong>. The commands are identical except the hostname.</p>
+
+        <h3>R1 – Basic Config</h3>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">Router></span> <span class="command">enable</span>
+<span class="prompt">Router#</span> <span class="command">configure terminal</span>
+Enter configuration commands, one per line.  End with CNTL/Z.
+<span class="prompt">Router(config)#</span> <span class="command">hostname R1</span>
+<span class="prompt">R1(config)#</span> <span class="command">no ip domain-lookup</span>
+<span class="prompt">R1(config)#</span> <span class="command">enable secret cisco123</span>
+<span class="prompt">R1(config)#</span> <span class="command">service password-encryption</span>
+<span class="prompt">R1(config)#</span> <span class="command">banner motd #</span>
+Enter TEXT message.  End with the character '#'.
+*****************************************************
+*   WARNING: Authorized Access Only – R1            *
+*   Unauthorized access is strictly prohibited.     *
+*****************************************************
+<span class="prompt">#</span>
+</pre>
+        </div>
+
+        <h3>SW1 – Basic Config</h3>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">Switch></span> <span class="command">enable</span>
+<span class="prompt">Switch#</span> <span class="command">configure terminal</span>
+<span class="prompt">Switch(config)#</span> <span class="command">hostname SW1</span>
+<span class="prompt">SW1(config)#</span> <span class="command">no ip domain-lookup</span>
+<span class="prompt">SW1(config)#</span> <span class="command">enable secret cisco123</span>
+<span class="prompt">SW1(config)#</span> <span class="command">service password-encryption</span>
+<span class="prompt">SW1(config)#</span> <span class="command">banner motd #</span>
+Enter TEXT message.  End with the character '#'.
+*****************************************************
+*   WARNING: Authorized Access Only – SW1           *
+*   Unauthorized access is strictly prohibited.     *
+*****************************************************
+<span class="prompt">#</span>
+</pre>
+        </div>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!--  Task 2 – Console Line                    -->
+        <!-- ══════════════════════════════════════════ -->
+        <h2>Task 2 – Secure the Console Line</h2>
+        <p>The console line is the physical port (used with a rollover cable). Apply this to both devices.</p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">R1(config)#</span> <span class="command">line console 0</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">password cisco</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">login</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">logging synchronous</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">exit</span>
+</pre>
+        </div>
+
+        <div class="info-box">
+            <i class="fas fa-info-circle"></i>
+            <div>
+                <strong>What does <code>logging synchronous</code> do?</strong>
+                Without it, Syslog messages (like interface state changes) are printed to your terminal
+                <em>mid-command</em>,
+                breaking your input. <code>logging synchronous</code> buffers those messages and reprints your partial
+                command
+                on a new line after the message — making the CLI usable.
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!--  Task 3 – Telnet Access                  -->
+        <!-- ══════════════════════════════════════════ -->
+        <h2>Task 3 – Configure Telnet Access (VTY Lines)</h2>
+        <p>VTY (Virtual Terminal) lines handle all remote login sessions. Routers have 5 (0–4), switches have 16 (0–15).
+        </p>
+
+        <h3>R1 – Telnet via VTY</h3>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">R1(config)#</span> <span class="command">line vty 0 4</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">password cisco</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">login</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">logging synchronous</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">exit</span>
+</pre>
+        </div>
+
+        <h3>SW1 – Management SVI + Default Gateway</h3>
+        <p>Before Telnetting to a switch, it needs an IP. Assign it on the <code>VLAN 1</code> SVI:</p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">SW1(config)#</span> <span class="command">interface vlan 1</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">description Management SVI</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">ip address 192.168.1.2 255.255.255.0</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">no shutdown</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">exit</span>
+<span class="prompt">SW1(config)#</span> <span class="command">ip default-gateway 192.168.1.1</span>
+
+<span class="prompt">SW1(config)#</span> <span class="command">line vty 0 15</span>
+<span class="prompt">SW1(config-line)#</span> <span class="command">password cisco</span>
+<span class="prompt">SW1(config-line)#</span> <span class="command">login</span>
+<span class="prompt">SW1(config-line)#</span> <span class="command">logging synchronous</span>
+<span class="prompt">SW1(config-line)#</span> <span class="command">exit</span>
+</pre>
+        </div>
+
+        <div class="info-box warning-box">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div>
+                <strong>Telnet sends everything in plain text!</strong>
+                Telnet transmits your username, password, and all commands unencrypted across the network. <em>Never use
+                    Telnet in a production environment.</em> It is covered here for lab understanding only — always
+                prefer SSH.
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!--  Task 4 – Test Telnet                     -->
+        <!-- ══════════════════════════════════════════ -->
+        <h2>Task 4 – Test Telnet from PC0</h2>
+        <p>Open the Command Prompt on PC0 (<code>192.168.1.10</code>) and Telnet to both devices:</p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span>
+                <span style="margin-left:10px; font-size:0.8rem; color:#9ca3af;">PC0 &gt; Command Prompt</span>
+            </div>
+            <pre>
+<span class="prompt">C:\></span> <span class="command">telnet 192.168.1.1</span>
+
+*** Authorized Access Only – R1 ***
+User Access Verification
+Password: <span class="command">cisco</span>
+<span class="prompt">R1></span> <span class="command">enable</span>
+Password: <span class="command">cisco123</span>
+<span class="prompt">R1#</span>
+
+<span class="prompt">C:\></span> <span class="command">telnet 192.168.1.2</span>
+
+*** Authorized Access Only – SW1 ***
+User Access Verification
+Password: <span class="command">cisco</span>
+<span class="prompt">SW1></span>
+</pre>
+        </div>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!--  Task 5 – SSH Configuration              -->
+        <!-- ══════════════════════════════════════════ -->
+        <h2>Task 5 – Configure SSH Access</h2>
+        <p>SSH encrypts the session. It requires: a <strong>hostname</strong>, a <strong>domain name</strong>, an
+            <strong>RSA key pair</strong>, and <strong>local usernames</strong>.
+        </p>
+
+        <h3>R1 – SSH Config</h3>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">R1(config)#</span> <span class="command">ip domain-name ccna-lab.local</span>
+<span class="prompt">R1(config)#</span> <span class="command">username admin privilege 15 secret Admin@123</span>
+<span class="prompt">R1(config)#</span> <span class="command">crypto key generate rsa modulus 1024</span>
+The name for the keys will be: R1.ccna-lab.local
+% The key modulus size is 1024 bits
+% Generating 1024 bit RSA keys, keys will be non-exportable...
+[OK] (elapsed time was 1 seconds)
+
+<span class="prompt">R1(config)#</span> <span class="command">ip ssh version 2</span>
+<span class="prompt">R1(config)#</span> <span class="command">line vty 0 4</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">login local</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">transport input ssh telnet</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">logging synchronous</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">exit</span>
+</pre>
+        </div>
+
+        <h3>SW1 – SSH Config</h3>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">SW1(config)#</span> <span class="command">ip domain-name ccna-lab.local</span>
+<span class="prompt">SW1(config)#</span> <span class="command">username admin privilege 15 secret Admin@123</span>
+<span class="prompt">SW1(config)#</span> <span class="command">crypto key generate rsa modulus 1024</span>
+The name for the keys will be: SW1.ccna-lab.local
+[OK] (elapsed time was 1 seconds)
+
+<span class="prompt">SW1(config)#</span> <span class="command">ip ssh version 2</span>
+<span class="prompt">SW1(config)#</span> <span class="command">line vty 0 15</span>
+<span class="prompt">SW1(config-line)#</span> <span class="command">login local</span>
+<span class="prompt">SW1(config-line)#</span> <span class="command">transport input ssh telnet</span>
+<span class="prompt">SW1(config-line)#</span> <span class="command">logging synchronous</span>
+<span class="prompt">SW1(config-line)#</span> <span class="command">exit</span>
+</pre>
+        </div>
+
+        <div class="info-box">
+            <i class="fas fa-info-circle"></i>
+            <div>
+                <strong>Why <code>login local</code> instead of <code>login</code>?</strong>
+                <code>login</code> checks the <em>line password</em> (set with <code>password cisco</code>).
+                <code>login local</code> checks the <em>local user database</em> (set with
+                <code>username … secret …</code>).
+                SSH requires <code>login local</code> — it cannot use a bare line password.
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!--  Task 6 – Test SSH                        -->
+        <!-- ══════════════════════════════════════════ -->
+        <h2>Task 6 – Test SSH from PC0</h2>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span>
+                <span style="margin-left:10px; font-size:0.8rem; color:#9ca3af;">PC0 &gt; Command Prompt</span>
+            </div>
+            <pre>
+<span class="prompt">C:\></span> <span class="command">ssh -l admin 192.168.1.1</span>
+
+*** Authorized Access Only – R1 ***
+Password: <span class="command">Admin@123</span>
+<span class="prompt">R1#</span>
+
+<span class="prompt">C:\></span> <span class="command">ssh -l admin 192.168.1.2</span>
+
+*** Authorized Access Only – SW1 ***
+Password: <span class="command">Admin@123</span>
+<span class="prompt">SW1#</span>
+</pre>
+        </div>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!--  Task 7 – Verification                    -->
+        <!-- ══════════════════════════════════════════ -->
+        <h2>Task 7 – Verification</h2>
+        <p>Use these commands to confirm your configuration is working correctly:</p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">R1#</span> <span class="command">show ip ssh</span>
+SSH Enabled - version 2.0
+Authentication methods:publickey,keyboard-interactive,password
+Authentication Publickey Algorithms:x509v3-ssh-rsa,ssh-rsa
+Hostkey Algorithms:x509v3-ssh-rsa,ssh-rsa
+Encryption Algorithms:aes128-ctr,aes192-ctr,aes256-ctr
+Authentication timeout: 120 secs; Authentication retries: 3
+
+<span class="prompt">R1#</span> <span class="command">show users</span>
+    Line      User       Host(s)     Idle     Location
+*  0 con 0               idle        00:00:00
+   1 vty 0   admin      192.168.1.10 00:00:02
+
+<span class="prompt">SW1#</span> <span class="command">show interface vlan 1</span>
+Vlan1 is up, line protocol is up
+  Internet address is 192.168.1.2/24
+
+<span class="prompt">R1#</span> <span class="command">show running-config | section line vty</span>
+line vty 0 4
+ logging synchronous
+ login local
+ transport input ssh telnet
+</pre>
+        </div>
+
+        <!-- Script downloads -->
+        <div id="script-downloads-container"></div>
+        <script src="../js/script-loader.js"></script>
+
+        <div class="next-lab-container">
+            <a href="rsa.ssh.lab.html" class="next-lab-btn">Next Lab: RSA &amp; SSH Deep Dive <i
+                    class="fas fa-arrow-right"></i></a>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Premium CCNA &amp; CCNP hands-on labs for networking professionals and students.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../labs.html">Labs</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Community</h3>
+                <div class="contact-icons">
+                    <a href="https://discord.gg/ZezHyjKP4S" target="_blank" title="Discord"><i
+                            class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Architecture &amp; Developer Space. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/download-broker.js"></script>
+    <script src="../js/theme-manager.js"></script>
+</body>
+
+</html>

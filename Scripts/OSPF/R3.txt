@@ -1,4 +1,50 @@
+! ============================================================
+! OSPF Single Area Lab – R3 Full Configuration
+! ============================================================
+
+enable
+configure terminal
+
+! ── Task 1: Basic Configuration ─────────────────────────────
+hostname R3
+enable secret cisco123
+no ip domain-lookup
+service password-encryption
+
+banner motd #
+*** Authorized Access Only – R3 ***
+#
+
+line console 0
+ password cisco
+ login
+ logging synchronous
+ exit
+
+line vty 0 4
+ password cisco
+ login
+ exit
+
+! ── Task 2: Interface Configuration ─────────────────────────
+interface GigabitEthernet0/0
+ description LAN - R3 Users
+ ip address 10.3.3.1 255.255.255.0
+ no shutdown
+ exit
+
+interface Serial0/0/1
+ description Link to R2
+ ip address 192.168.23.3 255.255.255.252
+ no shutdown
+ exit
+
+! ── Task 3: OSPF Configuration ──────────────────────────────
 router ospf 1
-router-id 3.3.3.3
-network 10.3.3.0 0.0.0.255 area 0
-network 192.168.23.0 0.0.0.3 area 0
+ router-id 3.3.3.3
+ network 10.3.3.0 0.0.0.255 area 0
+ network 192.168.23.0 0.0.0.3 area 0
+ exit
+
+end
+write memory

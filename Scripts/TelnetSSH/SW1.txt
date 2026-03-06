@@ -1,0 +1,60 @@
+! ============================================================
+! Telnet & SSH Remote Access Lab – Switch SW1
+! ============================================================
+
+enable
+configure terminal
+
+! ── Basic Configuration ──────────────────────────────────────
+hostname SW1
+enable secret cisco123
+no ip domain-lookup
+service password-encryption
+
+banner motd #
+*****************************************************
+*   WARNING: Authorized Access Only – SW1           *
+*   Unauthorized access is strictly prohibited.     *
+*****************************************************
+#
+
+! ── Console Line ────────────────────────────────────────────
+line console 0
+ password cisco
+ login
+ logging synchronous
+ exit
+
+! ── Management VLAN interface (SVI) ─────────────────────────
+! Switches do NOT have routed interfaces – use VLAN 1 SVI
+interface vlan 1
+ description Management SVI
+ ip address 192.168.1.2 255.255.255.0
+ no shutdown
+ exit
+
+! ── Default Gateway (so switch can reach remote networks) ───
+ip default-gateway 192.168.1.1
+
+! ── Telnet Access ────────────────────────────────────────────
+line vty 0 15
+ password cisco
+ login
+ logging synchronous
+ exit
+
+! ── SSH Configuration ────────────────────────────────────────
+ip domain-name ccna-lab.local
+username admin privilege 15 secret Admin@123
+crypto key generate rsa modulus 1024
+
+line vty 0 15
+ login local
+ transport input ssh telnet
+ logging synchronous
+ exit
+
+ip ssh version 2
+
+end
+write memory
