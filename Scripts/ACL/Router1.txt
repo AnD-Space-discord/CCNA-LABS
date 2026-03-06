@@ -2,36 +2,52 @@
 ! =====================================================
 ! Router1 — Student-Side Router Configuration
 ! ACL Lab: Block Students from reaching the Server
+! Routing: OSPFv2 Area 0
 ! =====================================================
 !
-! --- HOSTNAME AND BASIC SETUP ---
+! --- BASIC SETUP ---
+!
+enable
+configure terminal
 !
 hostname Router1
-!
+enable secret cisco123
 no ip domain-lookup
-! Disables DNS lookups to prevent the CLI from hanging on typos
+service password-encryption
+!
+banner motd #
+*** Authorized Access Only – Router1 (Students) ***
+#
+!
+line console 0
+ password cisco
+ login
+ logging synchronous
+ exit
+!
+line vty 0 4
+ password cisco
+ login
+ logging synchronous
+ exit
 !
 ! --- INTERFACE CONFIGURATION ---
 !
 interface GigabitEthernet0/0
- description Link_To_Students_10.0.0.0-8
+ description Link_To_Students_10.0.0.0/8
  ip address 10.0.0.1 255.0.0.0
  no shutdown
 !
 interface GigabitEthernet0/2
- description Link_To_Router0_192.168.1.0-30
+ description Link_To_Router0_Core_192.168.1.0/30
  ip address 192.168.1.1 255.255.255.252
  no shutdown
 !
-! --- ROUTING (Default route toward Router0) ---
+! --- ROUTING: OSPFv2 Area 0 ---
 !
-ip route 0.0.0.0 0.0.0.0 192.168.1.2
-! Default route — all unknown traffic sent to Router0
-!
-! --- LINE AND MANAGEMENT SETUP ---
-!
-line con 0
- logging synchronous
- exec-timeout 0 0
+router ospf 1
+ network 10.0.0.0 0.255.255.255 area 0
+ network 192.168.1.0 0.0.0.3 area 0
 !
 end
+write memory

@@ -2,54 +2,68 @@
 ! =====================================================
 ! Router0 — Core Router Configuration
 ! ACL Lab: Block Students from reaching the Server
+! Routing: OSPFv2 Area 0
 ! =====================================================
 !
-! --- HOSTNAME AND BASIC SETUP ---
+! --- BASIC SETUP ---
+!
+enable
+configure terminal
 !
 hostname Router0
-!
+enable secret cisco123
 no ip domain-lookup
-! Disables DNS lookups to prevent the CLI from hanging on typos
+service password-encryption
+!
+banner motd #
+*** Authorized Access Only – Router0 (Core) ***
+#
+!
+line console 0
+ password cisco
+ login
+ logging synchronous
+ exit
+!
+line vty 0 4
+ password cisco
+ login
+ logging synchronous
+ exit
 !
 ! --- INTERFACE CONFIGURATION ---
 !
 interface GigabitEthernet0/0
- description Link_To_Server_30.0.0.0-8
+ description Link_To_Server_30.0.0.0/8
  ip address 30.0.0.1 255.0.0.0
  ip access-group BlockStudents out
- ! ACL applied OUTBOUND here — blocks Student traffic before it hits the Server
+ ! ACL applied OUTBOUND — blocks Student traffic before it hits the Server
  no shutdown
 !
 interface GigabitEthernet0/1
- description Link_To_Router2_192.168.1.4-30
+ description Link_To_Router2_Teachers_192.168.1.4/30
  ip address 192.168.1.5 255.255.255.252
  no shutdown
 !
 interface GigabitEthernet0/2
- description Link_To_Router1_192.168.1.0-30
+ description Link_To_Router1_Students_192.168.1.0/30
  ip address 192.168.1.2 255.255.255.252
  no shutdown
 !
-! --- ROUTING (Static Routes to Student and Teacher networks) ---
+! --- ROUTING: OSPFv2 Area 0 ---
 !
-ip route 10.0.0.0 255.0.0.0 192.168.1.1
-! Static route to Students network via Router1
-ip route 20.0.0.0 255.0.0.0 192.168.1.6
-! Static route to Teachers network via Router2
+router ospf 1
+ network 30.0.0.0 0.255.255.255 area 0
+ network 192.168.1.0 0.0.0.3 area 0
+ network 192.168.1.4 0.0.0.3 area 0
 !
-! --- TASK 1: STANDARD NAMED ACL (BlockStudents) ---
+! --- TASK: STANDARD NAMED ACL (BlockStudents) ---
 !
 ip access-list standard BlockStudents
  deny 10.0.0.0 0.255.255.255
- ! Denies ALL traffic from the Students network (10.0.0.0/8)
+ ! Denies ALL traffic from Students network (10.0.0.0/8)
  permit any
  ! Permits all other traffic (Teachers, management, etc.)
 !
-! --- LINE AND MANAGEMENT SETUP ---
-!
-line con 0
- logging synchronous
- ! Prevents system messages from interrupting your typing
- exec-timeout 0 0
-!
 end
+write memory

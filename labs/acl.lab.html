@@ -4,183 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ACL Configuration Lab</title>
+  <title>ACL Configuration Lab | CCNA Hands-On</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    /* ── Topology Images ── */
-    .topology-container {
-      background: var(--secondary-bg, #1e293b);
-      border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
-      border-radius: 16px;
-      padding: 30px;
-      margin: 20px 0 50px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
-    }
-
-    .topology-img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      transition: transform 0.4s ease;
-    }
-
-    .topology-container:hover .topology-img {
-      transform: scale(1.01);
-    }
-
-    /* ── Topology Table ── */
-    .topology-table-wrapper {
-      overflow-x: auto;
-      margin: 20px 0 50px;
-      border-radius: 16px;
-    }
-
-    .topology-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      background: var(--secondary-bg, #1e293b);
-      border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      min-width: 600px;
-    }
-
-    .topology-table th {
-      background: rgba(59, 130, 246, 0.12);
-      color: var(--accent-color, #3b82f6);
-      padding: 14px 18px;
-      text-align: left;
-      font-weight: 700;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-bottom: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
-      white-space: nowrap;
-    }
-
-    .topology-table td {
-      padding: 13px 18px;
-      border-bottom: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
-      color: var(--text-main, #f1f5f9);
-      font-size: 0.9rem;
-      vertical-align: middle;
-    }
-
-    .topology-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .topology-table tr:hover td {
-      background: rgba(59, 130, 246, 0.04);
-    }
-
-    /* ── Network Badges ── */
-    .badge-students {
-      display: inline-block;
-      background: rgba(59, 130, 246, 0.15);
-      color: #60a5fa;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      padding: 3px 10px;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .badge-teachers {
-      display: inline-block;
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 3px 10px;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .badge-server {
-      display: inline-block;
-      background: rgba(245, 158, 11, 0.15);
-      color: #fbbf24;
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      padding: 3px 10px;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .badge-link {
-      display: inline-block;
-      background: rgba(168, 85, 247, 0.15);
-      color: #c084fc;
-      border: 1px solid rgba(168, 85, 247, 0.3);
-      padding: 3px 10px;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    /* ── Info / Warning Boxes ── */
-    .info-box {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.05));
-      border-left: 4px solid var(--accent-color, #3b82f6);
-      padding: 22px 26px;
-      border-radius: 0 14px 14px 0;
-      margin: 10px 0 50px;
-      color: var(--text-main, #f1f5f9);
-      font-size: 0.93rem;
-      line-height: 1.6;
-    }
-
-    .info-box>i {
-      color: var(--accent-color, #3b82f6);
-      font-size: 1.2rem;
-      margin-top: 2px;
-      flex-shrink: 0;
-    }
-
-    .info-box strong {
-      display: block;
-      margin-bottom: 5px;
-      color: var(--accent-color, #3b82f6);
-      font-size: 0.95rem;
-    }
-
-    .warning-box {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05));
-      border-left-color: #f59e0b;
-    }
-
-    .warning-box>i {
-      color: #f59e0b;
-    }
-
-    .warning-box strong {
-      color: #f59e0b;
-    }
-
-    /* Light mode overrides */
-    body.light-mode .topology-container {
-      background: #ffffff;
-      border-color: rgba(0, 0, 0, 0.08);
-    }
-
-    body.light-mode .topology-table {
-      background: #ffffff;
-    }
-  </style>
 </head>
 
 <body>
@@ -210,53 +37,22 @@
   </nav>
 
   <header class="lab-header-simple">
+    <p style="color: var(--accent-color); font-weight: 600; margin-bottom: 5px;">Level 2: Network Security</p>
     <h1>ACL Configuration Lab</h1>
-    <p>Configuring Standard Access Control Lists (Named ACLs)</p>
+    <p>Enterprise Traffic Control with Standard Named Access Lists</p>
   </header>
 
   <main class="lab-main">
 
-    <h2>Overview</h2>
+    <h2>Objective</h2>
     <p>
-      The <code>ip access-list</code> command is a global configuration mode command. To create a <strong>standard named
-        ACL</strong>, use the following syntax:
+      In this advanced lab, you will build a multi-router topology from scratch. You will configure basic security,
+      establish IP connectivity, and use <strong>OSPF Area 0</strong> for dynamic routing. Finally, you will implement a
+      <strong>Standard Named ACL</strong> on the core router to control access to the central server.
     </p>
-    <div class="terminal">
-      <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
-          class="dot green"></span></div>
-      <pre>
-<span class="prompt">Router(config)#</span> <span class="command">ip access-list standard ACL_name</span>
-</pre>
-    </div>
 
-    <p>
-      After entering this command, the prompt changes to <strong>standard ACL configuration mode</strong>, where you can
-      add permit/deny statements:
-    </p>
-    <div class="terminal">
-      <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
-          class="dot green"></span></div>
-      <pre>
-<span class="prompt">Router(config-std-nacl)#</span> <span class="command">permit|deny source_IP_address [wildcard_mask]</span>
-</pre>
-    </div>
-
-    <p>
-      An ACL does nothing until it is <strong>applied to an interface</strong>. To apply a standard ACL to an interface,
-      enter interface configuration mode and use:
-    </p>
-    <div class="terminal">
-      <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
-          class="dot green"></span></div>
-      <pre>
-<span class="prompt">Router(config-if)#</span> <span class="command">ip access-group ACL_name in|out</span>
-</pre>
-    </div>
-
-    <h2>Network Topology</h2>
-    <p>The lab uses the following topology. <strong>Router0</strong> is the core router connected to Router1 (Students
-      network), Router2 (Teachers network), and the Server.</p>
-
+    <!-- Network Topology -->
+    <h2>Lab Topology</h2>
     <div class="topology-container">
       <img src="acl-topology.png" alt="ACL Lab Network Topology" class="topology-img" />
     </div>
@@ -267,131 +63,225 @@
           <tr>
             <th>Network</th>
             <th>Subnet</th>
-            <th>Hosts</th>
-            <th>Connected To</th>
+            <th>Default Gateway</th>
+            <th>Router Interface</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><span class="badge-students">Students</span></td>
             <td><code>10.0.0.0/8</code></td>
-            <td>Laptop0 (.10), Laptop1 (.20)</td>
-            <td>Router1 → Router0 Gig0/2</td>
+            <td><code>10.0.0.1</code></td>
+            <td>Router1 Gi0/0</td>
           </tr>
           <tr>
             <td><span class="badge-teachers">Teachers</span></td>
             <td><code>20.0.0.0/8</code></td>
-            <td>PC0 (.10), PC1 (.20)</td>
-            <td>Router2 → Router0 Gig0/1</td>
+            <td><code>20.0.0.1</code></td>
+            <td>Router2 Gi0/0</td>
           </tr>
           <tr>
             <td><span class="badge-server">Server</span></td>
             <td><code>30.0.0.0/8</code></td>
-            <td>Server0 (.10)</td>
-            <td>Router0 Gig0/0</td>
+            <td><code>30.0.0.1</code></td>
+            <td>Router0 Gi0/0</td>
           </tr>
           <tr>
             <td><span class="badge-link">Link R0–R1</span></td>
             <td><code>192.168.1.0/30</code></td>
-            <td>R0 (.2), R1 (.1)</td>
-            <td>R0 Gig0/2 ↔ R1 Gig0/2</td>
+            <td>—</td>
+            <td>R1 Gi0/2 (.1) / R0 Gi0/2 (.2)</td>
           </tr>
           <tr>
             <td><span class="badge-link">Link R0–R2</span></td>
             <td><code>192.168.1.4/30</code></td>
-            <td>R0 (.5), R2 (.6)</td>
-            <td>R0 Gig0/1 ↔ R2 Gig0/0</td>
+            <td>—</td>
+            <td>R0 Gi0/1 (.5) / R2 Gi0/0 (.6)</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <h2>Objective</h2>
-    <p>Create a <strong>Standard Named ACL</strong> called <code>BlockStudents</code> on <strong>Router0</strong> that:
-    </p>
-    <ul>
-      <li>Denies all traffic from the <strong>Students network</strong> (<code>10.0.0.0/8</code>)</li>
-      <li>Permits all other traffic (Teachers, etc.)</li>
-      <li>Is applied <strong>outbound</strong> on <code>GigabitEthernet 0/0</code> (the interface facing the Server)
-      </li>
-    </ul>
+    <!-- ══════════════════════════════════════════ -->
+    <!--  Task 1 – Basic Configuration             -->
+    <!-- ══════════════════════════════════════════ -->
+    <h2>Task 1 – Basic Device Configuration</h2>
+    <p>Configure hostname, security, and banners on <strong>Router0</strong>, <strong>Router1</strong>, and
+      <strong>Router2</strong>.</p>
 
-    <h2>Traffic Flow Diagram</h2>
-    <p>The diagram below shows where inbound (<strong>in</strong>) and outbound (<strong>out</strong>) ACL directions
-      are applied across the network interfaces:</p>
-
-    <div class="topology-container">
-      <img src="acl-traffic-flow.png" alt="ACL Traffic Flow Diagram" class="topology-img" />
-    </div>
-
-    <h2>Task 1 – Creating a Standard Named ACL</h2>
-    <p>Access the command prompt of <strong>Router0</strong> and run the following commands to create and apply the
-      <code>BlockStudents</code> ACL.
-    </p>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
       <pre>
-<span class="prompt">Router&gt;</span>
-<span class="prompt">Router&gt;</span> <span class="command">enable</span>
-<span class="prompt">Router#</span> <span class="command">configure terminal</span>
-Enter configuration commands, one per line.  End with CNTL/Z.
-<span class="prompt">Router(config)#</span> <span class="command">ip access-list standard BlockStudents</span>
-<span class="prompt">Router(config-std-nacl)#</span> <span class="command">deny 10.0.0.0 0.255.255.255</span>
-<span class="prompt">Router(config-std-nacl)#</span> <span class="command">permit any</span>
-<span class="prompt">Router(config-std-nacl)#</span> <span class="command">exit</span>
-<span class="prompt">Router(config)#</span> <span class="command">interface gigabitethernet 0/0</span>
-<span class="prompt">Router(config-if)#</span> <span class="command">ip access-group BlockStudents out</span>
-<span class="prompt">Router(config-if)#</span> <span class="command">exit</span>
-<span class="prompt">Router(config)#</span> <span class="command">exit</span>
-<span class="prompt">Router#</span>
+<span class="prompt">Router(config)#</span> <span class="command">hostname RouterX</span>
+<span class="prompt">RouterX(config)#</span> <span class="command">enable secret cisco123</span>
+<span class="prompt">RouterX(config)#</span> <span class="command">service password-encryption</span>
+<span class="prompt">RouterX(config)#</span> <span class="command">no ip domain-lookup</span>
+<span class="prompt">RouterX(config)#</span> <span class="command">banner motd # Authorized Access Only #</span>
+<span class="prompt">RouterX(config)#</span> <span class="command">line console 0</span>
+<span class="prompt">RouterX(config-line)#</span> <span class="command">password cisco</span>
+<span class="prompt">RouterX(config-line)#</span> <span class="command">login</span>
+<span class="prompt">RouterX(config-line)#</span> <span class="command">logging synchronous</span>
+</pre>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--  Task 2 – Interface Configuration         -->
+    <!-- ══════════════════════════════════════════ -->
+    <h2>Task 2 – Interface IP Addressing</h2>
+    <p>Bring up the interfaces and assign IPs according to the topology table.</p>
+
+    <h3>Router0 – Interface Config</h3>
+    <div class="terminal">
+      <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+          class="dot green"></span></div>
+      <pre>
+<span class="prompt">Router0(config)#</span> <span class="command">interface gigabitethernet 0/0</span>
+<span class="prompt">Router0(config-if)#</span> <span class="command">ip address 30.0.0.1 255.0.0.0</span>
+<span class="prompt">Router0(config-if)#</span> <span class="command">no shutdown</span>
+<span class="prompt">Router0(config-if)#</span> <span class="command">exit</span>
+<span class="prompt">Router0(config)#</span> <span class="command">interface gigabitethernet 0/1</span>
+<span class="prompt">Router0(config-if)#</span> <span class="command">ip address 192.168.1.5 255.255.255.252</span>
+<span class="prompt">Router0(config-if)#</span> <span class="command">no shutdown</span>
+<span class="prompt">Router0(config-if)#</span> <span class="command">exit</span>
+<span class="prompt">Router0(config)#</span> <span class="command">interface gigabitethernet 0/2</span>
+<span class="prompt">Router0(config-if)#</span> <span class="command">ip address 192.168.1.2 255.255.255.252</span>
+<span class="prompt">Router0(config-if)#</span> <span class="command">no shutdown</span>
+</pre>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--  Task 3 – OSPF Area 0 Routing             -->
+    <!-- ══════════════════════════════════════════ -->
+    <h2>Task 3 – Dynamic Routing (OSPF Area 0)</h2>
+    <p>Enable OSPF Process 1 on all three routers to ensure the network is fully reachable.</p>
+
+    <h3>Router0 – OSPF Settings</h3>
+    <div class="terminal">
+      <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+          class="dot green"></span></div>
+      <pre>
+<span class="prompt">Router0(config)#</span> <span class="command">router ospf 1</span>
+<span class="prompt">Router0(config-router)#</span> <span class="command">router-id 0.0.0.0</span>
+<span class="prompt">Router0(config-router)#</span> <span class="command">network 30.0.0.0 0.255.255.255 area 0</span>
+<span class="prompt">Router0(config-router)#</span> <span class="command">network 192.168.1.0 0.0.0.3 area 0</span>
+<span class="prompt">Router0(config-router)#</span> <span class="command">network 192.168.1.4 0.0.0.3 area 0</span>
 </pre>
     </div>
 
     <div class="info-box">
-      <i class="fas fa-info-circle"></i>
+      <i class="fas fa-route"></i>
       <div>
-        <strong>Why apply it outbound on Gig0/0?</strong><br>
-        Standard ACLs should be placed as <em>close to the destination</em> as possible. By applying the ACL
-        <code>out</code> on Router0's interface facing the Server (<code>Gig0/0</code>), we block Student traffic just
-        before it reaches the Server while allowing all other outbound traffic through the same interface.
+        <strong>Verification Tip:</strong> Use <code>show ip route</code> to confirm all networks (10.x, 20.x, 30.x) are
+        learned via OSPF (marked with 'O').
       </div>
     </div>
 
-    <h2>Task 2 – Verification</h2>
-    <p>Verify the ACL was created correctly and is being applied to the interface.</p>
+    <!-- ══════════════════════════════════════════ -->
+    <!--  Task 4 – Standard Named ACL              -->
+    <!-- ══════════════════════════════════════════ -->
+    <h2>Task 4 – Implementing Standard Named ACL</h2>
+    <p>Create the <code>BlockStudents</code> ACL on <strong>Router0</strong> and apply it outbound on the interface
+      facing the Server.</p>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
       <pre>
-<span class="prompt">Router#</span> <span class="command">show ip access-lists</span>
+<span class="prompt">Router0(config)#</span> <span class="command">ip access-list standard BlockStudents</span>
+<span class="prompt">Router0(config-std-nacl)#</span> <span class="command">deny 10.0.0.0 0.255.255.255</span>
+<span class="prompt">Router0(config-std-nacl)#</span> <span class="command">permit any</span>
+<span class="prompt">Router0(config-std-nacl)#</span> <span class="command">exit</span>
+<span class="prompt">Router0(config)#</span> <span class="command">interface gigabitethernet 0/0</span>
+<span class="prompt">Router0(config-if)#</span> <span class="command">ip access-group BlockStudents out</span>
+</pre>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--  Task 5 – Verification                    -->
+    <!-- ══════════════════════════════════════════ -->
+    <h2>Task 5 – ACL Verification</h2>
+    <p>Check the ACL configuration and match statistics.</p>
+    <div class="terminal">
+      <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+          class="dot green"></span></div>
+      <pre>
+<span class="prompt">Router0#</span> <span class="command">show ip access-lists</span>
 Standard IP access list BlockStudents
-    10 deny   10.0.0.0, wildcard bits 0.255.255.255
-    20 permit any
-
-<span class="prompt">Router#</span> <span class="command">show ip interface gigabitethernet 0/0</span>
-GigabitEthernet0/0 is up, line protocol is up
-  Outgoing access list is BlockStudents
-  Inbound  access list is not set
+    10 deny   10.0.0.0, wildcard bits 0.255.255.255 (4 matches)
+    20 permit any (12 matches)
 </pre>
     </div>
 
-    <h2>Task 3 – Deleting a Standard ACL</h2>
-    <p>To delete a standard named ACL, use the following command in global configuration mode.</p>
+    <!-- ══════════════════════════════════════════ -->
+    <!--  Task 6 – Connectivity Test Results       -->
+    <!-- ══════════════════════════════════════════ -->
+    <h2>Task 6 – Connectivity Verification (Ping Results)</h2>
+    <p>Perform pings from the following sources to confirm the policy is working as expected.</p>
+
+    <div class="topology-table-wrapper">
+      <table class="topology-table">
+        <thead>
+          <tr>
+            <th>From Device</th>
+            <th>To Destination</th>
+            <th>Expected Result</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Student PC1</strong></td>
+            <td><strong>Server</strong> (30.0.0.10)</td>
+            <td style="color: #ef4444; font-weight: 700;"><i class="fas fa-times-circle"></i> FAILED</td>
+            <td>Blocked by ACL (Standard Rule 10)</td>
+          </tr>
+          <tr>
+            <td><strong>Student PC1</strong></td>
+            <td><strong>Teacher PC1</strong> (20.0.0.10)</td>
+            <td style="color: #22c55e; font-weight: 700;"><i class="fas fa-check-circle"></i> SUCCESS</td>
+            <td>Direct OSPF routing (no ACL)</td>
+          </tr>
+          <tr>
+            <td><strong>Teacher PC1</strong></td>
+            <td><strong>Server</strong> (30.0.0.10)</td>
+            <td style="color: #22c55e; font-weight: 700;"><i class="fas fa-check-circle"></i> SUCCESS</td>
+            <td>Matches <code>permit any</code></td>
+          </tr>
+          <tr>
+            <td><strong>Teacher PC1</strong></td>
+            <td><strong>Student PC1</strong> (10.0.0.10)</td>
+            <td style="color: #22c55e; font-weight: 700;"><i class="fas fa-check-circle"></i> SUCCESS</td>
+            <td>No ACL on this path</td>
+          </tr>
+          <tr>
+            <td><strong>Server</strong></td>
+            <td><strong>Teacher PC1</strong></td>
+            <td style="color: #22c55e; font-weight: 700;"><i class="fas fa-check-circle"></i> SUCCESS</td>
+            <td>Normal routing</td>
+          </tr>
+          <tr>
+            <td><strong>Server</strong></td>
+            <td><strong>Student PC1</strong></td>
+            <td style="color: #22c55e; font-weight: 700;"><i class="fas fa-check-circle"></i> SUCCESS</td>
+            <td>ACL only blocks Students outbound</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--  Task 7 – Deleting the ACL                 -->
+    <!-- ══════════════════════════════════════════ -->
+    <h2>Task 7 – Deleting the Security Policy</h2>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
       <pre>
-<span class="prompt">Router(config)#</span> <span class="command">no ip access-list standard BlockStudents</span>
+<span class="prompt">Router0(config)#</span> <span class="command">interface gigabitethernet 0/0</span>
+<span class="prompt">Router0(config-if)#</span> <span class="command">no ip access-group BlockStudents out</span>
+<span class="prompt">Router0(config-if)#</span> <span class="command">exit</span>
+<span class="prompt">Router0(config)#</span> <span class="command">no ip access-list standard BlockStudents</span>
 </pre>
-    </div>
-
-    <div class="info-box warning-box">
-      <i class="fas fa-exclamation-triangle"></i>
-      <div>
-        <strong>Important:</strong> Before deleting an ACL, make sure to first remove it from any interface it is
-        applied on, otherwise residual references may cause unexpected behavior.
-      </div>
     </div>
 
     <!-- Dynamic Script Downloads Section -->
@@ -401,7 +291,9 @@ GigabitEthernet0/0 is up, line protocol is up
     <div class="next-lab-container">
       <a href="nat.lab.html" class="next-lab-btn">Next Lab: NAT Configuration Lab <i class="fas fa-arrow-right"></i></a>
     </div>
+
   </main>
+
   <footer>
     <div class="footer-content">
       <div class="footer-section">
