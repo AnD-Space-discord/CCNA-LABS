@@ -255,6 +255,7 @@ function initMobileNav() {
         { type: 'divider' },
         { type: 'label', text: 'Labs' },
         { type: 'link', href: `${p}labs.html`, icon: 'fa-flask', text: 'All Labs' },
+        { type: 'link', href: `${p}labs/foundation.html`, icon: 'fa-graduation-cap', text: 'Foundation' },
         { type: 'link', href: `${p}labs/switching.html`, icon: 'fa-network-wired', text: 'Switching' },
         { type: 'link', href: `${p}labs/routing.html`, icon: 'fa-route', text: 'Routing' },
         { type: 'link', href: `${p}labs/security.html`, icon: 'fa-shield-alt', text: 'Security' },
