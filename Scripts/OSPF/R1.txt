@@ -7,24 +7,13 @@ configure terminal
 
 ! ── Task 1: Basic Configuration ─────────────────────────────
 hostname R1
-enable secret cisco123
 no ip domain-lookup
-service password-encryption
 
 banner motd #
 *** Authorized Access Only – R1 ***
 #
 
-line console 0
- password cisco
- login
- logging synchronous
- exit
 
-line vty 0 4
- password cisco
- login
- exit
 
 ! ── Task 2: Interface Configuration ─────────────────────────
 interface GigabitEthernet0/0

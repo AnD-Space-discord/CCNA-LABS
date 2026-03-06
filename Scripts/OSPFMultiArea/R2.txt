@@ -1,10 +1,6 @@
 ! --- Basic Configuration ---
 hostname R2
 enable secret cisco
-line vty 0 4
- password cisco
- login
-exit
 
 ! --- Interface Configuration ---
 interface Loopback0

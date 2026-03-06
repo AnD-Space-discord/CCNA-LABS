@@ -11,25 +11,13 @@ enable
 configure terminal
 !
 hostname Router2
-enable secret cisco123
 no ip domain-lookup
-service password-encryption
 !
 banner motd #
 *** Authorized Access Only – Router2 (Teachers) ***
 #
 !
-line console 0
- password cisco
- login
- logging synchronous
- exit
 !
-line vty 0 4
- password cisco
- login
- logging synchronous
- exit
 !
 ! --- INTERFACE CONFIGURATION ---
 !

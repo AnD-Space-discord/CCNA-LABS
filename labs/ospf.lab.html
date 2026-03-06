@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -54,7 +54,7 @@
     <div
       style="text-align: center; margin: 30px 0; padding: 20px; background: #f9f9f9; border: 2px dashed #ccc; border-radius: 8px;">
       <img src="../Images/OSPF/ospf-topology.png" alt="OSPF Lab Topology" style="max-width: 100%; height: auto;">
-      <p><strong>Topology:</strong> R1 ↔ R2 ↔ R3 connected via point-to-point serial/ethernet links.</p>
+      <p><strong>Topology:</strong> R1 ? R2 ? R3 connected via point-to-point serial/ethernet links.</p>
     </div>
 
     <!-- IP Addressing Table -->
@@ -75,7 +75,7 @@
             <td><code>GigabitEthernet0/0</code></td>
             <td><code>10.1.1.1</code></td>
             <td><code>255.255.255.0</code></td>
-            <td>LAN – R1 Users</td>
+            <td>LAN � R1 Users</td>
           </tr>
           <tr>
             <td><strong>R1</strong></td>
@@ -89,7 +89,7 @@
             <td><code>GigabitEthernet0/0</code></td>
             <td><code>10.2.2.1</code></td>
             <td><code>255.255.255.0</code></td>
-            <td>LAN – R2 Users</td>
+            <td>LAN � R2 Users</td>
           </tr>
           <tr>
             <td><strong>R2</strong></td>
@@ -110,7 +110,7 @@
             <td><code>GigabitEthernet0/0</code></td>
             <td><code>10.3.3.1</code></td>
             <td><code>255.255.255.0</code></td>
-            <td>LAN – R3 Users</td>
+            <td>LAN � R3 Users</td>
           </tr>
           <tr>
             <td><strong>R3</strong></td>
@@ -123,14 +123,13 @@
       </table>
     </div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!--  Task 1 – Basic Configuration             -->
-    <!-- ══════════════════════════════════════════ -->
-    <h2>Task 1 – Basic Configuration (All Routers)</h2>
+    <!-- ------------------------------------------ -->
+    <!--  Task 1 � Basic Configuration             -->
+    <!-- ------------------------------------------ -->
+    <h2>Task 1 � Basic Configuration (All Routers)</h2>
     <p>Start each router from a blank slate. Apply hostname, enable secret, disable DNS lookup, configure the
-      management plane (console &amp; VTY), enable password encryption, and set a login banner.</p>
 
-    <h3>R1 – Basic Config</h3>
+    <h3>R1 � Basic Config</h3>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
@@ -139,26 +138,15 @@
 <span class="prompt">Router#</span> <span class="command">configure terminal</span>
 Enter configuration commands, one per line.  End with CNTL/Z.
 <span class="prompt">Router(config)#</span> <span class="command">hostname R1</span>
-<span class="prompt">R1(config)#</span> <span class="command">enable secret cisco123</span>
 <span class="prompt">R1(config)#</span> <span class="command">no ip domain-lookup</span>
-<span class="prompt">R1(config)#</span> <span class="command">service password-encryption</span>
 <span class="prompt">R1(config)#</span> <span class="command">banner motd #</span>
 Enter TEXT message.  End with the character '#'.
-*** Authorized Access Only – R1 ***
+*** Authorized Access Only � R1 ***
 <span class="prompt">#</span>
-<span class="prompt">R1(config)#</span> <span class="command">line console 0</span>
-<span class="prompt">R1(config-line)#</span> <span class="command">password cisco</span>
-<span class="prompt">R1(config-line)#</span> <span class="command">login</span>
-<span class="prompt">R1(config-line)#</span> <span class="command">logging synchronous</span>
-<span class="prompt">R1(config-line)#</span> <span class="command">exit</span>
-<span class="prompt">R1(config)#</span> <span class="command">line vty 0 4</span>
-<span class="prompt">R1(config-line)#</span> <span class="command">password cisco</span>
-<span class="prompt">R1(config-line)#</span> <span class="command">login</span>
-<span class="prompt">R1(config-line)#</span> <span class="command">exit</span>
 </pre>
     </div>
 
-    <h3>R2 – Basic Config</h3>
+    <h3>R2 � Basic Config</h3>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
@@ -166,26 +154,15 @@ Enter TEXT message.  End with the character '#'.
 <span class="prompt">Router></span> <span class="command">enable</span>
 <span class="prompt">Router#</span> <span class="command">configure terminal</span>
 <span class="prompt">Router(config)#</span> <span class="command">hostname R2</span>
-<span class="prompt">R2(config)#</span> <span class="command">enable secret cisco123</span>
 <span class="prompt">R2(config)#</span> <span class="command">no ip domain-lookup</span>
-<span class="prompt">R2(config)#</span> <span class="command">service password-encryption</span>
 <span class="prompt">R2(config)#</span> <span class="command">banner motd #</span>
 Enter TEXT message.  End with the character '#'.
-*** Authorized Access Only – R2 ***
+*** Authorized Access Only � R2 ***
 <span class="prompt">#</span>
-<span class="prompt">R2(config)#</span> <span class="command">line console 0</span>
-<span class="prompt">R2(config-line)#</span> <span class="command">password cisco</span>
-<span class="prompt">R2(config-line)#</span> <span class="command">login</span>
-<span class="prompt">R2(config-line)#</span> <span class="command">logging synchronous</span>
-<span class="prompt">R2(config-line)#</span> <span class="command">exit</span>
-<span class="prompt">R2(config)#</span> <span class="command">line vty 0 4</span>
-<span class="prompt">R2(config-line)#</span> <span class="command">password cisco</span>
-<span class="prompt">R2(config-line)#</span> <span class="command">login</span>
-<span class="prompt">R2(config-line)#</span> <span class="command">exit</span>
 </pre>
     </div>
 
-    <h3>R3 – Basic Config</h3>
+    <h3>R3 � Basic Config</h3>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
@@ -193,48 +170,36 @@ Enter TEXT message.  End with the character '#'.
 <span class="prompt">Router></span> <span class="command">enable</span>
 <span class="prompt">Router#</span> <span class="command">configure terminal</span>
 <span class="prompt">Router(config)#</span> <span class="command">hostname R3</span>
-<span class="prompt">R3(config)#</span> <span class="command">enable secret cisco123</span>
 <span class="prompt">R3(config)#</span> <span class="command">no ip domain-lookup</span>
-<span class="prompt">R3(config)#</span> <span class="command">service password-encryption</span>
 <span class="prompt">R3(config)#</span> <span class="command">banner motd #</span>
 Enter TEXT message.  End with the character '#'.
-*** Authorized Access Only – R3 ***
+*** Authorized Access Only � R3 ***
 <span class="prompt">#</span>
-<span class="prompt">R3(config)#</span> <span class="command">line console 0</span>
-<span class="prompt">R3(config-line)#</span> <span class="command">password cisco</span>
-<span class="prompt">R3(config-line)#</span> <span class="command">login</span>
-<span class="prompt">R3(config-line)#</span> <span class="command">logging synchronous</span>
-<span class="prompt">R3(config-line)#</span> <span class="command">exit</span>
-<span class="prompt">R3(config)#</span> <span class="command">line vty 0 4</span>
-<span class="prompt">R3(config-line)#</span> <span class="command">password cisco</span>
-<span class="prompt">R3(config-line)#</span> <span class="command">login</span>
-<span class="prompt">R3(config-line)#</span> <span class="command">exit</span>
 </pre>
     </div>
 
     <div class="info-box">
       <i class="fas fa-info-circle"></i>
       <div>
-        <strong>Why service password-encryption?</strong>
         This command applies a type-7 cipher to all plaintext passwords stored in the running config. While not
         cryptographically strong, it prevents shoulder-surfing when the config is displayed on screen.
         <code>enable secret</code> uses MD5 (type-5) and is always preferred over <code>enable password</code>.
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!--  Task 2 – Interface Configuration         -->
-    <!-- ══════════════════════════════════════════ -->
-    <h2>Task 2 – Interface Configuration (All Routers)</h2>
+    <!-- ------------------------------------------ -->
+    <!--  Task 2 � Interface Configuration         -->
+    <!-- ------------------------------------------ -->
+    <h2>Task 2 � Interface Configuration (All Routers)</h2>
     <p>Assign IP addresses and descriptions to each interface, then bring it up with <code>no shutdown</code>.</p>
 
-    <h3>R1 – Interface Config</h3>
+    <h3>R1 � Interface Config</h3>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
       <pre>
 <span class="prompt">R1(config)#</span> <span class="command">interface GigabitEthernet0/0</span>
-<span class="prompt">R1(config-if)#</span> <span class="command">description LAN – R1 Users</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">description LAN � R1 Users</span>
 <span class="prompt">R1(config-if)#</span> <span class="command">ip address 10.1.1.1 255.255.255.0</span>
 <span class="prompt">R1(config-if)#</span> <span class="command">no shutdown</span>
 <span class="prompt">R1(config-if)#</span> <span class="command">exit</span>
@@ -247,13 +212,13 @@ Enter TEXT message.  End with the character '#'.
 </pre>
     </div>
 
-    <h3>R2 – Interface Config</h3>
+    <h3>R2 � Interface Config</h3>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
       <pre>
 <span class="prompt">R2(config)#</span> <span class="command">interface GigabitEthernet0/0</span>
-<span class="prompt">R2(config-if)#</span> <span class="command">description LAN – R2 Users</span>
+<span class="prompt">R2(config-if)#</span> <span class="command">description LAN � R2 Users</span>
 <span class="prompt">R2(config-if)#</span> <span class="command">ip address 10.2.2.1 255.255.255.0</span>
 <span class="prompt">R2(config-if)#</span> <span class="command">no shutdown</span>
 <span class="prompt">R2(config-if)#</span> <span class="command">exit</span>
@@ -271,13 +236,13 @@ Enter TEXT message.  End with the character '#'.
 </pre>
     </div>
 
-    <h3>R3 – Interface Config</h3>
+    <h3>R3 � Interface Config</h3>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
       <pre>
 <span class="prompt">R3(config)#</span> <span class="command">interface GigabitEthernet0/0</span>
-<span class="prompt">R3(config-if)#</span> <span class="command">description LAN – R3 Users</span>
+<span class="prompt">R3(config-if)#</span> <span class="command">description LAN � R3 Users</span>
 <span class="prompt">R3(config-if)#</span> <span class="command">ip address 10.3.3.1 255.255.255.0</span>
 <span class="prompt">R3(config-if)#</span> <span class="command">no shutdown</span>
 <span class="prompt">R3(config-if)#</span> <span class="command">exit</span>
@@ -299,10 +264,10 @@ Enter TEXT message.  End with the character '#'.
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!--  Task 3 – OSPF Configuration             -->
-    <!-- ══════════════════════════════════════════ -->
-    <h2>Task 3 – OSPF Configuration on R1</h2>
+    <!-- ------------------------------------------ -->
+    <!--  Task 3 � OSPF Configuration             -->
+    <!-- ------------------------------------------ -->
+    <h2>Task 3 � OSPF Configuration on R1</h2>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
@@ -314,7 +279,7 @@ Enter TEXT message.  End with the character '#'.
 </pre>
     </div>
 
-    <h2>Task 3 (cont.) – OSPF Configuration on R2</h2>
+    <h2>Task 3 (cont.) � OSPF Configuration on R2</h2>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
@@ -327,7 +292,7 @@ Enter TEXT message.  End with the character '#'.
 </pre>
     </div>
 
-    <h2>Task 3 (cont.) – OSPF Configuration on R3</h2>
+    <h2>Task 3 (cont.) � OSPF Configuration on R3</h2>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
@@ -339,7 +304,7 @@ Enter TEXT message.  End with the character '#'.
 </pre>
     </div>
 
-    <h2>Task 4 – Verification</h2>
+    <h2>Task 4 � Verification</h2>
     <p>Verify neighbor adjacencies and routing tables.</p>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -87,25 +87,25 @@
             <td>Router0 Gi0/0</td>
           </tr>
           <tr>
-            <td><span class="badge-link">Link R0–R1</span></td>
+            <td><span class="badge-link">Link R0�R1</span></td>
             <td><code>192.168.1.0/30</code></td>
-            <td>—</td>
+            <td>�</td>
             <td>R1 Gi0/2 (.1) / R0 Gi0/2 (.2)</td>
           </tr>
           <tr>
-            <td><span class="badge-link">Link R0–R2</span></td>
+            <td><span class="badge-link">Link R0�R2</span></td>
             <td><code>192.168.1.4/30</code></td>
-            <td>—</td>
+            <td>�</td>
             <td>R0 Gi0/1 (.5) / R2 Gi0/0 (.6)</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!--  Task 1 – Basic Configuration             -->
-    <!-- ══════════════════════════════════════════ -->
-    <h2>Task 1 – Basic Device Configuration</h2>
+    <!-- ------------------------------------------ -->
+    <!--  Task 1 � Basic Configuration             -->
+    <!-- ------------------------------------------ -->
+    <h2>Task 1 � Basic Device Configuration</h2>
     <p>Configure hostname, security, and banners on <strong>Router0</strong>, <strong>Router1</strong>, and
       <strong>Router2</strong>.</p>
 
@@ -114,24 +114,18 @@
           class="dot green"></span></div>
       <pre>
 <span class="prompt">Router(config)#</span> <span class="command">hostname RouterX</span>
-<span class="prompt">RouterX(config)#</span> <span class="command">enable secret cisco123</span>
-<span class="prompt">RouterX(config)#</span> <span class="command">service password-encryption</span>
 <span class="prompt">RouterX(config)#</span> <span class="command">no ip domain-lookup</span>
 <span class="prompt">RouterX(config)#</span> <span class="command">banner motd # Authorized Access Only #</span>
-<span class="prompt">RouterX(config)#</span> <span class="command">line console 0</span>
-<span class="prompt">RouterX(config-line)#</span> <span class="command">password cisco</span>
-<span class="prompt">RouterX(config-line)#</span> <span class="command">login</span>
-<span class="prompt">RouterX(config-line)#</span> <span class="command">logging synchronous</span>
 </pre>
     </div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!--  Task 2 – Interface Configuration         -->
-    <!-- ══════════════════════════════════════════ -->
-    <h2>Task 2 – Interface IP Addressing</h2>
+    <!-- ------------------------------------------ -->
+    <!--  Task 2 � Interface Configuration         -->
+    <!-- ------------------------------------------ -->
+    <h2>Task 2 � Interface IP Addressing</h2>
     <p>Bring up the interfaces and assign IPs according to the topology table.</p>
 
-    <h3>Router0 – Interface Config</h3>
+    <h3>Router0 � Interface Config</h3>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
@@ -150,13 +144,13 @@
 </pre>
     </div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!--  Task 3 – OSPF Area 0 Routing             -->
-    <!-- ══════════════════════════════════════════ -->
-    <h2>Task 3 – Dynamic Routing (OSPF Area 0)</h2>
+    <!-- ------------------------------------------ -->
+    <!--  Task 3 � OSPF Area 0 Routing             -->
+    <!-- ------------------------------------------ -->
+    <h2>Task 3 � Dynamic Routing (OSPF Area 0)</h2>
     <p>Enable OSPF Process 1 on all three routers to ensure the network is fully reachable.</p>
 
-    <h3>Router0 – OSPF Settings</h3>
+    <h3>Router0 � OSPF Settings</h3>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>
@@ -177,10 +171,10 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!--  Task 4 – Standard Named ACL              -->
-    <!-- ══════════════════════════════════════════ -->
-    <h2>Task 4 – Implementing Standard Named ACL</h2>
+    <!-- ------------------------------------------ -->
+    <!--  Task 4 � Standard Named ACL              -->
+    <!-- ------------------------------------------ -->
+    <h2>Task 4 � Implementing Standard Named ACL</h2>
     <p>Create the <code>BlockStudents</code> ACL on <strong>Router0</strong> and apply it outbound on the interface
       facing the Server.</p>
     <div class="terminal">
@@ -196,10 +190,10 @@
 </pre>
     </div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!--  Task 5 – Verification                    -->
-    <!-- ══════════════════════════════════════════ -->
-    <h2>Task 5 – ACL Verification</h2>
+    <!-- ------------------------------------------ -->
+    <!--  Task 5 � Verification                    -->
+    <!-- ------------------------------------------ -->
+    <h2>Task 5 � ACL Verification</h2>
     <p>Check the ACL configuration and match statistics.</p>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
@@ -212,10 +206,10 @@ Standard IP access list BlockStudents
 </pre>
     </div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!--  Task 6 – Connectivity Test Results       -->
-    <!-- ══════════════════════════════════════════ -->
-    <h2>Task 6 – Connectivity Verification (Ping Results)</h2>
+    <!-- ------------------------------------------ -->
+    <!--  Task 6 � Connectivity Test Results       -->
+    <!-- ------------------------------------------ -->
+    <h2>Task 6 � Connectivity Verification (Ping Results)</h2>
     <p>Perform pings from the following sources to confirm the policy is working as expected.</p>
 
     <div class="topology-table-wrapper">
@@ -269,10 +263,10 @@ Standard IP access list BlockStudents
       </table>
     </div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!--  Task 7 – Deleting the ACL                 -->
-    <!-- ══════════════════════════════════════════ -->
-    <h2>Task 7 – Deleting the Security Policy</h2>
+    <!-- ------------------------------------------ -->
+    <!--  Task 7 � Deleting the ACL                 -->
+    <!-- ------------------------------------------ -->
+    <h2>Task 7 � Deleting the Security Policy</h2>
     <div class="terminal">
       <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
           class="dot green"></span></div>

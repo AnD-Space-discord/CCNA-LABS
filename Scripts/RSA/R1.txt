@@ -17,7 +17,6 @@ ip ssh time-out 60
 ip ssh authentication-retries 3
 
 ! Step 4: Lock Down VTY Lines
-line vty 0 4
  login local
  transport input ssh
  exit
