@@ -1,0 +1,39 @@
+enable
+configure terminal
+hostname R3
+no ip domain-lookup
+
+interface gigabitEthernet 0/0
+ip address 10.2.3.2 255.255.255.252
+no shutdown
+exit
+
+interface gigabitEthernet 0/1
+ip address 10.3.4.1 255.255.255.252
+no shutdown
+exit
+
+interface gigabitEthernet 0/2
+ip address 172.16.100.1 255.255.255.0
+no shutdown
+exit
+
+router ospf 1
+network 10.2.3.0 0.0.0.3 area 0
+network 172.16.100.0 0.0.0.255 area 0
+network 10.3.4.0 0.0.0.3 area 2
+exit
+
+ip access-list extended SERVER_POLICIES
+remark IT Network (192.168.99.0/24) Unrestricted Access
+permit ip 192.168.99.0 0.0.0.255 host 172.16.100.10
+remark Regular Corp Departments SMB Transfer Access
+permit tcp 192.168.0.0 0.0.255.255 host 172.16.100.10 eq 445
+remark Block Standard Pinging to the Secure Asset Database
+deny icmp 192.168.0.0 0.0.255.255 host 172.16.100.10 echo
+remark Inherently allow any generic web traffic through
+permit ip any any
+exit
+
+interface gigabitEthernet 0/2
+ip access-group SERVER_POLICIES out

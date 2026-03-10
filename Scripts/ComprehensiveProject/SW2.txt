@@ -1,0 +1,17 @@
+enable
+configure terminal
+hostname SW2
+no ip domain-lookup
+
+vlan 99
+name IT_Department
+exit
+
+interface fastEthernet 0/1
+switchport mode access
+switchport access vlan 99
+exit
+
+interface gigabitEthernet 0/1
+switchport mode access
+switchport access vlan 99

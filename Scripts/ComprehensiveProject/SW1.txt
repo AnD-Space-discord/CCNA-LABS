@@ -1,21 +1,17 @@
 enable
 configure terminal
 hostname SW1
+no ip domain-lookup
+
 vlan 10
-name Sales
+name Engineering
 vlan 20
-name IT
+name Sales
+vlan 30
+name Management
+vlan 40
+name Software_Developers
 exit
 
-interface gigabitEthernet 0/1
+interface GigabitEthernet0/1
 switchport mode trunk
-exit
-
-interface fastEthernet 0/1
-switchport mode access
-switchport access vlan 10
-exit
-interface fastEthernet 0/2
-switchport mode access
-switchport access vlan 20
-exit
