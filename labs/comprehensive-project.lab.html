@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comprehensive Project Lab</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <a href="../index.html">Home</a>
+        <div class="nav-item">
+            <a href="../labs.html">Labs <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-content">
+                <a href="foundation.html">Foundation</a>
+                <a href="switching.html">Switching</a>
+                <a href="routing.html">Routing</a>
+                <a href="security.html">Security</a>
+                <a href="ip-services.html">IP Services</a>
+                <a href="../labs.html">All Labs</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a href="../blog.html">Blog <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-content">
+                <a href="../blog/switching.html">Switching</a>
+                <a href="../blog/routing.html">Routing</a>
+                <a href="../blog/security.html">Security</a>
+                <a href="../blog/ip-services.html">IP Services</a>
+                <a href="../blog.html">All Topics</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="lab-header-simple capstone-header">
+        <p class="capstone-subtitle">Capstone Project</p>
+        <h1>Comprehensive Project Lab</h1>
+        <p>All-in-One: Security, VLANs, Trunking, OSPF, NAT, and ACL</p>
+    </header>
+
+    <main class="lab-main">
+
+        <h2>Objective</h2>
+        <p>
+            Combine all learned CCNA technologies into one cohesive environment. You will configure basic security
+            (SSH, passwords, banners), Set up VLANs and Trunking, Route between VLANs (ROAS), Establish Dynamic Routing
+            (OSPF),
+            configure NAT, and secure the network using Access Control Lists (ACLs).
+        </p>
+
+        <!-- Lab Topology -->
+        <h2>Lab Topology</h2>
+        <div class="topology-container">
+            <img src="../Images/ComprehensiveProject/capstone-topology.jpg" alt="Capstone Topology" class="topology-img"
+                onerror="this.outerHTML='<div class=\'topology-img\' style=\'min-height: 200px; display: flex; align-items: center; justify-content: center; background: rgba(30, 41, 59, 0.5); border: 2px dashed #475569; color: #94a3b8; border-radius: 8px; font-weight: 500;\'>Capstone Project Topology Image Placeholder</div>'" />
+        </div>
+
+        <!-- IP Addressing Table -->
+        <div class="topology-table-wrapper">
+            <table class="topology-table">
+                <thead>
+                    <tr>
+                        <th>Device</th>
+                        <th>Interface</th>
+                        <th>IP Address</th>
+                        <th>Subnet Mask</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>R1</strong></td>
+                        <td><code>Gi0/1.10</code></td>
+                        <td><code>192.168.10.1</code></td>
+                        <td><code>255.255.255.0</code></td>
+                        <td>Gateway for VLAN 10 (Sales)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>R1</strong></td>
+                        <td><code>Gi0/1.20</code></td>
+                        <td><code>192.168.20.1</code></td>
+                        <td><code>255.255.255.0</code></td>
+                        <td>Gateway for VLAN 20 (IT)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>R1</strong></td>
+                        <td><code>Gi0/0</code></td>
+                        <td><code>203.0.113.1</code></td>
+                        <td><code>255.255.255.252</code></td>
+                        <td>WAN / Internet Link (OSPF & NAT Outside)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SW1</strong></td>
+                        <td><code>Gi0/1</code></td>
+                        <td><code>-</code></td>
+                        <td><code>-</code></td>
+                        <td>802.1Q Trunk Link to Router</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SW1</strong></td>
+                        <td><code>Fa0/1</code></td>
+                        <td><code>-</code></td>
+                        <td><code>-</code></td>
+                        <td>Access Port - VLAN 10 (Sales PC)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SW1</strong></td>
+                        <td><code>Fa0/2</code></td>
+                        <td><code>-</code></td>
+                        <td><code>-</code></td>
+                        <td>Access Port - VLAN 20 (IT PC)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Remote Host</strong></td>
+                        <td><code>Extern</code></td>
+                        <td><code>8.8.8.8</code></td>
+                        <td><code>255.0.0.0</code></td>
+                        <td>Internet Destination</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Task 1 - Basic System & Security Setup (Router & Switch)</h2>
+        <p>Apply hostname, domain name, passwords (Console, VTY, Enable), banners, and enable SSH access.</p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">Router></span> <span class="command">enable</span>
+<span class="prompt">Router#</span> <span class="command">configure terminal</span>
+<span class="prompt">Router(config)#</span> <span class="command">hostname R1</span>
+<span class="prompt">R1(config)#</span> <span class="command">no ip domain-lookup</span>
+<span class="prompt">R1(config)#</span> <span class="command">ip domain-name ccnaproject.lab</span>
+<span class="prompt">R1(config)#</span> <span class="command">crypto key generate rsa modulus 2048</span>
+<span class="prompt">R1(config)#</span> <span class="command">username admin privilege 15 secret cisco123</span>
+<span class="prompt">R1(config)#</span> <span class="command">enable secret class</span>
+<span class="prompt">R1(config)#</span> <span class="command">banner motd # WARNING! UNAUTHORIZED ACCESS PROHIBITED #</span>
+
+<span class="prompt">R1(config)#</span> <span class="command">line console 0</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">password cisco</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">login</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">exit</span>
+
+<span class="prompt">R1(config)#</span> <span class="command">line vty 0 4</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">login local</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">transport input ssh</span>
+<span class="prompt">R1(config-line)#</span> <span class="command">exit</span>
+</pre>
+        </div>
+
+        <h2>Task 2 - Core Switching (VLANs & Trunking) on Switch</h2>
+        <p>Create VLANs and a trunk port facing the router.</p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">Switch(config)#</span> <span class="command">hostname SW1</span>
+<span class="prompt">SW1(config)#</span> <span class="command">vlan 10</span>
+<span class="prompt">SW1(config-vlan)#</span> <span class="command">name Sales</span>
+<span class="prompt">SW1(config-vlan)#</span> <span class="command">vlan 20</span>
+<span class="prompt">SW1(config-vlan)#</span> <span class="command">name IT</span>
+<span class="prompt">SW1(config-vlan)#</span> <span class="command">exit</span>
+
+<span class="prompt">SW1(config)#</span> <span class="command">interface gigabitEthernet 0/1</span> <span class="comment">! Connection to Router</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">switchport mode trunk</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">exit</span>
+
+<span class="prompt">SW1(config)#</span> <span class="command">interface fastEthernet 0/1</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">switchport mode access</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">switchport access vlan 10</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">exit</span>
+<span class="prompt">SW1(config)#</span> <span class="command">interface fastEthernet 0/2</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">switchport mode access</span>
+<span class="prompt">SW1(config-if)#</span> <span class="command">switchport access vlan 20</span>
+</pre>
+        </div>
+
+        <h2>Task 3 - Inter-VLAN Routing (Router-on-a-Stick)</h2>
+        <p>Configure sub-interfaces on Router1 to act as gateways for the VLANs.</p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">R1(config)#</span> <span class="command">interface gigabitEthernet 0/1</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">no shutdown</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">exit</span>
+
+<span class="prompt">R1(config)#</span> <span class="command">interface gigabitEthernet 0/1.10</span>
+<span class="prompt">R1(config-subif)#</span> <span class="command">encapsulation dot1q 10</span>
+<span class="prompt">R1(config-subif)#</span> <span class="command">ip address 192.168.10.1 255.255.255.0</span>
+<span class="prompt">R1(config-subif)#</span> <span class="command">exit</span>
+
+<span class="prompt">R1(config)#</span> <span class="command">interface gigabitEthernet 0/1.20</span>
+<span class="prompt">R1(config-subif)#</span> <span class="command">encapsulation dot1q 20</span>
+<span class="prompt">R1(config-subif)#</span> <span class="command">ip address 192.168.20.1 255.255.255.0</span>
+</pre>
+        </div>
+
+        <h2>Task 4 - Dynamic Routing (OSPF)</h2>
+        <p>Enable OSPF so the internal subnets are advertised to the WAN router (assume a WAN router exists on Gi0/0).
+        </p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">R1(config)#</span> <span class="command">interface gigabitEthernet 0/0</span> <span class="comment">! WAN Interface</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">ip address 203.0.113.1 255.255.255.252</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">no shutdown</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">exit</span>
+
+<span class="prompt">R1(config)#</span> <span class="command">router ospf 1</span>
+<span class="prompt">R1(config-router)#</span> <span class="command">router-id 1.1.1.1</span>
+<span class="prompt">R1(config-router)#</span> <span class="command">network 192.168.10.0 0.0.0.255 area 0</span>
+<span class="prompt">R1(config-router)#</span> <span class="command">network 192.168.20.0 0.0.0.255 area 0</span>
+<span class="prompt">R1(config-router)#</span> <span class="command">network 203.0.113.0 0.0.0.3 area 0</span>
+</pre>
+        </div>
+
+        <h2>Task 5 - NAT (PAT Overload) Setup</h2>
+        <p>Translate inside IP addresses (VLANs 10 & 20) to the Router's outside interface (Gi0/0) public IP.</p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">R1(config)#</span> <span class="command">interface gigabitEthernet 0/1.10</span>
+<span class="prompt">R1(config-subif)#</span> <span class="command">ip nat inside</span>
+<span class="prompt">R1(config-subif)#</span> <span class="command">exit</span>
+<span class="prompt">R1(config)#</span> <span class="command">interface gigabitEthernet 0/1.20</span>
+<span class="prompt">R1(config-subif)#</span> <span class="command">ip nat inside</span>
+<span class="prompt">R1(config-subif)#</span> <span class="command">exit</span>
+<span class="prompt">R1(config)#</span> <span class="command">interface gigabitEthernet 0/0</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">ip nat outside</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">exit</span>
+
+<span class="prompt">R1(config)#</span> <span class="command">access-list 1 permit 192.168.10.0 0.0.0.255</span>
+<span class="prompt">R1(config)#</span> <span class="command">access-list 1 permit 192.168.20.0 0.0.0.255</span>
+<span class="prompt">R1(config)#</span> <span class="command">ip nat inside source list 1 interface gigabitEthernet 0/0 overload</span>
+</pre>
+        </div>
+
+        <h2>Task 6 - Network Security (Extended ACL)</h2>
+        <p>Deny VLAN 10 (Sales) from pinging a specific external destination (e.g., 8.8.8.8) but allow HTTP and all
+            other traffic.</p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">R1(config)#</span> <span class="command">ip access-list extended SECURE_SALES</span>
+<span class="prompt">R1(config-ext-nacl)#</span> <span class="command">deny icmp 192.168.10.0 0.0.0.255 host 8.8.8.8 echo</span>
+<span class="prompt">R1(config-ext-nacl)#</span> <span class="command">permit ip any any</span>
+<span class="prompt">R1(config-ext-nacl)#</span> <span class="command">exit</span>
+
+<span class="prompt">R1(config)#</span> <span class="command">interface gigabitEthernet 0/1.10</span>
+<span class="prompt">R1(config-subif)#</span> <span class="command">ip access-group SECURE_SALES in</span>
+</pre>
+        </div>
+
+        <h2>Task 7 - Verification Commands</h2>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">R1#</span> <span class="command">show run</span>
+<span class="prompt">R1#</span> <span class="command">show ip interface brief</span>
+<span class="prompt">R1#</span> <span class="command">show ip ospf neighbor</span>
+<span class="prompt">R1#</span> <span class="command">show ip nat translations</span>
+<span class="prompt">R1#</span> <span class="command">show access-lists</span>
+<span class="prompt">SW1#</span> <span class="command">show vlan brief</span>
+<span class="prompt">SW1#</span> <span class="command">show interfaces trunk</span>
+</pre>
+        </div>
+
+        <!-- Dynamic Script Downloads Section -->
+        <div id="script-downloads-container"></div>
+        <script src="../js/script-loader.js"></script>
+
+        <div class="next-lab-container" style="justify-content: center; margin-top: 40px;">
+            <a href="../labs.html" class="next-lab-btn"
+                style="background: linear-gradient(to right, #2563eb, #1e40af);">Return to Lab Directory <i
+                    class="fas fa-home"></i></a>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Premium CCNA & CCNP hands-on labs for networking professionals and students.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../labs.html">Labs</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Community</h3>
+                <div class="contact-icons">
+                    <a href="https://discord.gg/ZezHyjKP4S" target="_blank" title="Discord"><i
+                            class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Architecture & Developer Space. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/download-broker.js"></script>
+    <script src="../js/theme-manager.js"></script>
+</body>
+
+</html>

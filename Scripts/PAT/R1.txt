@@ -14,4 +14,6 @@ no shutdown
 ip nat outside
 exit
 
-ip nat inside source static 192.168.1.10 203.0.113.10
+access-list 1 permit 192.168.1.0 0.0.0.255
+
+ip nat inside source list 1 interface gigabitEthernet 0/1 overload

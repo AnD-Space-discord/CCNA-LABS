@@ -1,0 +1,21 @@
+enable
+configure terminal
+hostname SW1
+vlan 10
+name Sales
+vlan 20
+name IT
+exit
+
+interface gigabitEthernet 0/1
+switchport mode trunk
+exit
+
+interface fastEthernet 0/1
+switchport mode access
+switchport access vlan 10
+exit
+interface fastEthernet 0/2
+switchport mode access
+switchport access vlan 20
+exit

@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,8 +9,9 @@
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-                      <nav>
+  <nav>
     <a href="../index.html">Home</a>
     <div class="nav-item">
       <a href="../labs.html">Labs <i class="fas fa-chevron-down"></i></a>
@@ -34,78 +36,138 @@
     </div>
   </nav>
 
-          <header class="lab-header-simple">
+  <header class="lab-header-simple">
     <h1>NAT Configuration Lab</h1>
-  <p>Configuring PAT (NAT Overload)</p>
+    <p>Configuring Static NAT</p>
   </header>
 
-<main class="lab-main">
+  <main class="lab-main">
 
-<h2>Objective</h2>
-<p>Configure Port Address Translation (PAT) to allow multiple internal devices to share a single public IP address.</p>
+    <h2>Objective</h2>
+    <p>Configure Static NAT to map a localized inside private IP address to an outside public IP address.</p>
 
-<h2>Task 1 - Define Interfaces</h2>
-<p>Identify inside and outside interfaces.</p>
-<div class="terminal">
-<div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-<pre>
+    <!-- Lab Topology -->
+    <h2>Lab Topology</h2>
+    <div class="topology-container">
+      <img src="../Images/NAT/nat-topology.jpg" alt="NAT Topology" class="topology-img"
+        onerror="this.outerHTML='<div class=\'topology-img\' style=\'min-height: 200px; display: flex; align-items: center; justify-content: center; background: rgba(30, 41, 59, 0.5); border: 2px dashed #475569; color: #94a3b8; border-radius: 8px; font-weight: 500;\'>NAT Topology Image Placeholder</div>'" />
+    </div>
+
+    <!-- IP Addressing Table -->
+    <div class="topology-table-wrapper">
+      <table class="topology-table">
+        <thead>
+          <tr>
+            <th>Device</th>
+            <th>Interface</th>
+            <th>IP Address</th>
+            <th>Subnet Mask</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>R1</strong></td>
+            <td><code>GigabitEthernet0/0</code></td>
+            <td><code>192.168.1.1</code></td>
+            <td><code>255.255.255.0</code></td>
+            <td>Inside Local (LAN Gateway)</td>
+          </tr>
+          <tr>
+            <td><strong>R1</strong></td>
+            <td><code>GigabitEthernet0/1</code></td>
+            <td><code>203.0.113.2</code></td>
+            <td><code>255.255.255.252</code></td>
+            <td>Outside Global (WAN Link)</td>
+          </tr>
+          <tr>
+            <td><strong>Local Server</strong></td>
+            <td><code>NIC</code></td>
+            <td><code>192.168.1.10</code></td>
+            <td><code>255.255.255.0</code></td>
+            <td>Internal Server mapped to 203.0.113.10</td>
+          </tr>
+          <tr>
+            <td><strong>ISP Router</strong></td>
+            <td><code>GigabitEthernet0/0</code></td>
+            <td><code>203.0.113.1</code></td>
+            <td><code>255.255.255.252</code></td>
+            <td>Internet Gateway Simulator</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Task 1 - Basic Configuration</h2>
+    <p>Apply hostname and disable DNS lookup.</p>
+    <div class="terminal">
+      <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+          class="dot green"></span></div>
+      <pre>
+<span class="prompt">Router></span> <span class="command">enable</span>
+<span class="prompt">Router#</span> <span class="command">configure terminal</span>
+<span class="prompt">Router(config)#</span> <span class="command">hostname R1</span>
+<span class="prompt">R1(config)#</span> <span class="command">no ip domain-lookup</span>
+</pre>
+    </div>
+
+    <h2>Task 2 - Define Interfaces and IP Addressing</h2>
+    <p>Configure interface IP addresses and assign inside and outside interfaces for NAT.</p>
+    <div class="terminal">
+      <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+          class="dot green"></span></div>
+      <pre>
 <span class="prompt">R1(config)#</span> <span class="command">interface gigabitEthernet 0/0</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">ip address 192.168.1.1 255.255.255.0</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">no shutdown</span>
 <span class="prompt">R1(config-if)#</span> <span class="command">ip nat inside</span>
 <span class="prompt">R1(config-if)#</span> <span class="command">exit</span>
 <span class="prompt">R1(config)#</span> <span class="command">interface gigabitEthernet 0/1</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">ip address 203.0.113.2 255.255.255.252</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">no shutdown</span>
 <span class="prompt">R1(config-if)#</span> <span class="command">ip nat outside</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">exit</span>
 </pre>
-</div>
+    </div>
 
-<h2>Task 2 - Create Access List</h2>
-<p>Define which internal addresses are allowed to be translated.</p>
-<div class="terminal">
-<div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-<pre>
-<span class="prompt">R1(config)#</span> <span class="command">access-list 1 permit 192.168.1.0 0.0.0.255</span>
+    <h2>Task 3 - Configure Static NAT</h2>
+    <p>Create a static NAT translation mapping an internal server to a public IP address.</p>
+    <div class="terminal">
+      <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+          class="dot green"></span></div>
+      <pre>
+<span class="prompt">R1(config)#</span> <span class="command">ip nat inside source static 192.168.1.10 203.0.113.10</span>
 </pre>
-</div>
+    </div>
 
-<h2>Task 3 - Configure NAT Overload</h2>
-<p>Map the list to the outside interface using overload.</p>
-<div class="terminal">
-<div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-<pre>
-<span class="prompt">R1(config)#</span> <span class="command">ip nat inside source list 1 interface gigabitEthernet 0/1 overload</span>
-</pre>
-</div>
-
-<h2>Task 4 - Verification</h2>
-<p>Generate traffic from an inside host and check the translation table.</p>
-<div class="terminal">
-<div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-<pre>
+    <h2>Task 4 - Verification</h2>
+    <p>Check the NAT translation table to ensure the static entry exists.</p>
+    <div class="terminal">
+      <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+          class="dot green"></span></div>
+      <pre>
 <span class="prompt">R1#</span> <span class="command">show ip nat translations</span>
 Pro Inside global      Inside local       Outside local      Outside global
-icmp 203.0.113.1:1024  192.168.1.10:1     8.8.8.8:1          8.8.8.8:1
+--- 203.0.113.10       192.168.1.10       ---                ---
 </pre>
-</div>
-
-
-                
-    
-    
-        <!-- Dynamic Script Downloads Section -->
-        <div id="script-downloads-container"></div>
-        <script src="../js/script-loader.js"></script>
-
-        <div class="next-lab-container">
-        <a href="ipv6.lab.html" class="next-lab-btn">Next Lab: IPv6 Configuration Lab <i class="fas fa-arrow-right"></i></a>
     </div>
-    </main>
+
+    <!-- Dynamic Script Downloads Section -->
+    <div id="script-downloads-container"></div>
+    <script src="../js/script-loader.js"></script>
+
+    <div class="next-lab-container">
+      <a href="pat.lab.html" class="next-lab-btn">Next Lab: PAT Configuration Lab <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </main>
 
 
-  
 
 
-    
-    
-                <footer>
+
+
+
+  <footer>
     <div class="footer-content">
       <div class="footer-section">
         <h3>About Us</h3>
@@ -130,13 +192,13 @@ icmp 203.0.113.1:1024  192.168.1.10:1     8.8.8.8:1          8.8.8.8:1
       <p>&copy; 2026 Architecture & Developer Space. All rights reserved.</p>
     </div>
   </footer>
-  
-  
-  
-  
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../js/download-broker.js"></script>
-<script src="../js/theme-manager.js"></script>
-</body>
-</html>
 
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/download-broker.js"></script>
+  <script src="../js/theme-manager.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+enable
+configure terminal
+hostname R3
+no ip domain-lookup
+
+interface gigabitEthernet 0/0
+ip address 172.16.1.2 255.255.255.192
+no shutdown
+exit
+
+ip route 0.0.0.0 0.0.0.0 gigabitEthernet 0/0 172.16.1.1
+
+interface loopback 10
+ip address 10.10.10.3 255.255.255.128
+exit
+
+interface loopback 20
+ip address 10.20.20.3 255.255.255.240
+exit
+
+interface loopback 30
+ip address 10.30.30.3 255.255.255.248
+exit
+
+enable secret CISCO
+line vty 0 4
+password CISCO
+login
+exit

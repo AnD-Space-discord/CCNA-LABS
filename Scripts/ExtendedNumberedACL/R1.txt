@@ -1,0 +1,30 @@
+enable
+configure terminal
+hostname R1
+no ip domain-lookup
+
+interface gigabitEthernet 0/0
+ip address 172.16.1.1 255.255.255.192
+no shutdown
+exit
+
+ip route 0.0.0.0 0.0.0.0 gigabitEthernet 0/0 172.16.1.2
+
+enable secret CISCO
+line vty 0 4
+password CISCO
+login
+exit
+
+access-list 150 remark 'Allow Telnet For R3 Loopback10'
+access-list 150 permit tcp 10.10.10.0 0.0.0.127 any eq telnet
+access-list 150 remark 'Deny Telnet For R3 Loopback20'
+access-list 150 deny tcp 10.20.20.0 0.0.0.15 any eq telnet
+access-list 150 remark 'Allow Telnet For R3 Loopback30'
+access-list 150 permit tcp 10.30.30.0 0.0.0.7 any eq telnet
+access-list 150 remark 'Allow PING For R3 Loopback20'
+access-list 150 permit icmp 10.20.20.0 0.0.0.15 any echo
+
+interface gigabitEthernet 0/0
+ip access-group 150 in
+exit

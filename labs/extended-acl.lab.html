@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Extended ACL Configuration Lab</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <a href="../index.html">Home</a>
+        <div class="nav-item">
+            <a href="../labs.html">Labs <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-content">
+                <a href="foundation.html">Foundation</a>
+                <a href="switching.html">Switching</a>
+                <a href="routing.html">Routing</a>
+                <a href="security.html">Security</a>
+                <a href="ip-services.html">IP Services</a>
+                <a href="../labs.html">All Labs</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a href="../blog.html">Blog <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-content">
+                <a href="../blog/switching.html">Switching</a>
+                <a href="../blog/routing.html">Routing</a>
+                <a href="../blog/security.html">Security</a>
+                <a href="../blog/ip-services.html">IP Services</a>
+                <a href="../blog.html">All Topics</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="lab-header-simple">
+        <h1>Extended ACL Lab</h1>
+        <p>Advanced Traffic Filtering By Protocol & Port</p>
+    </header>
+
+    <main class="lab-main">
+
+        <h2>Objective</h2>
+        <p>
+            Configure an Extended Access Control List (ACL) to permit or deny specific types of traffic (like HTTP,
+            ICMP, Telnet)
+            between sources and destinations based on IP addresses and ports.
+        </p>
+
+        <!-- Lab Topology -->
+        <h2>Lab Topology</h2>
+        <div class="topology-container">
+            <img src="../Images/ExtendedACL/extended-acl.jpg" alt="Extended ACL Topology" class="topology-img"
+                onerror="this.outerHTML='<div class=\'topology-img\' style=\'min-height: 200px; display: flex; align-items: center; justify-content: center; background: rgba(30, 41, 59, 0.5); border: 2px dashed #475569; color: #94a3b8; border-radius: 8px; font-weight: 500;\'>Extended ACL Topology Image Placeholder</div>'" />
+        </div>
+
+        <!-- IP Addressing Table -->
+        <div class="topology-table-wrapper">
+            <table class="topology-table">
+                <thead>
+                    <tr>
+                        <th>Device</th>
+                        <th>Interface</th>
+                        <th>IP Address</th>
+                        <th>Subnet Mask</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>R1</strong></td>
+                        <td><code>GigabitEthernet0/0</code></td>
+                        <td><code>192.168.10.1</code></td>
+                        <td><code>255.255.255.0</code></td>
+                        <td>LAN Network (Source)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>R1</strong></td>
+                        <td><code>GigabitEthernet0/1</code></td>
+                        <td><code>10.0.0.1</code></td>
+                        <td><code>255.255.255.0</code></td>
+                        <td>Server Network (Destination)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LAN PC1</strong></td>
+                        <td><code>NIC</code></td>
+                        <td><code>192.168.10.10</code></td>
+                        <td><code>255.255.255.0</code></td>
+                        <td>Inside Host trying to reach Server</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Web/ICMP Server</strong></td>
+                        <td><code>NIC</code></td>
+                        <td><code>10.0.0.10</code></td>
+                        <td><code>255.255.255.0</code></td>
+                        <td>Target Server (HTTP & ICMP blocked)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Task 1 - Basic Configuration -->
+        <h2>Task 1 - Basic Configuration</h2>
+        <p>Apply hostname and disable DNS lookup on the router.</p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">Router></span> <span class="command">enable</span>
+<span class="prompt">Router#</span> <span class="command">configure terminal</span>
+<span class="prompt">Router(config)#</span> <span class="command">hostname R1</span>
+<span class="prompt">R1(config)#</span> <span class="command">no ip domain-lookup</span>
+</pre>
+        </div>
+
+        <!-- Task 2 - Interface IP Addressing -->
+        <h2>Task 2 - Interface IP Addressing</h2>
+        <p>Configure the interfaces leading to the LAN (Source) and Server (Destination).</p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">R1(config)#</span> <span class="command">interface GigabitEthernet0/0</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">description "LAN Network"</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">ip address 192.168.10.1 255.255.255.0</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">no shutdown</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">exit</span>
+<span class="prompt">R1(config)#</span> <span class="command">interface GigabitEthernet0/1</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">description "Server Network"</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">ip address 10.0.0.1 255.255.255.0</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">no shutdown</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">exit</span>
+</pre>
+        </div>
+
+        <!-- Task 3 - Extended Named ACL -->
+        <h2>Task 3 - Configure Extended ACL</h2>
+        <p>Create an Extended ACL to deny HTTP and Ping (ICMP) from the LAN to the Server (10.0.0.10), but permit
+            everything else.</p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">R1(config)#</span> <span class="command">ip access-list extended BLOCK_WEB_PING</span>
+<span class="prompt">R1(config-ext-nacl)#</span> <span class="command">deny tcp 192.168.10.0 0.0.0.255 host 10.0.0.10 eq 80</span>
+<span class="prompt">R1(config-ext-nacl)#</span> <span class="command">deny icmp 192.168.10.0 0.0.0.255 host 10.0.0.10 echo</span>
+<span class="prompt">R1(config-ext-nacl)#</span> <span class="command">permit ip any any</span>
+<span class="prompt">R1(config-ext-nacl)#</span> <span class="command">exit</span>
+</pre>
+        </div>
+
+        <!-- Task 4 - Apply ACL -->
+        <h2>Task 4 - Apply Extended ACL to Interface</h2>
+        <p>Apply the Extended ACL inbound on the LAN interface (closest to the source).</p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">R1(config)#</span> <span class="command">interface GigabitEthernet0/0</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">ip access-group BLOCK_WEB_PING in</span>
+<span class="prompt">R1(config-if)#</span> <span class="command">exit</span>
+</pre>
+        </div>
+
+        <!-- Task 5 - Verification -->
+        <h2>Task 5 - Verification Commands</h2>
+        <p>Check the configured access lists and verify if it has been applied to the correct interface.</p>
+        <div class="terminal">
+            <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                    class="dot green"></span></div>
+            <pre>
+<span class="prompt">R1#</span> <span class="command">show ip access-lists</span>
+Extended IP access list BLOCK_WEB_PING
+    10 deny tcp 192.168.10.0 0.0.0.255 host 10.0.0.10 eq www
+    20 deny icmp 192.168.10.0 0.0.0.255 host 10.0.0.10 echo
+    30 permit ip any any
+
+<span class="prompt">R1#</span> <span class="command">show ip interface gigabitethernet 0/0</span>
+...
+  Outgoing access list is not set
+  Inbound  access list is BLOCK_WEB_PING
+...
+</pre>
+        </div>
+
+        <!-- Dynamic Script Downloads Section -->
+        <div id="script-downloads-container"></div>
+        <script src="../js/script-loader.js"></script>
+
+        <div class="next-lab-container">
+            <a href="comprehensive-project.lab.html" class="next-lab-btn">Next Lab: Comprehensive Project Lab <i
+                    class="fas fa-arrow-right"></i></a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Premium CCNA & CCNP hands-on labs for networking professionals and students.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../labs.html">Labs</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Community</h3>
+                <div class="contact-icons">
+                    <a href="https://discord.gg/ZezHyjKP4S" target="_blank" title="Discord"><i
+                            class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Architecture & Developer Space. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/download-broker.js"></script>
+    <script src="../js/theme-manager.js"></script>
+</body>
+
+</html>

@@ -279,6 +279,25 @@ h2 {
   color: var(--text-main);
 }
 
+.capstone-header {
+  background: linear-gradient(135deg, #1e3a8a, #0f172a);
+  border-bottom: 3px solid #facc15;
+}
+
+.capstone-subtitle {
+  color: #facc15;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+body.light-mode .capstone-header {
+  background: #ffffff;
+}
+
+body.light-mode .capstone-subtitle {
+  color: var(--accent-color);
+}
+
 /* --- Footer --- */
 footer {
   padding: 80px 40px;
