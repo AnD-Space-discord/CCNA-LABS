@@ -16,6 +16,7 @@ const labScriptsData = {
     'extended-acl.lab.html': { folder: 'ExtendedACL', files: ['R1.txt'], pkt: 'extended-acl.pkt' },
     'extended-numbered-acl.lab.html': { folder: 'ExtendedNumberedACL', files: ['R1.txt', 'R3.txt'], pkt: 'extended-numbered-acl.pkt' },
     'comprehensive-project.lab.html': { folder: 'ComprehensiveProject', files: ['R1.txt', 'SW1.txt', 'R2.txt', 'R3.txt', 'R4.txt', 'SW2.txt'], pkt: 'comprehensive-project.pkt' },
+    'capstone-project-ii.lab.html': { folder: 'CapstoneProjectII', files: ['R1.txt', 'R2.txt', 'R3.txt', 'R4.txt', 'SW1.txt', 'SW2.txt'], pkt: 'capstone-project-ii.pkt' },
     'ospf.lab.html': { folder: 'OSPF', files: ['R1.txt', 'R2.txt', 'R3.txt'], pkt: 'ospf.pkt' },
     'ospf-multi-area.lab.html': { folder: 'OSPFMultiArea', files: ['R1.txt', 'R2.txt', 'R3.txt', 'R4.txt'], pkt: 'ospf-multi-area.pkt' },
     'port-security.lab.html': { folder: 'PortSecurity', files: ['SW1.txt'], pkt: 'port-security.pkt' },

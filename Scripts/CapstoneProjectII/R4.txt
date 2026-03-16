@@ -1,0 +1,32 @@
+enable
+configure terminal
+
+! ── Task 1: Basic Configuration ─────────────────────────────
+hostname R4
+no ip domain-lookup
+
+banner motd #
+*** Authorized Access Only - R4 ***
+#
+
+! Task 3: Interfaces
+interface GigabitEthernet0/0
+ip address 10.3.4.2 255.255.255.252
+no shutdown
+exit
+interface GigabitEthernet0/1
+ip address 192.168.99.1 255.255.255.0
+no shutdown
+exit
+
+! Task 4: OSPF
+router ospf 1
+network 10.3.4.0 0.0.0.3 area 2
+network 192.168.99.0 0.0.0.255 area 2
+exit
+
+! Task 6: Verification
+ping 172.16.100.10 source 192.168.99.1
+
+end
+write memory

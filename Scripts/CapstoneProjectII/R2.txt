@@ -1,0 +1,32 @@
+enable
+configure terminal
+
+! ── Task 1: Basic Configuration ─────────────────────────────
+hostname R2
+no ip domain-lookup
+
+banner motd #
+*** Authorized Access Only - R2 ***
+#
+
+! Task 2: Backbone IPs
+interface GigabitEthernet0/0
+ip address 10.1.2.2 255.255.255.252
+no shutdown
+exit
+interface GigabitEthernet0/1
+ip address 10.2.3.1 255.255.255.252
+no shutdown
+exit
+
+! Task 4: OSPF
+router ospf 1
+network 10.1.2.0 0.0.0.3 area 1
+network 10.2.3.0 0.0.0.3 area 0
+exit
+
+! Task 6: Verification
+show ip route ospf
+
+end
+write memory

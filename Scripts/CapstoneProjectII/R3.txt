@@ -1,0 +1,59 @@
+enable
+configure terminal
+
+! ── Task 1: Basic Configuration ─────────────────────────────
+hostname R3
+no ip domain-lookup
+
+banner motd #
+*** Authorized Access Only - R3 ***
+#
+
+! Task 2: Backbone IPs
+interface GigabitEthernet0/0
+ip address 10.2.3.2 255.255.255.252
+no shutdown
+exit
+interface GigabitEthernet0/1
+ip address 10.3.4.1 255.255.255.252
+no shutdown
+exit
+interface GigabitEthernet0/2
+ip address 172.16.100.1 255.255.255.0
+no shutdown
+exit
+
+! Task 4: OSPF
+router ospf 1
+network 10.2.3.0 0.0.0.3 area 0
+network 172.16.100.0 0.0.0.255 area 0
+network 10.3.4.0 0.0.0.3 area 2
+exit
+
+! Task 5: ACL
+ip access-list standard SERVER_ACCESS
+remark --- PERMIT: IT Department unrestricted access ---
+permit 192.168.99.0 0.0.0.255
+remark --- DENY: Engineering department ---
+deny 192.168.10.0 0.0.0.255
+remark --- DENY: Sales department ---
+deny 192.168.20.0 0.0.0.255
+remark --- DENY: Management department ---
+deny 192.168.30.0 0.0.0.255
+remark --- DENY: Software Dev department ---
+deny 192.168.40.0 0.0.0.255
+remark --- Implicit deny all (shown explicitly for clarity) ---
+deny any
+exit
+
+interface GigabitEthernet0/2
+ip access-group SERVER_ACCESS out
+exit
+
+! Task 6: Verification
+show ip ospf neighbor
+show ip access-lists SERVER_ACCESS
+show ip interface GigabitEthernet0/2
+
+end
+write memory

@@ -1,0 +1,52 @@
+enable
+configure terminal
+
+! ── Task 1: Basic Configuration ─────────────────────────────
+hostname R1
+no ip domain-lookup
+
+banner motd #
+*** Authorized Access Only - R1 ***
+#
+
+! Task 1: Router-on-a-Stick subinterfaces
+interface GigabitEthernet0/1
+no shutdown
+exit
+interface GigabitEthernet0/1.10
+encapsulation dot1Q 10
+ip address 192.168.10.1 255.255.255.0
+exit
+interface GigabitEthernet0/1.20
+encapsulation dot1Q 20
+ip address 192.168.20.1 255.255.255.0
+exit
+interface GigabitEthernet0/1.30
+encapsulation dot1Q 30
+ip address 192.168.30.1 255.255.255.0
+exit
+interface GigabitEthernet0/1.40
+encapsulation dot1Q 40
+ip address 192.168.40.1 255.255.255.0
+exit
+
+! Task 2: Backbone IP
+interface GigabitEthernet0/0
+ip address 10.1.2.1 255.255.255.252
+no shutdown
+exit
+
+! Task 4: OSPF
+router ospf 1
+network 10.1.2.0 0.0.0.3 area 1
+network 192.168.10.0 0.0.0.255 area 1
+network 192.168.20.0 0.0.0.255 area 1
+network 192.168.30.0 0.0.0.255 area 1
+network 192.168.40.0 0.0.0.255 area 1
+exit
+
+! Task 6: Verification
+ping 172.16.100.10 source 192.168.20.1
+
+end
+write memory

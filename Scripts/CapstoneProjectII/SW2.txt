@@ -1,0 +1,36 @@
+enable
+configure terminal
+
+! ── Task 1: Basic Configuration ─────────────────────────────
+hostname SW2
+no ip domain-lookup
+
+banner motd #
+*** Authorized Access Only - SW2 ***
+#
+
+! Task 3: VLAN and ports
+vlan 99
+name IT_Department
+exit
+
+! IT PC-1: Fa0/1
+interface FastEthernet0/1
+switchport mode access
+switchport access vlan 99
+exit
+
+! IT PC-2: Fa0/2
+interface FastEthernet0/2
+switchport mode access
+switchport access vlan 99
+exit
+
+! Uplink to R4 (access mode, VLAN 99)
+interface GigabitEthernet0/1
+switchport mode access
+switchport access vlan 99
+exit
+
+end
+write memory
