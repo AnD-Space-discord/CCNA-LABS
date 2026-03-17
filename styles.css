@@ -50,6 +50,18 @@ body.light-mode {
   transform: translateY(-50%) scale(1.1);
 }
 
+@media (max-width: 768px) {
+  .theme-toggle-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+    left: 12px;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(4px);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
 body.light-mode .hero {
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), #f1f5f9),
     url('https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80&w=2000');
@@ -219,14 +231,15 @@ body.light-mode .hero-home {
 }
 
 .hero h1 {
-  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-size: clamp(1.8rem, 8vw, 3.8rem);
   font-weight: 800;
-  letter-spacing: -2px;
+  letter-spacing: -1.5px;
   background: linear-gradient(to right, #ffffff, var(--accent-color));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 15px;
+  padding: 0 10px;
 }
 
 .hero p {
@@ -1097,6 +1110,17 @@ body.light-mode .lab-resources {
 
   .contact-icons {
     justify-content: center;
+  }
+
+  .terminal {
+    width: 95% !important;
+    margin: 30px auto !important;
+    max-width: 100%;
+  }
+
+  .terminal pre {
+    padding: 15px !important;
+    font-size: 0.8rem !important;
   }
 
   /* Lab main content: full width on mobile */

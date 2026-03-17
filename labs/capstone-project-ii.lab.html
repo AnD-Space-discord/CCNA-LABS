@@ -162,8 +162,9 @@
         .topology-table-wrapper {
             margin: 1rem 0 1.5rem;
             border-radius: 10px;
-            overflow: hidden;
+            overflow-x: auto;
             border: 1px solid var(--border);
+            -webkit-overflow-scrolling: touch;
         }
 
         .topology-table {
@@ -626,6 +627,222 @@
 
         body.light-mode .script-modal-body::-webkit-scrollbar-thumb {
             background: rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- Light Mode Enhancements for Capstone II --- */
+        body.light-mode {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f1f5f9;
+            --accent-blue: #2563eb;
+            --accent-cyan: #0891b2;
+            --accent-green: #059669;
+            --accent-yellow: #d97706;
+            --accent-red: #dc2626;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #475569;
+            --border: #cbd5e1;
+            --terminal-bg: #f9fafb;
+            --terminal-border: #e2e8f0;
+        }
+
+        body.light-mode nav {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        body.light-mode .dropdown-content {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        body.light-mode .terminal-header {
+            background: #e5e7eb;
+        }
+
+        body.light-mode .terminal pre {
+            color: #1e293b;
+        }
+
+        body.light-mode .prompt { color: #2563eb; }
+        body.light-mode .command { color: #059669; }
+        body.light-mode .comment { color: #6b7280; }
+
+        body.light-mode .topology-table strong {
+            color: #0f172a;
+        }
+
+        body.light-mode .lab-header-simple h1 {
+            background: linear-gradient(135deg, #0f172a, #334155);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-mode .lab-header-simple {
+            background: linear-gradient(180deg, rgba(226, 232, 240, 0.8) 0%, transparent 100%);
+        }
+
+        body.light-mode code {
+            color: #1e40af;
+        }
+
+        /* --- Theme Toggle Button --- */
+        .theme-toggle-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1001;
+            font-size: 1.1rem;
+        }
+
+        .theme-toggle-btn:hover {
+            background: var(--accent-blue);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        body.light-mode .theme-toggle-btn {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            color: #0f172a;
+        }
+
+        /* --- Download Broker (Toast Notification) --- */
+        #download-broker-overlay {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            transform: translateX(120%);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
+        }
+        #download-broker-overlay.active {
+            transform: translateX(0);
+        }
+        .broker-card {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--accent-blue);
+            border-radius: 16px;
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            min-width: 320px;
+            pointer-events: auto;
+        }
+        .broker-icon {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+            padding: 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .broker-content h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: #fff;
+            font-weight: 700;
+        }
+        .broker-content p {
+            margin: 4px 0 10px 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+        .broker-progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .broker-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--accent-blue);
+            transition: width 1.2s linear;
+        }
+
+        body.light-mode .broker-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--border);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        body.light-mode .broker-content h4 {
+            color: var(--text-primary);
+        }
+        body.light-mode .broker-content p {
+            color: var(--text-muted);
+        }
+        body.light-mode .broker-progress {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Mobile Responsive Rules --- */
+        @media (max-width: 768px) {
+            .lab-resources {
+                padding: 24px 20px;
+                margin-top: 60px;
+                border-radius: 16px;
+            }
+
+            .resource-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .resource-col h3 {
+                margin-bottom: 20px;
+                font-size: 1.05rem;
+            }
+
+            .view-btn, .download-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 10px 20px;
+            }
+
+            .topology-container {
+                padding: 0.5rem;
+            }
+
+            .lab-header-simple {
+                padding: 5rem 1rem 2rem;
+            }
+
+            .lab-header-simple h1 {
+                font-size: 1.6rem;
+            }
+
+            h2 {
+                font-size: 1.1rem;
+                margin: 2rem 0 0.5rem;
+            }
+
+            p {
+                font-size: 0.88rem;
+            }
         }
     </style>
 </head>
